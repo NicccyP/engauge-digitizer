@@ -7,6 +7,7 @@
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantXHide.h"
 #include "Logger.h"
@@ -68,5 +69,5 @@ void GuidelineStateDeployedConstantXHide::handleVisibleChange (bool visible)
 
 QString GuidelineStateDeployedConstantXHide::state () const
 {
-  return ("GuidelineStateDeployedConstantXHide");
+  return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE);
 }

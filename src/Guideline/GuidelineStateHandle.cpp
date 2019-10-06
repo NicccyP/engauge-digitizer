@@ -8,6 +8,7 @@
 #include "GraphicsScene.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandle.h"
 #include "Logger.h"
@@ -107,7 +108,7 @@ QLineF GuidelineStateHandle::pointToLine (const QPointF & /* posGraph */) const
 
 QString GuidelineStateHandle::state () const
 {
-  return ("GuidelineStateHandle");
+  return guidelineStateAsString (GUIDELINE_STATE_HANDLE);
 }
 
 void GuidelineStateHandle::updateWithLatestTransformation ()

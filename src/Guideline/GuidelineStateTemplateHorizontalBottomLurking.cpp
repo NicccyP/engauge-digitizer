@@ -6,6 +6,7 @@
 
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalBottomLurking.h"
 #include "Logger.h"
@@ -77,7 +78,7 @@ void GuidelineStateTemplateHorizontalBottomLurking::handleVisibleChange (bool vi
 
 QString GuidelineStateTemplateHorizontalBottomLurking::state () const
 {
-  return ("GuidelineStateTemplateHorizontalBottomLurking");
+  return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING);
 }
 
 void GuidelineStateTemplateHorizontalBottomLurking::updateWithLatestTransformation ()

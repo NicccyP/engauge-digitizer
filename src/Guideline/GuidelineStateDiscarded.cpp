@@ -7,7 +7,7 @@
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
-#include "GuidelineStateAbstractBase.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDiscarded.h"
 #include "Logger.h"
@@ -90,7 +90,7 @@ QLineF GuidelineStateDiscarded::pointToLine (const QPointF & /* posGraph */) con
 
 QString GuidelineStateDiscarded::state () const
 {
-  return ("GuidelineStateDiscarded");
+  return guidelineStateAsString (GUIDELINE_STATE_DISCARDED);
 }
 
 void GuidelineStateDiscarded::updateWithLatestTransformation ()

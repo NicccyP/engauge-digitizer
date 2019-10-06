@@ -24,6 +24,9 @@ typedef QList<GuidelineAbstract*> GuidelineContainerPrivate;
 /// This class contains all Guideline objects
 class Guidelines
 {
+  /// For unit testing
+  friend class TestGuidelines;
+
 public:
   /// Single constructor.
   Guidelines(MainWindow &mainWindow);
@@ -66,6 +69,9 @@ public:
 
 private:
   Guidelines();
+
+  /// For unit testing
+  const GuidelineContainerPrivate &guidelineContainerPrivate () const;
 
   /// Add a new Guideline to the global list maintained by this class
   void registerGuideline (GuidelineAbstract *guideline);

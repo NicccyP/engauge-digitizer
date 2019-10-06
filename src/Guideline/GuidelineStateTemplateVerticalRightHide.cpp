@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "GuidelineAbstract.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateVerticalRightHide.h"
 #include "Logger.h"
@@ -62,7 +63,7 @@ void GuidelineStateTemplateVerticalRightHide::handleVisibleChange (bool visible)
 
 QString GuidelineStateTemplateVerticalRightHide::state () const
 {
-  return ("GuidelineStateTemplateVerticalRightHide");
+  return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE);
 }
 
 void GuidelineStateTemplateVerticalRightHide::updateWithLatestTransformation ()

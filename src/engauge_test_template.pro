@@ -716,6 +716,7 @@ SOURCES += \
     Guideline/GuidelineProjectorConstantX.cpp \
     Guideline/GuidelineProjectorConstantY.cpp \
     Guideline/Guidelines.cpp \
+    Guideline/GuidelineState.cpp \
     Guideline/GuidelineStateAbstractBase.cpp \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedAbstract.cpp \

@@ -6,6 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantYLocked.h"
 #include "Logger.h"
@@ -70,5 +71,5 @@ void GuidelineStateDeployedConstantYLocked::handleVisibleChange (bool visible)
 
 QString GuidelineStateDeployedConstantYLocked::state () const
 {
-  return ("GuidelineStateDeployedConstantYLocked");
+  return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED);
 }

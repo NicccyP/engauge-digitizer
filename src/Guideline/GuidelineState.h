@@ -7,6 +7,8 @@
 #ifndef GUIDELINE_STATE_H
 #define GUIDELINE_STATE_H
 
+#include <QString>
+
 /// Set of possible Guideline states. See class Guideline for more information
 enum GuidelineState {
   GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE,
@@ -41,5 +43,7 @@ enum GuidelineState {
   GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING,  
   NUM_GUIDELINE_STATES
 };
+
+extern QString guidelineStateAsString (GuidelineState state);
 
 #endif // GUIDELINE_STATE_H

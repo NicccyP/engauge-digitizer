@@ -6,6 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
+#include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantRHover.h"
 #include "Logger.h"
@@ -70,5 +71,5 @@ void GuidelineStateDeployedConstantRHover::handleVisibleChange (bool visible)
 
 QString GuidelineStateDeployedConstantRHover::state () const
 {
-  return ("GuidelineStateDeployedConstantRHover");
+  return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER);
 }

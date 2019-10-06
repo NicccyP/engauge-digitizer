@@ -97,6 +97,11 @@ GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
   return guideline;
 }
 
+const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivate () const
+{
+  return m_guidelineContainer;
+}
+
 void Guidelines::handleActiveChange (bool active)
 {
   GuidelineContainerPrivate::iterator itr;

@@ -819,6 +819,11 @@ void MainWindow::ghostsDestroy ()
   m_ghosts = nullptr;
 }
 
+Guidelines &MainWindow::guidelines()
+{
+  return m_guidelines;
+}
+
 bool MainWindow::guidelinesAreVisible () const
 {
   return (guidelinesVisibilityCanBeEnabled () &&
@@ -1606,7 +1611,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
   // Checklist guide wizard
   m_actionHelpChecklistGuideWizard->setChecked (settings.value (SETTINGS_CHECKLIST_GUIDE_WIZARD,
-                                                            true).toBool ());
+                                                                true).toBool ());
 
   // Background toolbar visibility
   bool viewBackgroundToolBar = settings.value (SETTINGS_VIEW_BACKGROUND_TOOLBAR,
