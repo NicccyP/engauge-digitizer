@@ -17,7 +17,6 @@ testsAvailable=( \
     TestFormats \
     TestGraphCoords \
     TestGridLineLimiter \
-    TestGuidelines \
     TestMatrix \
     TestProjectedPoint \
     TestSegmentFill \

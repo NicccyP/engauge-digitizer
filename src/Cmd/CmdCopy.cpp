@@ -49,7 +49,7 @@ CmdCopy::CmdCopy(MainWindow &mainWindow,
 CmdCopy::CmdCopy (MainWindow &mainWindow,
                   Document &document,
                   const QString &cmdDescription,
-                   QXmlStreamReader &reader) :
+                  QXmlStreamReader &reader) :
   CmdAbstract (mainWindow,
                document,
                cmdDescription)

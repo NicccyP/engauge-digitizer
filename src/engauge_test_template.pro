@@ -76,6 +76,7 @@ HEADERS  += \
     Cmd/CmdEditPointAxis.h \
     Cmd/CmdEditPointGraph.h \
     Cmd/CmdFactory.h \
+    Cmd/CmdGong.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPointChangeBase.h \
@@ -490,13 +491,14 @@ SOURCES += \
     Cmd/CmdAddPointAxis.cpp \
     Cmd/CmdAddPointGraph.cpp \
     Cmd/CmdAddPointsGraph.cpp \
-    Cmd/CmdAddScale.cpp \    
+    Cmd/CmdAddScale.cpp \
     Cmd/CmdCopy.cpp \
     Cmd/CmdCut.cpp \
     Cmd/CmdDelete.cpp \
     Cmd/CmdEditPointAxis.cpp \
     Cmd/CmdEditPointGraph.cpp \
     Cmd/CmdFactory.cpp \
+    Cmd/CmdGong.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdRedoForTest.cpp \

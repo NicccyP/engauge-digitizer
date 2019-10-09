@@ -199,6 +199,9 @@ public:
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;
 
+  /// Send signal to unit test framework indicating all commands have finished executing
+  void sendGong ();
+  
   /// Processing performed after gui becomes available
   virtual void showEvent(QShowEvent *);
 
@@ -367,8 +370,15 @@ private slots:
   void slotViewZoomOutFromWheelEvent ();
 
 signals:
+  
   /// Send drag and drop regression test url
   void signalDropRegression(QString);
+
+  /// Send wakeup signal to unit test framework when all other commands have finished executing
+  void signalGong ();
+
+  /// Send signal to unit test framework on show event
+  void signalShowEvent ();
 
   /// Send zoom selection, picked from menu or keystroke, to StatusBar.
   void signalZoom(int);

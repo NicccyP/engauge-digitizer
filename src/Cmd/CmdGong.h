@@ -4,45 +4,35 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CMD_COPY_H
-#define CMD_COPY_H
+#ifndef CMD_GONG_H
+#define CMD_GONG_H
 
 #include "CmdAbstract.h"
-#include "CurvesGraphs.h"
-#include <QHash>
-#include <QStringList>
 
 class QXmlStreamReader;
 
-/// Command for copying all selected Points to the clipboard
-class CmdCopy : public CmdAbstract
+/// Command for sending a satisfying signal to the unit test framework to indicate completion of queued commands
+class CmdGong : public CmdAbstract
 {
 public:
   /// Constructor for normal creation
-  CmdCopy(MainWindow &mainWindow,
-          Document &document,
-          const QStringList &selectedPointIdentifiers);
+  CmdGong(MainWindow &mainWindow,
+          Document &document);
 
   /// Constructor for parsing error report file xml
-  CmdCopy(MainWindow &mainWindow,
+  CmdGong(MainWindow &mainWindow,
           Document &document,
           const QString &cmdDescription,
           QXmlStreamReader &reader);
 
-  virtual ~CmdCopy();
+  virtual ~CmdGong();
 
   virtual void cmdRedo ();
   virtual void cmdUndo ();
   virtual void saveXml (QXmlStreamWriter &writer) const;
 
 private:
-  CmdCopy();
-
-  bool m_transformIsDefined;
-  QString m_csv;
-  QString m_html;
-
-  CurvesGraphs m_curvesGraphs;
+  CmdGong();
 };
 
-#endif // CMD_COPY_H
+#endif // CMD_GONG_H

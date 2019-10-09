@@ -1504,6 +1504,13 @@ QString MainWindow::selectedGraphCurve () const
   return m_cmbCurve->currentText ();
 }
 
+void MainWindow::sendGong ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::sendGong";
+  
+  emit signalGong ();
+}
+
 void MainWindow::setCurrentFile (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setCurrentFile";
@@ -1918,6 +1925,8 @@ void MainWindow::showEvent (QShowEvent *event)
     m_timerLoadStartupFiles->start (0); // Zero delay still waits until execution finishes and gui is available
 
   }
+
+  emit signalShowEvent ();
 }
 
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)

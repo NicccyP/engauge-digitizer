@@ -1,17 +1,26 @@
 #include "CmdAddPointAxis.h"
+#include "CmdGong.h"
 #include "GuidelineAbstract.h"
 #include "Guidelines.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include <QCoreApplication>
+#include <QApplication>
+#include <qdebug.h>
+#include <QSettings>
+#include <QTextStream>
 #include <QThread>
-#include <QtTest/QtTest>
 #include "Settings.h"
 #include "Test/TestGuidelines.h"
 
-QTEST_MAIN (TestGuidelines)
-
 using namespace std;
+
+int main (int argc, char **argv)
+{
+  QApplication app (argc, argv);
+
+  TestGuidelines test;
+  test.initTestCase();
+}
 
 TestGuidelines::TestGuidelines(QObject *parent) :
   QObject(parent),
@@ -116,6 +125,11 @@ void TestGuidelines::initTestCase ()
                                  NO_EXPORT_IMAGE_EXTENSION,
                                  importFile,
                                  NO_COMMAND_LINE);
+
+  // This signal will trigger a callback until after this method has finished executing
+  connect (m_mainWindow, SIGNAL (signalShowEvent ()),
+           this, SLOT (test00StartupWithoutTransformation ()));
+
   m_mainWindow->show ();
 }
 
@@ -129,18 +143,36 @@ void TestGuidelines::processEventsElsewhere ()
 
 void TestGuidelines::test00StartupWithoutTransformation ()
 {
-  processEventsElsewhere ();
-
   // Expected and got counts
   QVector<int> countsExpected (NUM_GUIDELINE_STATES);
   countsExpected [GUIDELINE_STATE_DISCARDED] = 4;
   
   bool success = compareExpectedAndGot (countsExpected);
 
-  QVERIFY (success);  
+  qDebug() << (success ? "[PASS]" : "[FAIL]") << __FUNCTION__;
+
+  test01AfterAddingTransformationPrepare ();
+  
+  // Setup for next test in the chain
+  connect (m_mainWindow, SIGNAL (signalGong ()),
+           this, SLOT (test01AfterAddingTransformation ()));
 }
 
 void TestGuidelines::test01AfterAddingTransformation ()
+{
+  // Expected and got counts
+  QVector<int> countsExpected (NUM_GUIDELINE_STATES);
+  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING   ] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING    ] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   ] = 1;
+
+  bool success = compareExpectedAndGot (countsExpected);
+
+  qDebug() << (success ? "[PASS]" : "[FAIL]") << __FUNCTION__;
+}
+
+void TestGuidelines::test01AfterAddingTransformationPrepare ()
 {
   QPointF posScreen0 (400, 400);
   QPointF posScreen1 (600, 400);
@@ -166,27 +198,13 @@ void TestGuidelines::test01AfterAddingTransformation ()
                                                posGraph2,
                                                2.0,
                                                false);
+  CmdGong *cmd3 = new CmdGong (*m_mainWindow,
+                               m_mainWindow->cmdMediator()->document());
+                               
   m_mainWindow->cmdMediator()->push (cmd0);
   m_mainWindow->cmdMediator()->push (cmd1);
   m_mainWindow->cmdMediator()->push (cmd2);
-
-  qDebug() << "queue size=" << m_mainWindow->cmdMediator()->count();
-  while (m_mainWindow->cmdMediator()->canRedo()) {
-    m_mainWindow->cmdMediator()->redo();
-  }
-
-  processEventsElsewhere ();
-
-  // Expected and got counts
-  QVector<int> countsExpected (NUM_GUIDELINE_STATES);
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING   ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING    ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   ] = 1;
-
-  bool success = compareExpectedAndGot (countsExpected);
-
-  QVERIFY (success);
+  m_mainWindow->cmdMediator()->push (cmd3);  
 }
 
 void TestGuidelines::turnOffChecklist ()

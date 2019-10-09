@@ -111,13 +111,14 @@ HEADERS  += \
     src/Cmd/CmdAddPointAxis.h \
     src/Cmd/CmdAddPointGraph.h \
     src/Cmd/CmdAddPointsGraph.h \
-    src/Cmd/CmdAddScale.h \    
+    src/Cmd/CmdAddScale.h \
     src/Cmd/CmdCopy.h \
     src/Cmd/CmdCut.h \
     src/Cmd/CmdDelete.h \
     src/Cmd/CmdEditPointAxis.h \
     src/Cmd/CmdEditPointGraph.h \
     src/Cmd/CmdFactory.h \
+    src/Cmd/CmdGong.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPointChangeBase.h \
@@ -536,6 +537,7 @@ SOURCES += \
     src/Cmd/CmdEditPointAxis.cpp \
     src/Cmd/CmdEditPointGraph.cpp \
     src/Cmd/CmdFactory.cpp \
+    src/Cmd/CmdGong.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdRedoForTest.cpp \
