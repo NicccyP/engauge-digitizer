@@ -60,8 +60,8 @@ public:
   /// Return line parallel to an axis line, that passes through the specified point
   virtual QLineF pointToLine (const QPointF &poscreen) const = 0;
 
-  /// State as a string for debugging only
-  virtual QString state () const = 0;
+  /// Name of state as a string for debugging only
+  virtual QString stateName () const = 0;
 
 
   /// Update given Transformation in GuidelineStateContext

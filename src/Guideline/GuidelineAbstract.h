@@ -137,8 +137,11 @@ public:
   /// Wrapper for QGraphicsItem::setZValue
   virtual void setGraphicsItemZValue (double z) = 0;
 
-  /// State as a string for debugging only
-  QString state () const;
+  /// Dump of state as a string for debugging only. Context like the QGraphicsItem flags is included
+  QString stateDump () const;
+
+  /// Current state name for debugging and unit test only
+  QString stateName () const;
 
   /// Update active versus inactive state. Inactive state applies when DigitizeState is not DigitizeStateSelect, since
   /// the Guidelines can help with moving points around. This method is called on DigitizeState transitions.

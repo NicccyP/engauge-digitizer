@@ -61,7 +61,7 @@ void GuidelineStateTemplateVerticalLeftHide::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateTemplateVerticalLeftHide::state () const
+QString GuidelineStateTemplateVerticalLeftHide::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE);
 }

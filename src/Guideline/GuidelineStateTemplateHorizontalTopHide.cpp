@@ -61,7 +61,7 @@ void GuidelineStateTemplateHorizontalTopHide::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateTemplateHorizontalTopHide::state () const
+QString GuidelineStateTemplateHorizontalTopHide::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE);
 }

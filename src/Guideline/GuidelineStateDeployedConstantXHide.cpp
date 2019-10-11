@@ -67,7 +67,7 @@ void GuidelineStateDeployedConstantXHide::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateDeployedConstantXHide::state () const
+QString GuidelineStateDeployedConstantXHide::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE);
 }

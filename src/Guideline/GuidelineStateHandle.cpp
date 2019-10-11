@@ -106,7 +106,7 @@ QLineF GuidelineStateHandle::pointToLine (const QPointF & /* posGraph */) const
   return QLineF (0, 0, 0, 0);
 }
 
-QString GuidelineStateHandle::state () const
+QString GuidelineStateHandle::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_HANDLE);
 }

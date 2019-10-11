@@ -69,7 +69,7 @@ void GuidelineStateDeployedConstantTLocked::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateDeployedConstantTLocked::state () const
+QString GuidelineStateDeployedConstantTLocked::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED);
 }

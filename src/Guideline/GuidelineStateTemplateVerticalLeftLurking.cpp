@@ -75,7 +75,7 @@ void GuidelineStateTemplateVerticalLeftLurking::handleVisibleChange (bool visibl
   }
 }
 
-QString GuidelineStateTemplateVerticalLeftLurking::state () const
+QString GuidelineStateTemplateVerticalLeftLurking::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING);
 }

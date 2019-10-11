@@ -5,23 +5,38 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QApplication>
-#include <qdebug.h>
 #include <QSettings>
 #include <QTextStream>
 #include <QThread>
+#include <QtTest/QtTest>
 #include "Settings.h"
 #include "Test/TestGuidelines.h"
 
 using namespace std;
 
-int main (int argc, char **argv)
-{
-  QApplication app (argc, argv);
+const int NUMBER_TESTS = 2;
 
-  TestGuidelines test;
-  test.initTestCase();
+QTEST_MAIN (TestGuidelines)
+
+// TestGuidelines::Result
+TestGuidelines::Result::Result (bool pass,
+                                const QString &problem) :
+  m_pass (pass),
+  m_problem (problem)
+{
 }
 
+bool TestGuidelines::Result::pass () const
+{
+  return m_pass;
+}
+
+QString TestGuidelines::Result::problem () const
+{
+  return m_problem;
+}
+
+// TestGuidelines
 TestGuidelines::TestGuidelines(QObject *parent) :
   QObject(parent),
   m_mainWindow (0)
@@ -32,7 +47,7 @@ void TestGuidelines::cleanupTestCase ()
 {
 }
 
-bool TestGuidelines::compareExpectedAndGot (const QVector<int> &countsExpected)
+TestGuidelines::Result TestGuidelines::compareExpectedAndGot (const QVector<int> &countsExpected)
 {
   Guidelines &guidelines = m_mainWindow->guidelines();
   const GuidelineContainerPrivate &container = guidelines.guidelineContainerPrivate();
@@ -42,7 +57,7 @@ bool TestGuidelines::compareExpectedAndGot (const QVector<int> &countsExpected)
   for (itr = container.begin(); itr != container.end(); itr++) {
     const GuidelineAbstract *guideline = *itr;
 
-    GuidelineState state = guidelineStateFromString (guideline->state ());
+    GuidelineState state = guidelineStateFromString (guideline->stateName ());
     countsGot [state] += 1;
   }
 
@@ -51,31 +66,42 @@ bool TestGuidelines::compareExpectedAndGot (const QVector<int> &countsExpected)
   for (int state = 0; state < NUM_GUIDELINE_STATES; state++) {
 
     // We look for a difference, except for the discarded state which is not important
-    if ((countsExpected [state] != countsGot [state]) &&
-        (state != GUIDELINE_STATE_DISCARDED)) {
+    if (countsExpected [state] != countsGot [state]) {
+      if (state != GUIDELINE_STATE_DISCARDED) {
 
-      success = false;  // Noop
-      break;
+        success = false;
+        break;
+      }
     }
   }
 
   // Debug
-  if (!success) {
+  if (success) {
+
+    return Result (true,
+                   "");
+
+  } else {
 
     QString text;
     QTextStream str (&text);
+    str << "Expected/got=";
     for (int state = 0; state < NUM_GUIDELINE_STATES; state++) {
       if ((countsExpected [state] != 0) || (countsGot [state] != 0)) {
-        if (state != GUIDELINE_STATE_DISCARDED) {
 
-          str << guidelineStateAsString (static_cast<GuidelineState> (state)) << "=" << countsExpected [state] << "/" << countsGot [state] << " ";
+        str << guidelineStateAsString (static_cast<GuidelineState> (state)) << "=";
+        if (state == GUIDELINE_STATE_DISCARDED) {
+          str << "ARBITRARY";
+        } else {
+          str << countsExpected [state];
         }
+        str << "/" << countsGot [state] << " ";
       }
     }
-    qDebug() << "expected/got = " << text;
-  }
 
-  return success;
+    return Result (false,
+                   text);
+  }
 }
 
 GuidelineState TestGuidelines::guidelineStateFromString (const QString &string) const
@@ -125,19 +151,15 @@ void TestGuidelines::initTestCase ()
                                  NO_EXPORT_IMAGE_EXTENSION,
                                  importFile,
                                  NO_COMMAND_LINE);
-
-  // This signal will trigger a callback until after this method has finished executing
-  connect (m_mainWindow, SIGNAL (signalShowEvent ()),
-           this, SLOT (test00StartupWithoutTransformation ()));
-
+  
   m_mainWindow->show ();
-}
 
-void TestGuidelines::processEventsElsewhere ()
-{
-  // Need time to let MainWindow import the file, which involves a QTimer
-  for (int i = 0; i < 1000; i++) {
-    qApp->processEvents();
+  test00StartupWithoutTransformationPrepare ();
+
+  // We cannot return until every test has finished, since as soon as this
+  // finishes, QtTest will start calling the private slots
+  while (m_results.size () < NUMBER_TESTS) {
+    qApp->processEvents ();
   }
 }
 
@@ -145,17 +167,41 @@ void TestGuidelines::test00StartupWithoutTransformation ()
 {
   // Expected and got counts
   QVector<int> countsExpected (NUM_GUIDELINE_STATES);
-  countsExpected [GUIDELINE_STATE_DISCARDED] = 4;
-  
-  bool success = compareExpectedAndGot (countsExpected);
+  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE   ] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE    ] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE   ] = 1;
 
-  qDebug() << (success ? "[PASS]" : "[FAIL]") << __FUNCTION__;
+  m_results.push_back (compareExpectedAndGot (countsExpected));
 
   test01AfterAddingTransformationPrepare ();
-  
-  // Setup for next test in the chain
-  connect (m_mainWindow, SIGNAL (signalGong ()),
-           this, SLOT (test01AfterAddingTransformation ()));
+}
+
+void TestGuidelines::test00StartupWithoutTransformationPrepare ()
+{
+  const int FIVE_SECONDS = 5000;
+
+  // Setup for first test in the chain. We use a timer to give the gui time to
+  // start up
+  connect (&m_showTimer, SIGNAL (timeout ()),
+           this, SLOT (test00StartupWithoutTransformation ()));
+
+  m_showTimer.setSingleShot (true);
+  m_showTimer.start (FIVE_SECONDS);
+}
+
+void TestGuidelines::test00StartupWithoutTransformationReport ()
+{
+  // If there is no result for this test then NUMBER_TESTS is off
+  const Result &result = m_results.front ();
+  if (!result.pass ()) {
+    cout << result.problem().toLatin1().data() << endl;
+  }
+
+  bool pass = result.pass ();
+  m_results.pop_front ();
+
+  QVERIFY (pass);
 }
 
 void TestGuidelines::test01AfterAddingTransformation ()
@@ -167,13 +213,15 @@ void TestGuidelines::test01AfterAddingTransformation ()
   countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING    ] = 1;
   countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   ] = 1;
 
-  bool success = compareExpectedAndGot (countsExpected);
-
-  qDebug() << (success ? "[PASS]" : "[FAIL]") << __FUNCTION__;
+  m_results.push_back (compareExpectedAndGot (countsExpected));
 }
 
 void TestGuidelines::test01AfterAddingTransformationPrepare ()
 {
+  // Setup for next test in the chain
+  connect (m_mainWindow, SIGNAL (signalGong ()),
+           this, SLOT (test01AfterAddingTransformation ()));
+
   QPointF posScreen0 (400, 400);
   QPointF posScreen1 (600, 400);
   QPointF posScreen2 (400, 200);
@@ -205,6 +253,20 @@ void TestGuidelines::test01AfterAddingTransformationPrepare ()
   m_mainWindow->cmdMediator()->push (cmd1);
   m_mainWindow->cmdMediator()->push (cmd2);
   m_mainWindow->cmdMediator()->push (cmd3);  
+}
+
+void TestGuidelines::test01AfterAddingTransformationReport ()
+{
+  // If there is no result for this test then NUMBER_TESTS is off
+  const Result &result = m_results.front ();
+  if (!result.pass ()) {
+    cout << result.problem().toLatin1().data() << endl;
+  }
+
+  bool pass = result.pass ();
+  m_results.pop_front ();
+
+  QVERIFY (pass);
 }
 
 void TestGuidelines::turnOffChecklist ()

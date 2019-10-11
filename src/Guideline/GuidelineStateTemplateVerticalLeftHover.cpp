@@ -74,7 +74,7 @@ void GuidelineStateTemplateVerticalLeftHover::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateTemplateVerticalLeftHover::state () const
+QString GuidelineStateTemplateVerticalLeftHover::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER);
 }

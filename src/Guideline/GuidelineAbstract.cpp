@@ -40,7 +40,7 @@ GuidelineAbstract::~GuidelineAbstract ()
 
 void GuidelineAbstract::bindGuidelineVisible (GuidelineAbstract *guidelineVisible)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::bindGuidelineVisible state=" << m_context->state ().toLatin1().data();
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::bindGuidelineVisible state=" << m_context->stateName ().toLatin1().data();
 
   m_guidelineVisible = guidelineVisible;
 
@@ -106,14 +106,14 @@ void GuidelineAbstract::handleMouseMoveEvent (const QPointF &posScene)
 
 void GuidelineAbstract::handleMousePressEvent(const QPointF &posScene)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMousePressEvent state=" << m_context->state ().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMousePressEvent state=" << m_context->stateName ().toLatin1().data();
 
   m_context->handleMousePress(posScene);
 }
 
 void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent state=" << m_context->state ().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent state=" << m_context->stateName ().toLatin1().data();
 
   m_context->handleMouseRelease (posScene);
 }
@@ -138,13 +138,13 @@ void GuidelineAbstract::slotHandleMoved (QPointF posScreen)
    updateGeometry (posScreen);
 }
 
-QString GuidelineAbstract::state () const
+QString GuidelineAbstract::stateDump () const
 {
   // This is used by Guidelines::stateDump and GuidelineStateContext::stateDump
   QString out;
   QTextStream str (&out);
 
-  str << " " << m_context->state();
+  str << " " << m_context->stateName ();
   str << " (";
   str << (getGraphicsItemSelected() ? "selected" : "unselected") << " ";
   str << (getGraphicsItemAcceptHover() ? "hoverable" : "unhoverable") << " ";
@@ -154,6 +154,11 @@ QString GuidelineAbstract::state () const
   str << ")";
 
   return out;
+}
+
+QString GuidelineAbstract::stateName () const
+{
+  return m_context->stateName ();
 }
 
 void GuidelineAbstract::updateWithLatestTransformation ()

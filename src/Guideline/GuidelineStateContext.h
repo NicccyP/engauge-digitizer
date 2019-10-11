@@ -174,11 +174,11 @@ public:
   /// Pass replacement Guideline state from template Guidelines to handle Guideline
   void setStateReplacement (GuidelineState stateReplacement);
 
-  /// State as a string for debugging only
-  QString state () const;
-
-  /// States listed as a string for debugging only
+  /// Dump state for debugging only
   QString stateDump () const;
+
+  /// State as a string for debugging only
+  QString stateName () const;
 
   /// Get method for replacement state
   GuidelineState stateReplacement () const;

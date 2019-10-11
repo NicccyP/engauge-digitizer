@@ -76,7 +76,7 @@ void GuidelineStateTemplateHorizontalBottomHover::handleVisibleChange (bool visi
   }
 }
 
-QString GuidelineStateTemplateHorizontalBottomHover::state () const
+QString GuidelineStateTemplateHorizontalBottomHover::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER);
 }

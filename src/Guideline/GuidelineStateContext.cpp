@@ -208,16 +208,16 @@ void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement
   m_stateReplacement = stateReplacement;
 }
 
-QString GuidelineStateContext::state () const
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  return m_states[m_currentState]->state();
-}
-
 QString GuidelineStateContext::stateDump () const
 {
   return m_guidelines.stateDump ();
+}
+
+QString GuidelineStateContext::stateName () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->stateName();
 }
 
 GuidelineState GuidelineStateContext::stateReplacement () const

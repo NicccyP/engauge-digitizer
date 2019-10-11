@@ -163,7 +163,7 @@ QString Guidelines::stateDump () const
   for (itrSort = m_guidelineContainer.begin(); itrSort != m_guidelineContainer.end(); itrSort++) {
     GuidelineAbstract *guideline = *itrSort;
 
-    sorted << guideline->state();
+    sorted << guideline->stateDump ();
   }
 
   qSort (sorted.begin(),

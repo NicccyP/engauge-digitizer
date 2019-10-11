@@ -28,7 +28,7 @@ public:
   virtual void handleVisibleChange (bool visible);
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;
-  virtual QString state () const;
+  virtual QString stateName () const;
   virtual void updateWithLatestTransformation ();
 
 private:

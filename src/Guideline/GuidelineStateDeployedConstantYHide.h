@@ -25,7 +25,7 @@ public:
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
-  virtual QString state () const;
+  virtual QString stateName () const;
 
 private:
   GuidelineStateDeployedConstantYHide();

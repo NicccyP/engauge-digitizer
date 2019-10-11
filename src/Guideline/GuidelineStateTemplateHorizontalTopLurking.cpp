@@ -75,7 +75,7 @@ void GuidelineStateTemplateHorizontalTopLurking::handleVisibleChange (bool visib
   }
 }
 
-QString GuidelineStateTemplateHorizontalTopLurking::state () const
+QString GuidelineStateTemplateHorizontalTopLurking::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING);
 }

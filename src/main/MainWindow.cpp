@@ -1925,8 +1925,6 @@ void MainWindow::showEvent (QShowEvent *event)
     m_timerLoadStartupFiles->start (0); // Zero delay still waits until execution finishes and gui is available
 
   }
-
-  emit signalShowEvent ();
 }
 
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)

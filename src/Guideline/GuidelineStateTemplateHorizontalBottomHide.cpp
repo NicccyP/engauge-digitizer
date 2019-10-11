@@ -62,7 +62,7 @@ void GuidelineStateTemplateHorizontalBottomHide::handleVisibleChange (bool visib
   }
 }
 
-QString GuidelineStateTemplateHorizontalBottomHide::state () const
+QString GuidelineStateTemplateHorizontalBottomHide::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE);
 }

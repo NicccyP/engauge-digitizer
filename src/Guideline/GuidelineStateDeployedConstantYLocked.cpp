@@ -69,7 +69,7 @@ void GuidelineStateDeployedConstantYLocked::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateDeployedConstantYLocked::state () const
+QString GuidelineStateDeployedConstantYLocked::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED);
 }

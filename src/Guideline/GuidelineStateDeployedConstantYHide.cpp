@@ -67,7 +67,7 @@ void GuidelineStateDeployedConstantYHide::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateDeployedConstantYHide::state () const
+QString GuidelineStateDeployedConstantYHide::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE);
 }

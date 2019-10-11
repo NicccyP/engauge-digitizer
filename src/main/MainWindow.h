@@ -377,9 +377,6 @@ signals:
   /// Send wakeup signal to unit test framework when all other commands have finished executing
   void signalGong ();
 
-  /// Send signal to unit test framework on show event
-  void signalShowEvent ();
-
   /// Send zoom selection, picked from menu or keystroke, to StatusBar.
   void signalZoom(int);
 

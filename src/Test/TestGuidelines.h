@@ -4,18 +4,21 @@
 #include "GuidelineState.h"
 #include <QObject>
 #include <QString>
+#include <QTimer>
 
 class MainWindow;
 
-/// Unit test of guidelines. This does not use QtTest framework since we need to let
-/// CmdMediator command stack work its way through the commands between tests, and
-/// prior to the first test, using asynchronous signals and slots. The QtTest framework
-/// flies through all tests without stopping, and even pausing with calls to
-/// QCoreApplication::processEvents does not clear off the stack so queued signals
-/// can be processed
-///
-/// Some signals specific to unit testing are received by this class so it must
-/// inherit from QObject
+/// Unit test of guidelines. Since the QtTest framework automatically screams through
+/// the private slots of this class but we want mouse/command/signal events to happen
+/// at their own pace in the gui, we use a multi-step approach:
+/// -# Under initTestCase() we use run the actual tests. Each test gets two smaller steps:
+///     -# Run the 'TestPrepare' method which queues up command(s) in MainWindow command queue
+///     -# The 'Test' method gets called after the 'TestPrepare' method has done its magic. This
+///        stores the result from each test into a FIFO list
+/// -# Let QtTest framework call each private slot. Each private slot grabs the next result
+///    in the FIFO list
+/// This approach produces test output that is formatted just like 'normal' QtTest tests
+/// (pass/fail in green/red, with class and function names afterwards)
 class TestGuidelines : public QObject
 {
   Q_OBJECT
@@ -23,26 +26,56 @@ public:
   /// Single constructor.
   explicit TestGuidelines(QObject *parent = 0);
 
-  /// Initialize and start chain of tests
-  void initTestCase ();
-
 public slots:
   // These would be private slots but we want to control when they are called so
   // these are moved outside of the private slots (which qttest automatically calls)
-  void cleanupTestCase ();
   void test00StartupWithoutTransformation ();
   void test01AfterAddingTransformation ();
 
+private slots:
+
+  void cleanupTestCase ();
+  void initTestCase ();
+
+  // Number of tests (with one private slot per test) must equal NUMBER_TESTS
+  void test00StartupWithoutTransformationReport ();
+  void test01AfterAddingTransformationReport ();
+
 private:
 
-  bool compareExpectedAndGot (const QVector<int> &countsExpected);
+  /// Helper class containing result set from one test
+  class Result
+  {
+  public:
+    /// Single constructor
+    Result (bool pass,
+            const QString &problem);
+
+    /// Get method for pass/fail result
+    bool pass () const;
+
+    /// Problem encountered with fail result
+    QString problem () const;
+
+  private:
+    Result ();
+
+    bool m_pass;
+    QString m_problem;
+  };
+
+  /// Data collection
+  typedef QList<Result> Results;
+
+  Result compareExpectedAndGot (const QVector<int> &countsExpected);
   GuidelineState guidelineStateFromString (const QString &string) const;
-  void processEventsElsewhere ();
+  void test00StartupWithoutTransformationPrepare ();  
   void test01AfterAddingTransformationPrepare ();
   void turnOffChecklist ();
 
   MainWindow *m_mainWindow;
-
+  QTimer m_showTimer;
+  Results m_results;
 };
 
 #endif // TEST_GUIDELINES_H

@@ -69,7 +69,7 @@ void GuidelineStateDeployedConstantTHover::handleVisibleChange (bool visible)
   }
 }
 
-QString GuidelineStateDeployedConstantTHover::state () const
+QString GuidelineStateDeployedConstantTHover::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER);
 }
