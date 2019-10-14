@@ -49,7 +49,7 @@ void CmdGong::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGong::cmdUndo";
 }
 
-void CmdGong::saveXml (QXmlStreamWriter &writer) const
+void CmdGong::saveXml (QXmlStreamWriter & /* writer */) const
 {
   // Noop. This command is only for unit testing, and is completely independent of the Document that is being saved
 }
