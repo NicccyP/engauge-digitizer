@@ -28,9 +28,11 @@ public:
 
 public slots:
   // These would be private slots but we want to control when they are called so
-  // these are moved outside of the private slots (which qttest automatically calls)
+  // these are moved outside of the private slots (which qttest automatically calls).
+  // Number of methods here must agree with NUMBER_TESTS
   void test00StartupWithoutTransformation ();
   void test01AfterAddingTransformation ();
+  void test02AfterRemovingTransformation ();
 
 private slots:
 
@@ -40,6 +42,7 @@ private slots:
   // Number of tests (with one private slot per test) must equal NUMBER_TESTS
   void test00StartupWithoutTransformationReport ();
   void test01AfterAddingTransformationReport ();
+  void test02AfterRemovingTransformationReport ();
 
 private:
 
@@ -69,8 +72,12 @@ private:
 
   Result compareExpectedAndGot (const QVector<int> &countsExpected);
   GuidelineState guidelineStateFromString (const QString &string) const;
+
+  // Number of methods here must agree with NUMBER_TESTS
   void test00StartupWithoutTransformationPrepare ();  
   void test01AfterAddingTransformationPrepare ();
+  void test02AfterRemovingTransformationPrepare ();
+
   void turnOffChecklist ();
 
   MainWindow *m_mainWindow;

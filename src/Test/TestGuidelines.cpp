@@ -1,4 +1,5 @@
 #include "CmdAddPointAxis.h"
+#include "CmdDelete.h"
 #include "CmdGong.h"
 #include "GuidelineAbstract.h"
 #include "Guidelines.h"
@@ -14,7 +15,7 @@
 
 using namespace std;
 
-const int NUMBER_TESTS = 2;
+const int NUMBER_TESTS = 3;
 
 QTEST_MAIN (TestGuidelines)
 
@@ -174,6 +175,7 @@ void TestGuidelines::test00StartupWithoutTransformation ()
 
   m_results.push_back (compareExpectedAndGot (countsExpected));
 
+  // Connect to next test here
   test01AfterAddingTransformationPrepare ();
 }
 
@@ -214,11 +216,16 @@ void TestGuidelines::test01AfterAddingTransformation ()
   countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   ] = 1;
 
   m_results.push_back (compareExpectedAndGot (countsExpected));
+
+  // Connect to next test here
+  test02AfterRemovingTransformationPrepare ();
 }
 
 void TestGuidelines::test01AfterAddingTransformationPrepare ()
 {
   // Setup for next test in the chain
+  disconnect (m_mainWindow, SIGNAL (signalGong ()),
+              this, SLOT (test00StartupWithoutTransformation ()));
   connect (m_mainWindow, SIGNAL (signalGong ()),
            this, SLOT (test01AfterAddingTransformation ()));
 
@@ -256,6 +263,57 @@ void TestGuidelines::test01AfterAddingTransformationPrepare ()
 }
 
 void TestGuidelines::test01AfterAddingTransformationReport ()
+{
+  // If there is no result for this test then NUMBER_TESTS is off
+  const Result &result = m_results.front ();
+  if (!result.pass ()) {
+    cout << result.problem().toLatin1().data() << endl;
+  }
+
+  bool pass = result.pass ();
+  m_results.pop_front ();
+
+  QVERIFY (pass);
+}
+
+void TestGuidelines::test02AfterRemovingTransformation ()
+{
+  // Expected and got counts
+  QVector<int> countsExpected (NUM_GUIDELINE_STATES);
+  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE   ] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE    ] = 1;
+  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE   ] = 1;
+
+  m_results.push_back (compareExpectedAndGot (countsExpected));
+
+  // Connect to next test here
+  //test03... ();
+}
+
+void TestGuidelines::test02AfterRemovingTransformationPrepare ()
+{
+  // Setup for next test in the chain
+  disconnect (m_mainWindow, SIGNAL (signalGong ()),
+              this, SLOT (test01AfterAddingTransformation ()));
+  connect (m_mainWindow, SIGNAL (signalGong ()),
+           this, SLOT (test02AfterRemovingTransformation ()));
+
+  const QString POINT2_IDENTIFIER ("Axes\tpoint\t2");
+  QStringList pointsToDelete;
+  pointsToDelete << POINT2_IDENTIFIER;
+
+  CmdDelete *cmd0 = new CmdDelete (*m_mainWindow,
+                                   m_mainWindow->cmdMediator()->document(),
+                                   pointsToDelete);
+  CmdGong *cmd1 = new CmdGong (*m_mainWindow,
+                               m_mainWindow->cmdMediator()->document());
+
+  m_mainWindow->cmdMediator()->push (cmd0);
+  m_mainWindow->cmdMediator()->push (cmd1);
+}
+
+void TestGuidelines::test02AfterRemovingTransformationReport ()
 {
   // If there is no result for this test then NUMBER_TESTS is off
   const Result &result = m_results.front ();
