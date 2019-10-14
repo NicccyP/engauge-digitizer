@@ -72,6 +72,7 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
+class QGridLayout;
 class QMenu;
 class QPushButton;
 class QSettings;
@@ -79,7 +80,6 @@ class QSignalMapper;
 class QTextStream;
 class QTimer;
 class QToolBar;
-class QVBoxLayout;
 class StatusBar;
 class TransformationStateContext;
 class TutorialDlg;
@@ -598,7 +598,7 @@ private:
   QAction *m_actionHelpTutorial;
   QAction *m_actionHelpWhatsThis;
 
-  QVBoxLayout *m_layout;
+  QGridLayout *m_layout;
   GraphicsScene *m_scene;
   GraphicsView *m_view;
 

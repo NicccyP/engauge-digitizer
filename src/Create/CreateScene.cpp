@@ -9,7 +9,7 @@
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include <QVBoxLayout>
+#include <QGridLayout>
 
 CreateScene::CreateScene()
 {
@@ -21,6 +21,34 @@ void CreateScene::create(MainWindow &mw)
   
   mw.m_scene = new GraphicsScene (&mw);
   mw.m_view = new GraphicsView (mw.m_scene, mw);
-  mw.m_layout->addWidget (mw.m_view);
+
+  QGraphicsScene *sceneBottom = new QGraphicsScene ();
+  QGraphicsScene *sceneLeft = new QGraphicsScene ();
+  QGraphicsScene *sceneRight = new QGraphicsScene ();
+  QGraphicsScene *sceneTop = new QGraphicsScene ();
+
+  QGraphicsView *viewBottom = new QGraphicsView (sceneBottom);
+  QGraphicsView *viewLeft = new QGraphicsView (sceneLeft);
+  QGraphicsView *viewRight = new QGraphicsView (sceneRight);
+  QGraphicsView *viewTop = new QGraphicsView (sceneTop);
+
+  const int DEPTH = 6;
+
+  viewBottom->setFixedHeight (DEPTH);
+  viewLeft->setFixedWidth (DEPTH);
+  viewRight->setFixedWidth (DEPTH);
+  viewTop->setFixedHeight (DEPTH);
+
+  viewBottom->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  viewLeft->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  viewRight->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  viewTop->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+
+  int row = 0;
+  mw.m_layout->addWidget (viewTop, row++, 1);
+  mw.m_layout->addWidget (viewLeft, row, 0);
+  mw.m_layout->addWidget (mw.m_view, row, 1);
+  mw.m_layout->addWidget (viewRight, row++, 2);
+  mw.m_layout->addWidget (viewBottom, row++, 1);
 }
 
