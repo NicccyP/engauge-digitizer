@@ -1571,7 +1571,11 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        pixmap,
                                        curveSelected);
 
-  m_guidelines.initialize (*m_scene);
+  m_guidelines.initialize (*m_scene,
+                           *m_sceneGuidelineBottom,
+                           *m_sceneGuidelineLeft,
+                           *m_sceneGuidelineRight,
+                           *m_sceneGuidelineTop);
 }
 
 void MainWindow::settingsRead (bool isReset)

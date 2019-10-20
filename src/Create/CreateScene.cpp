@@ -9,6 +9,7 @@
 #include "GraphicsView.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QGraphicsView>
 #include <QGridLayout>
 
 CreateScene::CreateScene()
@@ -22,33 +23,43 @@ void CreateScene::create(MainWindow &mw)
   mw.m_scene = new GraphicsScene (&mw);
   mw.m_view = new GraphicsView (mw.m_scene, mw);
 
-  QGraphicsScene *sceneBottom = new QGraphicsScene ();
-  QGraphicsScene *sceneLeft = new QGraphicsScene ();
-  QGraphicsScene *sceneRight = new QGraphicsScene ();
-  QGraphicsScene *sceneTop = new QGraphicsScene ();
+  mw.m_sceneGuidelineBottom = new QGraphicsScene ();
+  mw.m_sceneGuidelineLeft = new QGraphicsScene ();
+  mw.m_sceneGuidelineRight = new QGraphicsScene ();
+  mw.m_sceneGuidelineTop = new QGraphicsScene ();
 
-  QGraphicsView *viewBottom = new QGraphicsView (sceneBottom);
-  QGraphicsView *viewLeft = new QGraphicsView (sceneLeft);
-  QGraphicsView *viewRight = new QGraphicsView (sceneRight);
-  QGraphicsView *viewTop = new QGraphicsView (sceneTop);
+  mw.m_viewGuidelineBottom = new QGraphicsView (mw.m_sceneGuidelineBottom);
+  mw.m_viewGuidelineLeft = new QGraphicsView (mw.m_sceneGuidelineLeft);
+  mw.m_viewGuidelineRight = new QGraphicsView (mw.m_sceneGuidelineRight);
+  mw.m_viewGuidelineTop = new QGraphicsView (mw.m_sceneGuidelineTop);
 
-  const int DEPTH = 6;
+  mw.m_viewGuidelineBottom->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mw.m_viewGuidelineLeft->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mw.m_viewGuidelineRight->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mw.m_viewGuidelineTop->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  viewBottom->setFixedHeight (DEPTH);
-  viewLeft->setFixedWidth (DEPTH);
-  viewRight->setFixedWidth (DEPTH);
-  viewTop->setFixedHeight (DEPTH);
+  mw.m_viewGuidelineBottom->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mw.m_viewGuidelineLeft->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mw.m_viewGuidelineRight->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  mw.m_viewGuidelineTop->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  viewBottom->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
-  viewLeft->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
-  viewRight->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
-  viewTop->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  const int DEPTH = 16;
+
+  mw.m_viewGuidelineBottom->setFixedHeight (DEPTH);
+  mw.m_viewGuidelineLeft->setFixedWidth (DEPTH);
+  mw.m_viewGuidelineRight->setFixedWidth (DEPTH);
+  mw.m_viewGuidelineTop->setFixedHeight (DEPTH);
+
+  mw.m_viewGuidelineBottom->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  mw.m_viewGuidelineLeft->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  mw.m_viewGuidelineRight->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+  mw.m_viewGuidelineTop->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
 
   int row = 0;
-  mw.m_layout->addWidget (viewTop, row++, 1);
-  mw.m_layout->addWidget (viewLeft, row, 0);
+  mw.m_layout->addWidget (mw.m_viewGuidelineTop, row++, 1);
+  mw.m_layout->addWidget (mw.m_viewGuidelineLeft, row, 0);
   mw.m_layout->addWidget (mw.m_view, row, 1);
-  mw.m_layout->addWidget (viewRight, row++, 2);
-  mw.m_layout->addWidget (viewBottom, row++, 1);
+  mw.m_layout->addWidget (mw.m_viewGuidelineRight, row++, 2);
+  mw.m_layout->addWidget (mw.m_viewGuidelineBottom, row++, 1);
 }
 

@@ -63,11 +63,13 @@ void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
   if (m_guidelineVisible != nullptr) {
 
     // If scene position is off-screen then user is removing the visible Guideline
+#ifdef TODO
     if (!m_scene.sceneRect().contains (posScene)) {
 
       m_guidelineVisible->draggedOffScreen ();
 
     }
+#endif
 
     m_guidelineVisible = nullptr;
   }

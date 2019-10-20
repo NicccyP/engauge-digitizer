@@ -53,7 +53,11 @@ public:
   /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded.
   /// We do not set the initial state as a function of external conditions since during loading those
   /// conditions are not predictable
-  void initialize (QGraphicsScene &scene);
+  void initialize (QGraphicsScene &scene,
+                   QGraphicsScene &sceneGuidelineBottom,
+                   QGraphicsScene &sceneGuidelineLeft,
+                   QGraphicsScene &sceneGuidelineRight,
+                   QGraphicsScene &sceneGuidelineTop);
 
   /// States listed as a string for debugging only
   QString stateDump () const;

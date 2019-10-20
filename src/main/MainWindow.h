@@ -72,6 +72,7 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
+class QGraphicsView;
 class QGridLayout;
 class QMenu;
 class QPushButton;
@@ -601,6 +602,16 @@ private:
   QGridLayout *m_layout;
   GraphicsScene *m_scene;
   GraphicsView *m_view;
+
+  QGraphicsScene *m_sceneGuidelineBottom;
+  QGraphicsScene *m_sceneGuidelineLeft;
+  QGraphicsScene *m_sceneGuidelineRight;
+  QGraphicsScene *m_sceneGuidelineTop;
+
+  QGraphicsView *m_viewGuidelineBottom;
+  QGraphicsView *m_viewGuidelineLeft;
+  QGraphicsView *m_viewGuidelineRight;
+  QGraphicsView *m_viewGuidelineTop;
 
   StatusBar *m_statusBar;
   Transformation m_transformation;

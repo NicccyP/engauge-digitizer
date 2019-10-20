@@ -33,17 +33,18 @@ Guidelines::~Guidelines ()
 
 void Guidelines::clear ()
 {
-  QGraphicsScene *scene = nullptr;
-
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
 
-    if (scene == nullptr) {
-      scene = &guideline->scene();
-    }
+    // Remove the guideline from its scene
+    QGraphicsScene *scene = &guideline->scene();
 
-    guideline->removeFromScene (scene);
+    if (scene != nullptr) {
+
+      guideline->removeFromScene (scene);
+
+    }
   }
 
   m_guidelineContainer.clear ();
@@ -122,8 +123,27 @@ void Guidelines::handleVisibleChange (bool visible)
   }
 }
 
-void Guidelines::initialize (QGraphicsScene &scene)
+void Guidelines::initialize (QGraphicsScene &scene,
+                             QGraphicsScene &sceneGuidelineBottom,
+                             QGraphicsScene &sceneGuidelineLeft,
+                             QGraphicsScene &sceneGuidelineRight,
+                             QGraphicsScene &sceneGuidelineTop)
 {
+  const int MARGIN = 13;
+  QRectF rectBottom (scene.sceneRect().bottomLeft(),
+                     scene.sceneRect().bottomRight() + QPointF (0, MARGIN));
+  QRectF rectLeft (scene.sceneRect().topLeft() + QPointF (-MARGIN, 0),
+                   scene.sceneRect().bottomLeft());
+  QRectF rectRight (scene.sceneRect().topRight(),
+                    scene.sceneRect().bottomRight() + QPointF (MARGIN, 0));
+  QRectF rectTop (scene.sceneRect().topLeft() + QPointF (0, MARGIN),
+                  scene.sceneRect().topRight());
+
+  sceneGuidelineBottom.setSceneRect (rectBottom);
+  sceneGuidelineLeft.setSceneRect (rectLeft);
+  sceneGuidelineRight.setSceneRect (rectRight);
+  sceneGuidelineTop.setSceneRect (rectTop);
+
   GuidelineState stateVerticalLeft = GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING;
   GuidelineState stateVerticalRight = GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING;
   GuidelineState stateHorizontalTop = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING;
@@ -136,16 +156,16 @@ void Guidelines::initialize (QGraphicsScene &scene)
     stateHorizontalBottom = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE;
   }
 
-  registerGuideline (new GuidelineLine (scene,
+  registerGuideline (new GuidelineLine (sceneGuidelineLeft,
                                         *this,
                                         stateVerticalLeft));
-  registerGuideline (new GuidelineLine (scene,
+  registerGuideline (new GuidelineLine (sceneGuidelineRight,
                                         *this,
                                         stateVerticalRight));
-  registerGuideline (new GuidelineLine (scene,
+  registerGuideline (new GuidelineLine (sceneGuidelineTop,
                                         *this,
                                         stateHorizontalTop));
-  registerGuideline (new GuidelineLine (scene,
+  registerGuideline (new GuidelineLine (sceneGuidelineBottom,
                                         *this,
                                         stateHorizontalBottom));
 }
