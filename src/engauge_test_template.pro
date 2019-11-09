@@ -305,6 +305,7 @@ HEADERS  += \
     Grid/GridTriangleFill.h \
     Guideline/GuidelineAbstract.h \
     Guideline/GuidelineEllipse.h \
+    Guideline/GuidelineFactory.h \
     Guideline/GuidelineFormat.h \
     Guideline/GuidelineLine.h \
     Guideline/GuidelineProjectorAbstract.h \
@@ -710,6 +711,7 @@ SOURCES += \
     Grid/GridTriangleFill.cpp \
     Guideline/GuidelineAbstract.cpp \
     Guideline/GuidelineEllipse.cpp \
+    Guideline/GuidelineFactory.cpp \
     Guideline/GuidelineFormat.cpp \
     Guideline/GuidelineLine.cpp \
     Guideline/GuidelineProjectorAbstract.cpp \
