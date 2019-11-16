@@ -8,8 +8,10 @@
 #include "Document.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
+#include "GraphicsScene.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineEllipse.h"
+#include "GuidelineFactory.h"
 #include "GuidelineLine.h"
 #include "Guidelines.h"
 #include "Logger.h"
@@ -22,7 +24,8 @@
 #include <QTextStream>
 
 Guidelines::Guidelines (MainWindow &mainWindow) :
-  m_mainWindow (mainWindow)
+  m_mainWindow (mainWindow),
+  m_guidelineFactory (nullptr)
 {
 }
 
@@ -62,38 +65,8 @@ CoordsType Guidelines::coordsType () const
 
 GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
 {
-  // This method is used to create non-template Guidelines after the template Guidelines
-  // have been created. We grab the scene from the first Guideline in the list
-  ENGAUGE_ASSERT (m_guidelineContainer.size () > 0);
-
-  GuidelineAbstract *guidelineFirst = m_guidelineContainer.at (0);
-  QGraphicsScene &scene = guidelineFirst->scene ();
-
-  // Map of states that get an ellipse
-  QMap<GuidelineState, bool> guidelineStatesWithEllipse;
-  guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE] = true;
-  guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE] = true;
-  guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER] = true;
-
-  GuidelineAbstract *guideline = nullptr;
-
-  if (guidelineStatesWithEllipse.contains (stateInitial)) {
-
-    guideline = new GuidelineEllipse (scene,
-                                      *this,
-                                      stateInitial);
-
-  } else {
-
-    guideline = new GuidelineLine (scene,
-                                      *this,
-                                      stateInitial);
-
-  }
-
-  ENGAUGE_CHECK_PTR (guideline);
-
-  registerGuideline (guideline);
+  GuidelineAbstract *guideline = m_guidelineFactory->createGuideline (*this,
+                                                     stateInitial);
 
   return guideline;
 }
@@ -123,13 +96,20 @@ void Guidelines::handleVisibleChange (bool visible)
   }
 }
 
-void Guidelines::initialize (QGraphicsScene &scene,
+void Guidelines::initialize (GraphicsScene &scene,
                              QGraphicsScene &sceneGuidelineBottom,
                              QGraphicsScene &sceneGuidelineLeft,
                              QGraphicsScene &sceneGuidelineRight,
                              QGraphicsScene &sceneGuidelineTop)
 {
   const int MARGIN = 13;
+
+  m_guidelineFactory = new GuidelineFactory (&scene,
+                                             &sceneGuidelineBottom,
+                                             &sceneGuidelineLeft,
+                                             &sceneGuidelineRight,
+                                             &sceneGuidelineTop);
+
   QRectF rectBottom (scene.sceneRect().bottomLeft(),
                      scene.sceneRect().bottomRight() + QPointF (0, MARGIN));
   QRectF rectLeft (scene.sceneRect().topLeft() + QPointF (-MARGIN, 0),
@@ -156,18 +136,16 @@ void Guidelines::initialize (QGraphicsScene &scene,
     stateHorizontalBottom = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE;
   }
 
-  registerGuideline (new GuidelineLine (sceneGuidelineLeft,
-                                        *this,
-                                        stateVerticalLeft));
-  registerGuideline (new GuidelineLine (sceneGuidelineRight,
-                                        *this,
-                                        stateVerticalRight));
-  registerGuideline (new GuidelineLine (sceneGuidelineTop,
-                                        *this,
-                                        stateHorizontalTop));
-  registerGuideline (new GuidelineLine (sceneGuidelineBottom,
-                                        *this,
-                                        stateHorizontalBottom));
+  registerGuideline (m_guidelineFactory->createGuideline (*this,
+                                                          stateVerticalLeft));
+  registerGuideline (m_guidelineFactory->createGuideline (*this,
+                                                          stateVerticalLeft));
+  registerGuideline (m_guidelineFactory->createGuideline (*this,
+                                                          stateVerticalRight));
+  registerGuideline (m_guidelineFactory->createGuideline (*this,
+                                                          stateHorizontalTop));
+  registerGuideline (m_guidelineFactory->createGuideline (*this,
+                                                          stateHorizontalBottom));
 }
 
 void Guidelines::registerGuideline (GuidelineAbstract *guideline)

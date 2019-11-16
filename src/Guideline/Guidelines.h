@@ -15,7 +15,9 @@
 #include "Transformation.h"
 
 class DocumentModelCoords;
+class GraphicsScene;
 class GuidelineAbstract;
+class GuidelineFactory;
 class MainWindow;
 class QGraphicsScene;
 
@@ -53,7 +55,7 @@ public:
   /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded.
   /// We do not set the initial state as a function of external conditions since during loading those
   /// conditions are not predictable
-  void initialize (QGraphicsScene &scene,
+  void initialize (GraphicsScene &scene,
                    QGraphicsScene &sceneGuidelineBottom,
                    QGraphicsScene &sceneGuidelineLeft,
                    QGraphicsScene &sceneGuidelineRight,
@@ -83,6 +85,8 @@ private:
   GuidelineContainerPrivate m_guidelineContainer; // Save for easy removal later
 
   MainWindow &m_mainWindow;
+
+  GuidelineFactory *m_guidelineFactory;
 };
 
 #endif // GUIDELINES_H
