@@ -43,7 +43,7 @@ void CreateScene::create(MainWindow &mw)
   mw.m_viewGuidelineRight->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   mw.m_viewGuidelineTop->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  const int DEPTH = 16;
+  const int DEPTH = 8;
 
   mw.m_viewGuidelineBottom->setFixedHeight (DEPTH);
   mw.m_viewGuidelineLeft->setFixedWidth (DEPTH);
@@ -54,6 +54,20 @@ void CreateScene::create(MainWindow &mw)
   mw.m_viewGuidelineLeft->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
   mw.m_viewGuidelineRight->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
   mw.m_viewGuidelineTop->setStyleSheet ("background-color: rgba(0, 0, 0, 0)");
+
+  QString topBottom (tr ("X/Theta Guideline Window\n"
+                         "Drag the guideline in this window into the main window to create a guideline "
+                         "for the X coordinate for cartesian coordinates, or Theta coordinate for polar "
+                         "coordinates"));
+  QString leftRight (tr ("Y/R Guideline Window\n"
+                         "Drag the guideline in this window into the main window to create a guideline "
+                         "for the Y coordinate for cartesian coordinates, or R coordinate for polar "
+                         "coordinates"));
+
+  mw.m_viewGuidelineBottom->setWhatsThis (topBottom);
+  mw.m_viewGuidelineLeft->setWhatsThis (leftRight);
+  mw.m_viewGuidelineRight->setWhatsThis (leftRight);
+  mw.m_viewGuidelineTop->setWhatsThis (topBottom);
 
   int row = 0;
   mw.m_layout->addWidget (mw.m_viewGuidelineTop, row++, 1);

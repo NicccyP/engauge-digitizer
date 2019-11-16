@@ -2995,6 +2995,11 @@ void MainWindow::slotViewGuidelines ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
 
+  m_viewGuidelineBottom->setVisible (guidelinesAreVisible ());
+  m_viewGuidelineLeft->setVisible (guidelinesAreVisible ());
+  m_viewGuidelineRight->setVisible (guidelinesAreVisible ());
+  m_viewGuidelineTop->setVisible (guidelinesAreVisible ());
+
   m_guidelines.handleVisibleChange (guidelinesAreVisible ());
 }
 

@@ -39,7 +39,7 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScree
   context().setStateReplacement (stateReplacement);
 
   // Unselect all selected items. This prevents the extremely confusing error where an
-  // existing axis point stays selected and gets dragged along with this Guideline,
+  // a currently-selected axis point stays selected and gets dragged along with this Guideline,
   // which moves the axis unexpectedly
   QList<QGraphicsItem*>::iterator itr;
   QList<QGraphicsItem*> items = m_context.guideline().scene().selectedItems();
@@ -59,6 +59,9 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScree
   guidelineVisible->setGraphicsItemPen (guidelineFormat.colorDeployedNonHover (),
                                         guidelineFormat.lineWidthNonHover ());
 
+  // Place new Guideline at cursor position but in the main window rather than a
+  // guideline window. The complication is that posScreen is in the coordinates of
+  // a different window
   guidelineVisible->updateGeometry (posScreen);
 
   context().guideline().bindGuidelineVisible (guidelineVisible);
