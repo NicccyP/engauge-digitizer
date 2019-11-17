@@ -480,6 +480,17 @@ void CreateActions::createView (MainWindow &mw)
                                                 "This toolbar is disabled when there is only one coordinate system."));
   connect (mw.m_actionViewCoordSystem, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarCoordSystem()));
 
+  mw.m_actionViewGuidelines = new QAction (tr ("Guidelines Toolbar"), &mw);
+  mw.m_actionViewGuidelines->setCheckable (true);
+  mw.m_actionViewGuidelines->setChecked (false);
+  mw.m_actionViewGuidelines->setStatusTip (tr ("Show or hide the guidelines toolbar and guidelines."));
+  mw.m_actionViewGuidelines->setWhatsThis (tr ("View Guidelines ToolBar and Guidelines\n\n"
+                                               "Show or hide the guidelines toolbar, and guidelines in the main window. "
+                                               "The toolbar is used to create new X and Y aligned guidelines for cartesian "
+                                               "plots, and T (theta) and R (range) guidelines for polar plots. Guidelines "
+                                               "are useful for aligning points."));
+  connect (mw.m_actionViewGuidelines, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarGuidelines ()));
+
   mw.m_actionViewToolTips = new QAction (tr ("Tool Tips"), &mw);
   mw.m_actionViewToolTips->setCheckable (true);
   mw.m_actionViewToolTips->setChecked (true);
@@ -496,17 +507,6 @@ void CreateActions::createView (MainWindow &mw)
                                               "Show or hide grid lines that are added for accurate adjustments of the axes points, "
                                               "which can improve accuracy in distorted graphs"));
   connect (mw.m_actionViewGridLines, SIGNAL (triggered ()), &mw, SLOT (slotViewGridLines()));
-
-  mw.m_actionViewGuidelines = new QAction (tr ("Guidelines"), &mw);
-  mw.m_actionViewGuidelines->setCheckable (true);
-  mw.m_actionViewGuidelines->setChecked (true); // Offer initially since otherwise user will never know about the guidelines
-  mw.m_actionViewGuidelines->setStatusTip (tr ("Show or hide guidelines."));
-  mw.m_actionViewGuidelines->setWhatsThis (tr ("View Guidelines\n\n"
-                                               "Show or hide guidelines that can be used to align objects. Along each of "
-                                               "the four sides of the main window is a guideline that will appear under "
-                                               "the cursor. Guidelines can be moved by dragging. Each guideline shows "
-                                               "a constant coordinate value, as displayed in the status bar."));
-  connect (mw.m_actionViewGuidelines, SIGNAL (triggered ()), &mw, SLOT (slotViewGuidelines()));  
 
   mw.m_actionViewBackgroundNone = new QAction (tr ("No Background"), &mw);
   mw.m_actionViewBackgroundNone->setCheckable (true);

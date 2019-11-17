@@ -37,6 +37,7 @@
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "DocumentModelCoords.h"
 #include "DocumentScrub.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
@@ -54,7 +55,6 @@
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
-#include "GuidelineView.h"
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
 #endif
@@ -88,6 +88,7 @@
 #include <QDomDocument>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QHBoxLayout>
 #include <QImageReader>
 #include <QKeyEvent>
 #include <QKeySequence>
@@ -108,7 +109,6 @@
 #include <QToolBar>
 #include <QToolButton>
 #include "QtToString.h"
-#include <QVBoxLayout>
 #include <QWhatsThis>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -1572,11 +1572,7 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        pixmap,
                                        curveSelected);
 
-  m_guidelines.initialize (*m_scene,
-                           *m_sceneGuidelineBottom,
-                           *m_sceneGuidelineLeft,
-                           *m_sceneGuidelineRight,
-                           *m_sceneGuidelineTop);
+  m_guidelines.initialize (*m_scene);
 }
 
 void MainWindow::settingsRead (bool isReset)
@@ -1935,6 +1931,22 @@ void MainWindow::showEvent (QShowEvent *event)
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 {
   m_statusBar->showTemporaryMessage (temporaryMessage);
+}
+
+void MainWindow::slotBtnGuidelineR ()
+{
+}
+
+void MainWindow::slotBtnGuidelineT ()
+{
+}
+
+void MainWindow::slotBtnGuidelineX ()
+{
+}
+
+void MainWindow::slotBtnGuidelineY ()
+{
 }
 
 void MainWindow::slotBtnPrintAll ()
@@ -2996,11 +3008,6 @@ void MainWindow::slotViewGuidelines ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
 
-  m_viewGuidelineBottom->setVisible (guidelinesAreVisible ());
-  m_viewGuidelineLeft->setVisible (guidelinesAreVisible ());
-  m_viewGuidelineRight->setVisible (guidelinesAreVisible ());
-  m_viewGuidelineTop->setVisible (guidelinesAreVisible ());
-
   m_guidelines.handleVisibleChange (guidelinesAreVisible ());
 }
 
@@ -3074,6 +3081,24 @@ void MainWindow::slotViewToolBarGeometryWindow ()
   } else {
     m_dockGeometryWindow->hide();
   }
+}
+
+void MainWindow::slotViewToolBarGuidelines ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGuidelines";
+
+  bool cartesian = (m_cmdMediator->document().modelCoords().coordsType () == COORDS_TYPE_CARTESIAN);
+  
+  // Complication is that we may have just had any one of many transitions:
+  //   allHide->cartesianShow
+  //   cartesianShow->cartesianHide
+  //   cartesianShow->polarShow
+  //   polarShow->allHide
+  bool showCartesian = (m_actionViewGuidelines->isChecked () && cartesian);
+  bool showPolar = (m_actionViewGuidelines->isChecked () && !cartesian);
+
+  m_toolGuidelinesCartesian->setVisible (showCartesian);
+  m_toolGuidelinesPolar->setVisible (showPolar);
 }
 
 void MainWindow::slotViewToolBarSettingsViews ()

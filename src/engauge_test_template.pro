@@ -357,7 +357,6 @@ HEADERS  += \
     Guideline/GuidelineStateTemplateVerticalRightHide.h \
     Guideline/GuidelineStateTemplateVerticalRightHover.h \
     Guideline/GuidelineStateTemplateVerticalRightLurking.h \
-    Guideline/GuidelineView.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -764,7 +763,6 @@ SOURCES += \
     Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
     Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
     Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
-    Guideline/GuidelineView.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

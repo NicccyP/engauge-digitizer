@@ -96,33 +96,9 @@ void Guidelines::handleVisibleChange (bool visible)
   }
 }
 
-void Guidelines::initialize (GraphicsScene &scene,
-                             QGraphicsScene &sceneGuidelineBottom,
-                             QGraphicsScene &sceneGuidelineLeft,
-                             QGraphicsScene &sceneGuidelineRight,
-                             QGraphicsScene &sceneGuidelineTop)
+void Guidelines::initialize (GraphicsScene &scene)
 {
-  const int MARGIN = 13;
-
-  m_guidelineFactory = new GuidelineFactory (&scene,
-                                             &sceneGuidelineBottom,
-                                             &sceneGuidelineLeft,
-                                             &sceneGuidelineRight,
-                                             &sceneGuidelineTop);
-
-  QRectF rectBottom (scene.sceneRect().bottomLeft(),
-                     scene.sceneRect().bottomRight() + QPointF (0, MARGIN));
-  QRectF rectLeft (scene.sceneRect().topLeft() + QPointF (-MARGIN, 0),
-                   scene.sceneRect().bottomLeft());
-  QRectF rectRight (scene.sceneRect().topRight(),
-                    scene.sceneRect().bottomRight() + QPointF (MARGIN, 0));
-  QRectF rectTop (scene.sceneRect().topLeft() + QPointF (0, MARGIN),
-                  scene.sceneRect().topRight());
-
-  sceneGuidelineBottom.setSceneRect (rectBottom);
-  sceneGuidelineLeft.setSceneRect (rectLeft);
-  sceneGuidelineRight.setSceneRect (rectRight);
-  sceneGuidelineTop.setSceneRect (rectTop);
+  m_guidelineFactory = new GuidelineFactory (&scene);
 
   GuidelineState stateVerticalLeft = GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING;
   GuidelineState stateVerticalRight = GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING;

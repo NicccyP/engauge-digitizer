@@ -137,5 +137,38 @@ void CreateToolBars::create (MainWindow &mw)
   mw.m_toolCoordSystem->addWidget (mw.m_btnShowAll);
   mw.m_toolCoordSystem->addWidget (mw.m_btnPrintAll);
   mw.addToolBar (mw.m_toolCoordSystem);
-}
 
+  // Cartesian Guideline toolbar. The icons, status tip and what this in the buttons are loaded later when cartesian/polar format is selected
+  mw.m_btnGuidelineX = new QPushButton (QIcon(":/engauge/img/icon_guidelinesx.png"), "");
+  mw.m_btnGuidelineX->setEnabled (false);
+  mw.m_btnGuidelineX->setAcceptDrops (false);
+  connect (mw.m_btnGuidelineX, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineX ()));
+  
+  mw.m_btnGuidelineY = new QPushButton (QIcon(":/engauge/img/icon_guidelinesy.png"), "");
+  mw.m_btnGuidelineY->setEnabled (false);
+  mw.m_btnGuidelineY->setAcceptDrops (false);
+  connect (mw.m_btnGuidelineY, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineY ()));
+  
+  mw.m_toolGuidelinesCartesian = new QToolBar (tr ("Guidelines"), &mw);
+  mw.m_toolGuidelinesCartesian->hide (); // Toolbar is made visible when conditions are right
+  mw.m_toolGuidelinesCartesian->addWidget (mw.m_btnGuidelineX);
+  mw.m_toolGuidelinesCartesian->addWidget (mw.m_btnGuidelineY);
+  mw.addToolBar (mw.m_toolGuidelinesCartesian);
+
+  // Polar Guideline toolbar. The icons, status tip and what this in the buttons are loaded later when cartesian/polar format is selected
+  mw.m_btnGuidelineT = new QPushButton (QIcon(":/engauge/img/icon_guidelinest.png"), "");
+  mw.m_btnGuidelineT->setEnabled (false);
+  mw.m_btnGuidelineT->setAcceptDrops (false);
+  connect (mw.m_btnGuidelineT, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineT ()));
+
+  mw.m_btnGuidelineR = new QPushButton (QIcon(":/engauge/img/icon_guidelinesr.png"), "");
+  mw.m_btnGuidelineR->setEnabled (false);
+  mw.m_btnGuidelineR->setAcceptDrops (false);
+  connect (mw.m_btnGuidelineR, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineR ()));
+
+  mw.m_toolGuidelinesPolar = new QToolBar (tr ("Guidelines"), &mw);
+  mw.m_toolGuidelinesPolar->hide (); // Toolbar is made visible when conditions are right
+  mw.m_toolGuidelinesPolar->addWidget (mw.m_btnGuidelineT);
+  mw.m_toolGuidelinesPolar->addWidget (mw.m_btnGuidelineR);
+  mw.addToolBar (mw.m_toolGuidelinesPolar);
+}

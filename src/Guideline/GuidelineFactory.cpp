@@ -13,19 +13,10 @@
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GuidelineFactory::GuidelineFactory (GraphicsScene *sceneMain,
-                                    QGraphicsScene *sceneGuidelineBottom,
-                                    QGraphicsScene *sceneGuidelineLeft,
-                                    QGraphicsScene *sceneGuidelineRight,
-                                    QGraphicsScene *sceneGuidelineTop) :
-  m_sceneMain (sceneMain),
-  m_sceneGuidelineBottom (sceneGuidelineBottom),
-  m_sceneGuidelineLeft (sceneGuidelineLeft),
-  m_sceneGuidelineRight (sceneGuidelineRight),
-  m_sceneGuidelineTop (sceneGuidelineTop)
+GuidelineFactory::GuidelineFactory (GraphicsScene *sceneMain) :
+  m_sceneMain (sceneMain)
 {
   createEllipseMap ();
-  createSceneMap ();
 }
 
 GuidelineFactory::~GuidelineFactory ()
@@ -39,12 +30,6 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
 
   // Main scene or one of the guideline scenes?
   QGraphicsScene *scene = m_sceneMain;
-
-  if (m_mapStateToScene.contains (stateInitial)) {
-
-    scene = m_mapStateToScene [stateInitial];
-
-  }
   
   // Line or ellipse?
   GuidelineAbstract *guideline = nullptr;
@@ -71,21 +56,4 @@ void GuidelineFactory::createEllipseMap ()
   m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE] = true;
   m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE] = true;
   m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER] = true;
-}
-
-void GuidelineFactory::createSceneMap ()
-{
-  // All other states get assigned to the main scene
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE] = m_sceneGuidelineBottom;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER] = m_sceneGuidelineBottom;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING] = m_sceneGuidelineBottom;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE] = m_sceneGuidelineLeft;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER] = m_sceneGuidelineLeft;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING] = m_sceneGuidelineLeft;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE] = m_sceneGuidelineRight;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER] = m_sceneGuidelineRight;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING] = m_sceneGuidelineRight;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE] = m_sceneGuidelineTop;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HOVER] = m_sceneGuidelineTop;
-  m_mapStateToScene [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING] = m_sceneGuidelineTop;
 }

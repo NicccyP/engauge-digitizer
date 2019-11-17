@@ -62,7 +62,6 @@ class GeometryWindow;
 class Ghosts;
 class GraphicsScene;
 class GraphicsView;
-class GuidelineView;
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 class HelpWindow;
 #endif
@@ -74,7 +73,7 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
-class QGridLayout;
+class QHBoxLayout;
 class QMenu;
 class QPushButton;
 class QSettings;
@@ -281,6 +280,10 @@ public:
   const GraphicsView &view () const;
 
 private slots:
+  void slotBtnGuidelineR ();
+  void slotBtnGuidelineT ();
+  void slotBtnGuidelineX ();
+  void slotBtnGuidelineY ();
   void slotBtnPrintAll();
   void slotBtnShowAllPressed();
   void slotBtnShowAllReleased();
@@ -361,6 +364,7 @@ private slots:
   void slotViewToolBarDigitize ();
   void slotViewToolBarFittingWindow ();
   void slotViewToolBarGeometryWindow ();
+  void slotViewToolBarGuidelines ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoomFactor (ZoomFactor);
@@ -524,13 +528,13 @@ private:
   QAction *m_actionViewBackground;
   QAction *m_actionViewChecklistGuide;
   QAction *m_actionViewCoordSystem;
+  QAction *m_actionViewGuidelines;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewFittingWindow;
   QAction *m_actionViewGeometryWindow;
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
-  QAction *m_actionViewGuidelines;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;
@@ -600,19 +604,9 @@ private:
   QAction *m_actionHelpTutorial;
   QAction *m_actionHelpWhatsThis;
 
-  QGridLayout *m_layout;
+  QHBoxLayout *m_layout;
   GraphicsScene *m_scene;
   GraphicsView *m_view;
-
-  QGraphicsScene *m_sceneGuidelineBottom;
-  QGraphicsScene *m_sceneGuidelineLeft;
-  QGraphicsScene *m_sceneGuidelineRight;
-  QGraphicsScene *m_sceneGuidelineTop;
-
-  GuidelineView *m_viewGuidelineBottom;
-  GuidelineView *m_viewGuidelineLeft;
-  GuidelineView *m_viewGuidelineRight;
-  GuidelineView *m_viewGuidelineTop;
 
   StatusBar *m_statusBar;
   Transformation m_transformation;
@@ -636,6 +630,13 @@ private:
   QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
 
+  QPushButton *m_btnGuidelineX;
+  QPushButton *m_btnGuidelineY;
+  QToolBar *m_toolGuidelinesCartesian;
+  QPushButton *m_btnGuidelineT;
+  QPushButton *m_btnGuidelineR;  
+  QToolBar *m_toolGuidelinesPolar;
+  
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)  
   HelpWindow *m_helpWindow;
 #endif

@@ -27,11 +27,7 @@ class GuidelineFactory
 {
 public:
   /// Single constructor.
-  GuidelineFactory (GraphicsScene *sceneMain,
-                    QGraphicsScene *sceneGuidelineBottom,
-                    QGraphicsScene *sceneGuidelineLeft,
-                    QGraphicsScene *sceneGuidelineRight,
-                    QGraphicsScene *sceneGuidelineTop);
+  GuidelineFactory (GraphicsScene *sceneMain);
   virtual ~GuidelineFactory();
 
   GuidelineAbstract *createGuideline (Guidelines &guidelines,
@@ -41,15 +37,9 @@ private:
   GuidelineFactory ();
 
   void createEllipseMap ();
-  void createSceneMap ();
 
   GraphicsScene *m_sceneMain;
-  QGraphicsScene *m_sceneGuidelineBottom;
-  QGraphicsScene *m_sceneGuidelineLeft;
-  QGraphicsScene *m_sceneGuidelineRight;
-  QGraphicsScene *m_sceneGuidelineTop;
 
-  MapStateToScene m_mapStateToScene;
   MapStatesWithEllipse m_mapStatesWithEllipse;  
 };
 
