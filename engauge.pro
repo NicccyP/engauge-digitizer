@@ -400,7 +400,6 @@ HEADERS  += \
     src/Guideline/GuidelineStateTemplateVerticalRightHide.h \
     src/Guideline/GuidelineStateTemplateVerticalRightHover.h \
     src/Guideline/GuidelineStateTemplateVerticalRightLurking.h \
-    src/Guideline/GuidelineView.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -803,7 +802,6 @@ SOURCES += \
     src/Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
     src/Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
     src/Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
-    src/Guideline/GuidelineView.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
