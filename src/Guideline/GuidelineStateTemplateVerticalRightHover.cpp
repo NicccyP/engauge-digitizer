@@ -61,7 +61,7 @@ void GuidelineStateTemplateVerticalRightHover::handleMousePress (const QPointF &
   GuidelineState stateNew = context().cartesian() ?
     GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER :
     GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER;
-    
+
   handleMousePressCommon (posScene,
                           stateNew,
                           GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING);

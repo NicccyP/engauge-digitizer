@@ -12,6 +12,7 @@
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QLineF>
+#include <QPointF>
 #include <QString>
 #include <QVector>
 

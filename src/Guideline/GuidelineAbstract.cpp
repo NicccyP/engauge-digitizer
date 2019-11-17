@@ -137,7 +137,7 @@ void GuidelineAbstract::setContext (GuidelineStateContext *context)
 
 void GuidelineAbstract::slotHandleMoved (QPointF posScreen)
 {
-   updateGeometry (posScreen);
+  updateGeometry (posScreen);
 }
 
 QString GuidelineAbstract::stateDump () const

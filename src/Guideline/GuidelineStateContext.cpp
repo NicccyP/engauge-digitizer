@@ -233,12 +233,12 @@ Transformation GuidelineStateContext::transformation() const
 void GuidelineStateContext::transitionIfRequested ()
 {
   if (m_currentState != m_nextState) {
-    
+
     // End the current state if there is one
     if (m_currentState != NUM_GUIDELINE_STATES) {
       m_states[m_currentState]->end ();
     }
-    
+
     m_currentState = m_nextState;
 
     // Start the requested state

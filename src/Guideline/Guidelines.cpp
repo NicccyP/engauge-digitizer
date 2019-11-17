@@ -139,8 +139,6 @@ void Guidelines::initialize (GraphicsScene &scene,
   registerGuideline (m_guidelineFactory->createGuideline (*this,
                                                           stateVerticalLeft));
   registerGuideline (m_guidelineFactory->createGuideline (*this,
-                                                          stateVerticalLeft));
-  registerGuideline (m_guidelineFactory->createGuideline (*this,
                                                           stateVerticalRight));
   registerGuideline (m_guidelineFactory->createGuideline (*this,
                                                           stateHorizontalTop));

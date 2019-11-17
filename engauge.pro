@@ -364,8 +364,8 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedConstantRAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantRActive.h \
     src/Guideline/GuidelineStateDeployedConstantRHide.h \
-    src/Guideline/GuidelineStateDeployedConstantRLocked.h \
     src/Guideline/GuidelineStateDeployedConstantRHover.h \
+    src/Guideline/GuidelineStateDeployedConstantRLocked.h \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantTActive.h \
     src/Guideline/GuidelineStateDeployedConstantTHide.h \
@@ -399,7 +399,8 @@ HEADERS  += \
     src/Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
     src/Guideline/GuidelineStateTemplateVerticalRightHide.h \
     src/Guideline/GuidelineStateTemplateVerticalRightHover.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightLurking.h \    
+    src/Guideline/GuidelineStateTemplateVerticalRightLurking.h \
+    src/Guideline/GuidelineView.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -766,8 +767,8 @@ SOURCES += \
     src/Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantRActive.cpp \
     src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRLocked.cpp \
     src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRLocked.cpp \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantTActive.cpp \
     src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
@@ -802,6 +803,7 @@ SOURCES += \
     src/Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
     src/Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
     src/Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
+    src/Guideline/GuidelineView.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \

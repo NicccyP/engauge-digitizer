@@ -54,6 +54,7 @@
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
+#include "GuidelineView.h"
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
 #endif
@@ -1181,6 +1182,26 @@ void MainWindow::loadToolTips()
   }
 }
 
+bool MainWindow::maybeSave()
+{
+  if (m_cmdMediator != nullptr) {
+    if (m_cmdMediator->isModified()) {
+      QMessageBox::StandardButton ret = QMessageBox::warning (this,
+                                                              engaugeWindowTitle(),
+                                                              tr("The document has been modified.\n"
+                                                                 "Do you want to save your changes?"),
+                                                              QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+      if (ret == QMessageBox::Save) {
+        return slotFileSave();
+      } else if (ret == QMessageBox::Cancel) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
 bool MainWindow::modeGraph () const
 {
   bool success = false;
@@ -1201,26 +1222,6 @@ bool MainWindow::modeMap () const
   }
 
   return success;
-}
-
-bool MainWindow::maybeSave()
-{
-  if (m_cmdMediator != nullptr) {
-    if (m_cmdMediator->isModified()) {
-      QMessageBox::StandardButton ret = QMessageBox::warning (this,
-                                                              engaugeWindowTitle(),
-                                                              tr("The document has been modified.\n"
-                                                                 "Do you want to save your changes?"),
-                                                              QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-      if (ret == QMessageBox::Save) {
-        return slotFileSave();
-      } else if (ret == QMessageBox::Cancel) {
-        return false;
-      }
-    }
-  }
-
-  return true;
 }
 
 DocumentModelExportFormat MainWindow::modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,

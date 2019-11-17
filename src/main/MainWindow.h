@@ -18,6 +18,7 @@
 #include <QCursor>
 #include <QMainWindow>
 #include <QMap>
+#include <QPointF>
 #include <QUrl>
 #include "Transformation.h"
 #include "ZoomControl.h"
@@ -61,6 +62,7 @@ class GeometryWindow;
 class Ghosts;
 class GraphicsScene;
 class GraphicsView;
+class GuidelineView;
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 class HelpWindow;
 #endif
@@ -72,7 +74,6 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
-class QGraphicsView;
 class QGridLayout;
 class QMenu;
 class QPushButton;
@@ -608,10 +609,10 @@ private:
   QGraphicsScene *m_sceneGuidelineRight;
   QGraphicsScene *m_sceneGuidelineTop;
 
-  QGraphicsView *m_viewGuidelineBottom;
-  QGraphicsView *m_viewGuidelineLeft;
-  QGraphicsView *m_viewGuidelineRight;
-  QGraphicsView *m_viewGuidelineTop;
+  GuidelineView *m_viewGuidelineBottom;
+  GuidelineView *m_viewGuidelineLeft;
+  GuidelineView *m_viewGuidelineRight;
+  GuidelineView *m_viewGuidelineTop;
 
   StatusBar *m_statusBar;
   Transformation m_transformation;

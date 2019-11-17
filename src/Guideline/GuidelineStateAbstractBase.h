@@ -63,7 +63,6 @@ public:
   /// Name of state as a string for debugging only
   virtual QString stateName () const = 0;
 
-
   /// Update given Transformation in GuidelineStateContext
   virtual void updateWithLatestTransformation () = 0;
 
@@ -75,7 +74,7 @@ protected:
   /// Common mouse press handling. This is expected to be used by
   /// every derived leaf class except GUIDELINE_STATE_HANDLE (which this method creates)
   /// and GUIDELINE_STATE_DISCARDED (which is a noop)
-  void handleMousePressCommon (const QPointF &pos,
+  void handleMousePressCommon (const QPointF &posAbsolute,
                                GuidelineState stateDeployed,
                                GuidelineState stateReplacement);
 

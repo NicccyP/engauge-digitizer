@@ -29,7 +29,7 @@ GuidelineStateContext &GuidelineStateAbstractBase::context () const
   return m_context;
 }
 
-void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScreen,
+void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene,
                                                          GuidelineState stateDeployed,
                                                          GuidelineState stateReplacement)
 {
@@ -59,10 +59,8 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScree
   guidelineVisible->setGraphicsItemPen (guidelineFormat.colorDeployedNonHover (),
                                         guidelineFormat.lineWidthNonHover ());
 
-  // Place new Guideline at cursor position but in the main window rather than a
-  // guideline window. The complication is that posScreen is in the coordinates of
-  // a different window
-  guidelineVisible->updateGeometry (posScreen);
+  // Place new Guideline at cursor position
+  guidelineVisible->updateGeometry (posScene);
 
   context().guideline().bindGuidelineVisible (guidelineVisible);
 

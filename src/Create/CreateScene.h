@@ -23,7 +23,6 @@ public:
 
   /// Create QGraphicsScene
   void create (MainWindow &mw);
-
 };
 
 #endif // CREATE_SCENE_H
