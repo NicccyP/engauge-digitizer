@@ -17,7 +17,7 @@
 
 class GuidelineStateContext;
 
-/// This class maintains deployed/template horizontal/vertical state behaviors for the Guideline class
+/// This class maintains deployed horizontal/vertical state behaviors for the Guideline class
 class GuidelineStateAbstractBase
 {
 public:
@@ -44,7 +44,7 @@ public:
   /// If previously transparent before hover enter then make transparent again
   virtual void handleHoverLeaveEvent () = 0;
 
-  /// At the start of dragging, convert the template Guideline into an invisible handle and visible
+  /// At the start of dragging, convert the Guideline into an invisible handle and visible
   /// slaved deployed Guideline
   virtual void handleMousePress (const QPointF &posScene) = 0;
   

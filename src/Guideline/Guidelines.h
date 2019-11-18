@@ -52,9 +52,7 @@ public:
   /// User toggled guideline visibility
   void handleVisibleChange (bool visible);
 
-  /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded.
-  /// We do not set the initial state as a function of external conditions since during loading those
-  /// conditions are not predictable
+  /// Initialize Guideline factory
   void initialize (GraphicsScene &scene);
 
   /// States listed as a string for debugging only

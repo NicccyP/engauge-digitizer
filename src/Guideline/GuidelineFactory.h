@@ -21,8 +21,7 @@ typedef QMap<GuidelineState, bool> MapStatesWithEllipse;
 
 /// Factory for generating Guideline objects. The complications are:
 /// -# Some guidelines are lines (GuidelineLine) and some are ellipses (GuidelineEllipse)
-/// -# Template guidelines belong to narrow scenes/views around the main scene perimeter, and
-///    all other guidelines belong to the main scene/view
+/// -# Guidelines are either horizontal (X or theta T) or vertical (Y or range R)
 class GuidelineFactory
 {
 public:

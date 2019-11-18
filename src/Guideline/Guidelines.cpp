@@ -99,27 +99,6 @@ void Guidelines::handleVisibleChange (bool visible)
 void Guidelines::initialize (GraphicsScene &scene)
 {
   m_guidelineFactory = new GuidelineFactory (&scene);
-
-  GuidelineState stateVerticalLeft = GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING;
-  GuidelineState stateVerticalRight = GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING;
-  GuidelineState stateHorizontalTop = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING;
-  GuidelineState stateHorizontalBottom = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING;
-
-  if (!transformation().transformIsDefined()) {
-    stateVerticalLeft = GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE;
-    stateVerticalRight = GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE;
-    stateHorizontalTop = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE;
-    stateHorizontalBottom = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE;
-  }
-
-  registerGuideline (m_guidelineFactory->createGuideline (*this,
-                                                          stateVerticalLeft));
-  registerGuideline (m_guidelineFactory->createGuideline (*this,
-                                                          stateVerticalRight));
-  registerGuideline (m_guidelineFactory->createGuideline (*this,
-                                                          stateHorizontalTop));
-  registerGuideline (m_guidelineFactory->createGuideline (*this,
-                                                          stateHorizontalBottom));
 }
 
 void Guidelines::registerGuideline (GuidelineAbstract *guideline)

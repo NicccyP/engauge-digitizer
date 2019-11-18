@@ -27,8 +27,7 @@ GuidelineLine::GuidelineLine(QGraphicsScene &scene,
                              GuidelineState guidelineStateInitial) :
   GuidelineAbstract (scene)
 {
-  // Create context after all virtual methods have been created. The transition
-  // into the initial state will position the line if it is a template guideline
+  // Create context after all virtual methods have been created
   setContext (new GuidelineStateContext (*this,
                                          guidelines,
                                          guidelineStateInitial));

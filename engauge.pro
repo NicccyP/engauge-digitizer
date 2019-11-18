@@ -383,23 +383,6 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedConstantYLocked.h \
     src/Guideline/GuidelineStateDiscarded.h \
     src/Guideline/GuidelineStateHandle.h \
-    src/Guideline/GuidelineStateTemplateAbstract.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHover.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomLurking.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHide.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHover.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopLurking.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHide.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHover.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftLurking.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightHide.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightHover.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightLurking.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -785,23 +768,6 @@ SOURCES += \
     src/Guideline/GuidelineStateDeployedConstantYLocked.cpp \
     src/Guideline/GuidelineStateDiscarded.cpp \
     src/Guideline/GuidelineStateHandle.cpp \
-    src/Guideline/GuidelineStateTemplateAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHover.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomLurking.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHover.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopLurking.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHover.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftLurking.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \

@@ -29,7 +29,19 @@ class Transformation;
 /// digraph guidelines {
 ///   rankdir = LR;
 ///
-///   Start -> DeployedConstantRHover [label = DragHorizontalTemplateWithPolarCoordinates];
+///   Start -> ConstantRAppearing [label = BtnGuidelineR];
+///   ConstantRAppearing -> ConstantRActive [label = Timeout];
+///
+///   Start -> ConstantTAppearing [label = BtnGuidelineT];
+///   ConstantRAppearing -> ConstantTActive [label = Timeout];
+///
+///   Start -> ConstantXAppearing [label = BtnGuidelineX];
+///   ConstantXAppearing -> ConstantXActive [label = Timeout];
+///
+///   Start -> ConstantYAppearing [label = BtnGuidelineY];
+///   ConstantYAppearing -> ConstantYActive [label = Timeout];
+///
+///   Start -> DeployedConstantRHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantRHover -> DeployedConstantRActive [label = HoverLeave];
 ///   DeployedConstantRHover -> Handle [label = MouseClick];
 ///   DeployedConstantRActive -> Discarded [label = TransformLoss];
@@ -39,7 +51,7 @@ class Transformation;
 ///   DeployedConstantRActive -> DeployedConstantRLocked [label = LeaveSelectMode];
 ///   DeployedConstantRLocked -> DeployedConstantRActive [label = EnterSelectMode];
 ///
-///   Start -> DeployedConstantTHover [label = DragHorizontalTemplateWithPolarCoordinates];
+///   Start -> DeployedConstantTHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantTHover -> DeployedConstantTActive [label = HoverLeave];
 ///   DeployedConstantTHover -> Handle [label = MouseClick];
 ///   DeployedConstantTActive -> Discarded [label = TransformLoss];
@@ -49,7 +61,7 @@ class Transformation;
 ///   DeployedConstantTActive -> DeployedConstantTLocked [label = LeaveSelectMode];
 ///   DeployedConstantTLocked -> DeployedConstantTActive [label = EnterSelectMode];
 ///
-///   Start -> DeployedConstantXHover [label = DragHorizontalTemplateWithCartesianCoordinates];
+///   Start -> DeployedConstantXHover [label = HoverWithCartesianCoordinates];
 ///   DeployedConstantXHover -> DeployedConstantXActive [label = HoverLeave];
 ///   DeployedConstantXHover -> Handle [label = MouseClick];
 ///   DeployedConstantXActive -> Discarded [label = TransformLoss];
@@ -59,7 +71,7 @@ class Transformation;
 ///   DeployedConstantXActive -> DeployedConstantXLocked [label = LeaveSelectMode];
 ///   DeployedConstantXLocked -> DeployedConstantXActive [label = EnterSelectMode];
 ///
-///   Start -> DeployedConstantYHover [label = DragVerticalTemplateWithCartesianCoordinates];
+///   Start -> DeployedConstantYHover [label = HoverWithCartesianCoordinates];
 ///   DeployedConstantYHover -> DeployedConstantYActive [label = HoverLeave];
 ///   DeployedConstantYHover -> Handle [label = MouseClick];
 ///   DeployedConstantYActive -> Discarded [label = TransformLoss];
@@ -68,42 +80,6 @@ class Transformation;
 ///   DeployedConstantYActive -> DeployedConstantYHover [label = HoverEnter];
 ///   DeployedConstantYActive -> DeployedConstantYLocked [label = LeaveSelectMode];
 ///   DeployedConstantYLocked -> DeployedConstantYActive [label = EnterSelectMode];
-///
-///   Start -> TemplateHorizontalBottomLurking [label = InitializeWithTransform];
-///   Start -> TemplateHorizontalBottomHide [label = InitializeWithoutTransform];
-///   Start -> TemplateHorizontalBottomHide [label = EndOfTemplateHorizontalBottomDrag];
-///   TemplateHorizontalBottomLurking -> TemplateHorizontalBottomHover [label = HoverEnter];
-///   TemplateHorizontalBottomHover -> TemplateHorizontalBottomLurking [label = HoverLeave];
-///   TemplateHorizontalBottomHover -> Handle [label = MouseClick];
-///   TemplateHorizontalBottomLurking -> TemplateHorizontalBottomHide [label = TurnedOff];
-///   TemplateHorizontalBottomHide -> TemplateHorizontalBottomLurking [label = TurnedOn];
-///
-///   Start -> TemplateHorizontalTopLurking [label = InitializeWithTransform];
-///   Start -> TemplateHorizontalTopHide [label = InitializeWithoutTransform];
-///   Start -> TemplateHorizontalTopHide [label = EndOfTemplateHorizontalTopDrag];
-///   TemplateHorizontalTopLurking -> TemplateHorizontalTopHover [label = HoverEnter];
-///   TemplateHorizontalTopHover -> TemplateHorizontalTopLurking [label = HoverLeave];
-///   TemplateHorizontalTopHover -> Handle [label = MouseClick];
-///   TemplateHorizontalTopLurking -> TemplateHorizontalTopHide [label = TurnedOff];
-///   TemplateHorizontalTopHide -> TemplateHorizontalTopLurking [label = TurnedOn];
-///
-///   Start -> TemplateVerticalLeftLurking [label = InitializeWithTransform];
-///   Start -> TemplateVerticalLeftHide [label = InitializeWithoutTransform];
-///   Start -> TemplateVerticalLeftHide [label = EndOfTemplateVerticalLeftDrag];
-///   TemplateVerticalLeftLurking -> TemplateVerticalLeftHover [label = HoverEnter];
-///   TemplateVerticalLeftHover -> TemplateVerticalLeftLurking [label = HoverLeave];
-///   TemplateVerticalLeftHover -> Handle [label = MouseClick];
-///   TemplateVerticalLeftLurking -> TemplateVerticalLeftHide [label = TurnedOff];
-///   TemplateVerticalLeftHide -> TemplateVerticalLeftLurking [label = TurnedOn];
-///
-///   Start -> TemplateVerticalRightLurking [label = InitializeWithTransform];
-///   Start -> TemplateVerticalRightHide [label = InitializeWithoutTransform];
-///   Start -> TemplateVerticalRightHide [label = EndOfTemplateVerticalRightDrag];
-///   TemplateVerticalRightLurking -> TemplateVerticalRightHover [label = HoverEnter];
-///   TemplateVerticalRightHover -> TemplateVerticalRightLurking [label = HoverLeave];
-///   TemplateVerticalRightHover -> Handle [label = MouseClick];
-///   TemplateVerticalRightLurking -> TemplateVerticalRightHide [label = TurnedOff];
-///   TemplateVerticalRightHide -> TemplateVerticalRightLurking [label = TurnedOn];
 ///
 ///   Handle -> Discarded [label = MouseRelease];
 ///
@@ -146,7 +122,7 @@ public:
   /// If previously transparent before hover enter then make transparent again
   void handleHoverLeaveEvent ();
 
-  /// At the start of dragging, convert the template Guideline into an invisible handle and
+  /// At the start of dragging, convert the original Guideline into an invisible handle and
   /// visible slaved deployed Guideline
   void handleMousePress (const QPointF &posScene);
   
@@ -172,7 +148,7 @@ public:
   /// later adjustement when the transformation changes
   void setPosCursorGraph (const QPointF &posGraph);
 
-  /// Pass replacement Guideline state from template Guidelines to handle Guideline
+  /// Pass replacement Guideline state from original Guideline to handle Guideline
   void setStateReplacement (GuidelineState stateReplacement);
 
   /// Dump state for debugging only

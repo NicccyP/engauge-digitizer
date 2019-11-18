@@ -4,32 +4,32 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
+#ifndef GUIDELINE_STATE_CONSTANT_R_APPEARING_H
+#define GUIDELINE_STATE_CONSTANT_R_APPEARING_H
 
-#include "GuidelineStateTemplateHorizontalBottomAbstract.h"
+#include "GuidelineStateConstantRAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
-class GuidelineStateTemplateHorizontalBottomHide : public GuidelineStateTemplateHorizontalBottomAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_CONSTANT_R_APPEARING
+class GuidelineStateConstantRAppearing : public GuidelineStateConstantRAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalBottomHide(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalBottomHide();
+  GuidelineStateConstantRAppearing(GuidelineStateContext &context);
+  virtual ~GuidelineStateConstantRAppearing();
 
   virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleAppearingChange (bool appearing);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
   virtual QString stateName () const;
-  virtual void updateWithLatestTransformation();
 
 private:
-  GuidelineStateTemplateHorizontalBottomHide();
+  GuidelineStateConstantRAppearing();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
+#endif // GUIDELINE_STATE_CONSTANT_R_APPEARING_H

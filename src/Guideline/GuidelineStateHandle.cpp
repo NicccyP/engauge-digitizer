@@ -81,10 +81,6 @@ void GuidelineStateHandle::handleMouseRelease (const QPointF &posScene)
 
   context().guideline().detachVisibleGuideline (posScene);
 
-  // This is the replacement template Guideline
-  GuidelineAbstract *guidelineReplacement = context().createGuideline (context().stateReplacement ());
-  guidelineReplacement->setGraphicsItemAcceptHoverEvents (true);
-
   // Go dark. This is not a significant memory leak (versus immediately deleting this object)
   // since the Guideline states are extremely lightweight (few bytes), and there are so few of
   // them (max expected to be well below 100). Plus, whenever the scene is closed (on exit or

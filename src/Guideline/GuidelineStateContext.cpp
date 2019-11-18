@@ -27,18 +27,6 @@
 #include "GuidelineStateDeployedConstantYLocked.h"
 #include "GuidelineStateDiscarded.h"
 #include "GuidelineStateHandle.h"
-#include "GuidelineStateTemplateHorizontalBottomHide.h"
-#include "GuidelineStateTemplateHorizontalBottomHover.h"
-#include "GuidelineStateTemplateHorizontalBottomLurking.h"
-#include "GuidelineStateTemplateHorizontalTopHide.h"
-#include "GuidelineStateTemplateHorizontalTopHover.h"
-#include "GuidelineStateTemplateHorizontalTopLurking.h"
-#include "GuidelineStateTemplateVerticalLeftHide.h"
-#include "GuidelineStateTemplateVerticalLeftHover.h"
-#include "GuidelineStateTemplateVerticalLeftLurking.h"
-#include "GuidelineStateTemplateVerticalRightHide.h"
-#include "GuidelineStateTemplateVerticalRightHover.h"
-#include "GuidelineStateTemplateVerticalRightLurking.h"
 #include <QGraphicsScene>
 #include "Transformation.h"
 
@@ -66,18 +54,6 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED        , new GuidelineStateDeployedConstantYLocked        (*this));   
   m_states.insert (GUIDELINE_STATE_DISCARDED                         , new GuidelineStateDiscarded                      (*this));
   m_states.insert (GUIDELINE_STATE_HANDLE                            , new GuidelineStateHandle                         (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE   , new GuidelineStateTemplateHorizontalBottomHide   (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER  , new GuidelineStateTemplateHorizontalBottomHover  (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING, new GuidelineStateTemplateHorizontalBottomLurking(*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE      , new GuidelineStateTemplateHorizontalTopHide      (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HOVER     , new GuidelineStateTemplateHorizontalTopHover     (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING   , new GuidelineStateTemplateHorizontalTopLurking   (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE       , new GuidelineStateTemplateVerticalLeftHide       (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER      , new GuidelineStateTemplateVerticalLeftHover      (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING    , new GuidelineStateTemplateVerticalLeftLurking    (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE      , new GuidelineStateTemplateVerticalRightHide      (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER     , new GuidelineStateTemplateVerticalRightHover     (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   , new GuidelineStateTemplateVerticalRightLurking   (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_GUIDELINE_STATES);
 
   m_currentState = NUM_GUIDELINE_STATES; // Value that forces a transition right away

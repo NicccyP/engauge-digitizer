@@ -33,12 +33,12 @@ public:
   /// Color when object is transparent but still handling (probably hover) events
   QColor colorHidden () const;
 
-  /// Guideline line width for non-templates Guidelines
+  /// Guideline line width
   double lineWidthHover () const;
 
-  /// Guideline line width of template Guideline as drawn
+  /// Guideline line width for narrow lines
   double lineWidthNonHover () const;
-
+  
 private:
   GuidelineFormat();
 

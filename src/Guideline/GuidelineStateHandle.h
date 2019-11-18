@@ -9,7 +9,7 @@
 
 #include "GuidelineStateAbstractBase.h"
 
-/// State for an invisible handle which was previously a template but morphed
+/// State for an invisible handle which was previously a deployed Guideline but morphed
 /// into an invisible handle that the user is dragging. At the end of the drag
 /// this disappears. Since the Guideline in this state is invisible we do not
 /// have to worry about rotating this to be parallel with an axis. A visible

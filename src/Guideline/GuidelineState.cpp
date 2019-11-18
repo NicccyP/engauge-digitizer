@@ -34,18 +34,6 @@ QString guidelineStateAsString (GuidelineState state)
     guidelineStateHash [GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED]         = "DeployedConstantYLocked";
     guidelineStateHash [GUIDELINE_STATE_DISCARDED]                          = "Discarded";
     guidelineStateHash [GUIDELINE_STATE_HANDLE]                             = "Handle";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE]    = "TemplateHorizontalBottomHide";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER]   = "TemplateHorizontalBottomHover";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING] = "TemplateHorizontalBottomLurking";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE]       = "TemplateHorizontalTopHide";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HOVER]      = "TemplateHorizontalTopHover";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING]    = "TemplateHorizontalTopLurking";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE]        = "TemplateVerticalLeftHide";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER]       = "TemplateVerticalLeftHover";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING]     = "TemplateVerticalLeftLurking";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE]       = "TemplateVerticalRightHide";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER]      = "TemplateVerticalRightHover";
-    guidelineStateHash [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING]    = "TemplateVerticalRightLurking";
   }
 
   if (guidelineStateHash.contains (state)) {

@@ -168,10 +168,6 @@ void TestGuidelines::test00StartupWithoutTransformation ()
 {
   // Expected and got counts
   QVector<int> countsExpected (NUM_GUIDELINE_STATES);
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE   ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE    ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE   ] = 1;
 
   m_results.push_back (compareExpectedAndGot (countsExpected));
 
@@ -210,10 +206,6 @@ void TestGuidelines::test01AfterAddingTransformation ()
 {
   // Expected and got counts
   QVector<int> countsExpected (NUM_GUIDELINE_STATES);
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING   ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING    ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   ] = 1;
 
   m_results.push_back (compareExpectedAndGot (countsExpected));
 
@@ -280,10 +272,6 @@ void TestGuidelines::test02AfterRemovingTransformation ()
 {
   // Expected and got counts
   QVector<int> countsExpected (NUM_GUIDELINE_STATES);
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE   ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE    ] = 1;
-  countsExpected [GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE   ] = 1;
 
   m_results.push_back (compareExpectedAndGot (countsExpected));
 

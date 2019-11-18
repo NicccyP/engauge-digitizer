@@ -4,32 +4,32 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING_H
+#ifndef GUIDELINE_STATE_CONSTANT_X_APPEARING_H
+#define GUIDELINE_STATE_CONSTANT_X_APPEARING_H
 
-#include "GuidelineStateTemplateHorizontalBottomAbstract.h"
+#include "GuidelineStateConstantXAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
-class GuidelineStateTemplateHorizontalBottomLurking : public GuidelineStateTemplateHorizontalBottomAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_CONSTANT_X_APPEARING
+class GuidelineStateConstantXAppearing : public GuidelineStateConstantXAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalBottomLurking(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalBottomLurking();
+  GuidelineStateConstantXAppearing(GuidelineStateContext &context);
+  virtual ~GuidelineStateConstantXAppearing();
 
   virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleAppearingChange (bool appearing);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
   virtual QString stateName () const;
-  virtual void updateWithLatestTransformation();
 
 private:
-  GuidelineStateTemplateHorizontalBottomLurking();
+  GuidelineStateConstantXAppearing();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING_H
+#endif // GUIDELINE_STATE_CONSTANT_X_APPEARING_H

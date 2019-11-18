@@ -34,3 +34,4 @@ snapcraft.yaml
 stage
 transifex_downloads
 bin/engauge.ilk
+android*.json

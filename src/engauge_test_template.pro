@@ -340,23 +340,6 @@ HEADERS  += \
     Guideline/GuidelineStateDeployedConstantYLocked.h \
     Guideline/GuidelineStateDiscarded.h \
     Guideline/GuidelineStateHandle.h \
-    Guideline/GuidelineStateTemplateAbstract.h \
-    Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
-    Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
-    Guideline/GuidelineStateTemplateHorizontalBottomHover.h \
-    Guideline/GuidelineStateTemplateHorizontalBottomLurking.h \
-    Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
-    Guideline/GuidelineStateTemplateHorizontalTopHide.h \
-    Guideline/GuidelineStateTemplateHorizontalTopHover.h \
-    Guideline/GuidelineStateTemplateHorizontalTopLurking.h \
-    Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
-    Guideline/GuidelineStateTemplateVerticalLeftHide.h \
-    Guideline/GuidelineStateTemplateVerticalLeftHover.h \
-    Guideline/GuidelineStateTemplateVerticalLeftLurking.h \
-    Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
-    Guideline/GuidelineStateTemplateVerticalRightHide.h \
-    Guideline/GuidelineStateTemplateVerticalRightHover.h \
-    Guideline/GuidelineStateTemplateVerticalRightLurking.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -746,23 +729,6 @@ SOURCES += \
     Guideline/GuidelineStateDeployedConstantYLocked.cpp \
     Guideline/GuidelineStateDiscarded.cpp \
     Guideline/GuidelineStateHandle.cpp \
-    Guideline/GuidelineStateTemplateAbstract.cpp \
-    Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
-    Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
-    Guideline/GuidelineStateTemplateHorizontalBottomHover.cpp \
-    Guideline/GuidelineStateTemplateHorizontalBottomLurking.cpp \
-    Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
-    Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
-    Guideline/GuidelineStateTemplateHorizontalTopHover.cpp \
-    Guideline/GuidelineStateTemplateHorizontalTopLurking.cpp \
-    Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
-    Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
-    Guideline/GuidelineStateTemplateVerticalLeftHover.cpp \
-    Guideline/GuidelineStateTemplateVerticalLeftLurking.cpp \
-    Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
-    Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
-    Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
-    Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

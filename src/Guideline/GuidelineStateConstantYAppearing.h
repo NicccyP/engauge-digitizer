@@ -4,32 +4,32 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER_H
-#define GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER_H
+#ifndef GUIDELINE_STATE_CONSTANT_Y_APPEARING_H
+#define GUIDELINE_STATE_CONSTANT_Y_APPEARING_H
 
-#include "GuidelineStateTemplateVerticalLeftAbstract.h"
+#include "GuidelineStateConstantYAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT
-class GuidelineStateTemplateVerticalLeftHover : public GuidelineStateTemplateVerticalLeftAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_CONSTANT_Y_APPEARING
+class GuidelineStateConstantYAppearing : public GuidelineStateConstantYAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateVerticalLeftHover(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateVerticalLeftHover();
+  GuidelineStateConstantYAppearing(GuidelineStateContext &context);
+  virtual ~GuidelineStateConstantYAppearing();
 
-  virtual void begin();
+  virtual void begin ();
   virtual bool doPaint () const;
-  virtual void end ();
+  virtual void end ();  
+  virtual void handleAppearingChange (bool appearing);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
   virtual QString stateName () const;
-  virtual void updateWithLatestTransformation();
 
 private:
-  GuidelineStateTemplateVerticalLeftHover();
+  GuidelineStateConstantYAppearing();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER_H
+#endif // GUIDELINE_STATE_CONSTANT_Y_APPEARING_H

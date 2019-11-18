@@ -44,3 +44,4 @@ double GuidelineFormat::lineWidthNonHover () const
 {
   return 0.8; // Narrow for precision
 }
+

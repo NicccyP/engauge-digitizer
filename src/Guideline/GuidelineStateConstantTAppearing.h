@@ -4,32 +4,32 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE_H
-#define GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE_H
+#ifndef GUIDELINE_STATE_CONSTANT_T_APPEARING_H
+#define GUIDELINE_STATE_CONSTANT_T_APPEARING_H
 
-#include "GuidelineStateTemplateVerticalRightAbstract.h"
+#include "GuidelineStateConstantTAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT
-class GuidelineStateTemplateVerticalRightHide : public GuidelineStateTemplateVerticalRightAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_CONSTANT_T_APPEARING
+class GuidelineStateConstantTAppearing : public GuidelineStateConstantTAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateVerticalRightHide(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateVerticalRightHide();
+  GuidelineStateConstantTAppearing(GuidelineStateContext &context);
+  virtual ~GuidelineStateConstantTAppearing();
 
-  virtual void begin();
+  virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleAppearingChange (bool appearing);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
   virtual QString stateName () const;
-  virtual void updateWithLatestTransformation();
 
 private:
-  GuidelineStateTemplateVerticalRightHide();
+  GuidelineStateConstantTAppearing();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE_H
+#endif // GUIDELINE_STATE_CONSTANT_T_APPEARING_H

@@ -25,18 +25,14 @@ class QWidget;
 /// formatting.
 ///
 /// General strategy:
-/// 1) Four template Guidelines lie around the four scene borders
-/// 2) A deployed Guideline is created by dragging a template Guideline from its original position
-/// 3) When a (template or deployed) Guideline is dragged, the following process occurs
-///    3a) The dragged Guideline becomes invisible, and its state changes to Handle
-///    3b) A new deployed Guideline is generated where the dragged Guideline was located
-///    3c) Dragging the Handle causes the same movements in the new deployed Guideline
-///    3d) The new deployed Guideline is continually resized to just fit the scene, and in the
-///        case of polar coordinates resized to go between origin and scene edge (theta) or
-///        curved elliptically (range)
-///    3e) At the end of the drag, the Handle is no longer needed so it transitions to Discarded state
-///    3f) At the end of the drag, if it started with a template Guideline then a replacement
-///        is put back on the scene edge
+/// When a deployed Guideline is dragged, the following process occurs
+///  1) The dragged Guideline becomes invisible, and its state changes to Handle
+///  2) A new deployed Guideline is generated where the dragged Guideline was located
+///  3) Dragging the Handle causes the same movements in the new deployed Guideline
+///  4) The new deployed Guideline is continually resized to just fit the scene, and in the
+///     case of polar coordinates resized to go between origin and scene edge (theta) or
+///     curved elliptically (range)
+///  5) At the end of the drag, the Handle is no longer needed so it transitions to Discarded state
 /// State transitions are diagrammed in the GuidelineStateContext class
 ///
 /// This strategy works with the following constraints
@@ -49,15 +45,14 @@ class QWidget;
 /// State names are defined as:
 /// # horizontal = Follows constant-y isocontour
 /// # vertical = Follows constant-x isocontour
-/// # template = One of the guidelines along every scene border that can be dragged
-/// # deployed = One of the guidelines created by the user dragging a template guideline
+/// # deployed = One of the guidelines created by button press or dragging an existing Guideline
 /// # hide = Used when all Guidelines have been turned off
 /// # hover = Applies when cursor is hovering over the Guideline, to add some highlighting
 /// # normal = After a deployed Guideline has been created and lost the hover
 /// # discarded = A noop state. The Guideline is no longer useful and has been removed
 /// # handle = This Guideline is invisible, being dragged, and moving a bound deployed
 ///            Guideline along the same drag trajectory
-/// # lurking = Template Guideline state for when active but not seen, and waiting for hover
+/// # lurking = Guideline state for when active but not seen, and waiting for hover
 ///
 /// There are two derived classes:
 /// # one for drawing lines (cartesian and polar angle) with QGraphicsLineItem
