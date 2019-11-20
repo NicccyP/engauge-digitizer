@@ -29,17 +29,17 @@ class Transformation;
 /// digraph guidelines {
 ///   rankdir = LR;
 ///
-///   Start -> ConstantRAppearing [label = BtnGuidelineR];
-///   ConstantRAppearing -> ConstantRActive [label = Timeout];
+///   Start -> DeployedConstantRAppearing [label = BtnGuidelineR];
+///   DeployedConstantRAppearing -> DeployedConstantRActive [label = Timeout];
 ///
-///   Start -> ConstantTAppearing [label = BtnGuidelineT];
-///   ConstantRAppearing -> ConstantTActive [label = Timeout];
+///   Start -> DeployedConstantTAppearing [label = BtnGuidelineT];
+///   DeployedConstantRAppearing -> DeployedConstantTActive [label = Timeout];
 ///
-///   Start -> ConstantXAppearing [label = BtnGuidelineX];
-///   ConstantXAppearing -> ConstantXActive [label = Timeout];
+///   Start -> DeployedConstantXAppearing [label = BtnGuidelineX];
+///   DeployedConstantXAppearing -> DeployedConstantXActive [label = Timeout];
 ///
-///   Start -> ConstantYAppearing [label = BtnGuidelineY];
-///   ConstantYAppearing -> ConstantYActive [label = Timeout];
+///   Start -> DeployedConstantYAppearing [label = BtnGuidelineY];
+///   DeployedConstantYAppearing -> DeployedConstantYActive [label = Timeout];
 ///
 ///   Start -> DeployedConstantRHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantRHover -> DeployedConstantRActive [label = HoverLeave];

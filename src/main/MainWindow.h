@@ -356,8 +356,8 @@ private slots:
   void slotViewGridLines ();
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
+  void slotViewGroupGuidelines(QAction*);
   void slotViewGroupStatus(QAction*);
-  void slotViewGuidelines ();
   void slotViewToolBarBackground ();
   void slotViewToolBarChecklistGuide ();
   void slotViewToolBarCoordSystem ();
@@ -545,6 +545,11 @@ private:
   QAction *m_actionViewCurvesNone;
   QAction *m_actionViewCurvesSelected;
   QAction *m_actionViewCurvesAll;
+  QMenu *m_menuViewGuidelines;
+  QActionGroup *m_groupGuidelines;
+  QAction *m_actionViewGuidelinesHide;
+  QAction *m_actionViewGuidelinesEdit;
+  QAction *m_actionViewGuidelinesLock;
   QMenu *m_menuViewStatus;
   QActionGroup *m_groupStatus;
   QAction *m_actionStatusNever;

@@ -2989,6 +2989,13 @@ void MainWindow::slotViewGroupCurves(QAction * /* action */)
   updateViewedCurves ();
 }
 
+void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
+
+  m_guidelines.handleVisibleChange (guidelinesAreVisible ());
+}
+
 void MainWindow::slotViewGroupStatus(QAction *action)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupStatus";
@@ -3002,13 +3009,6 @@ void MainWindow::slotViewGroupStatus(QAction *action)
   } else {
     m_statusBar->setStatusBarMode(STATUS_BAR_MODE_ALWAYS);
   }
-}
-
-void MainWindow::slotViewGuidelines ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
-
-  m_guidelines.handleVisibleChange (guidelinesAreVisible ());
 }
 
 void MainWindow::slotViewToolBarBackground ()
@@ -3089,11 +3089,13 @@ void MainWindow::slotViewToolBarGuidelines ()
 
   bool cartesian = (m_cmdMediator->document().modelCoords().coordsType () == COORDS_TYPE_CARTESIAN);
   
-  // Complication is that we may have just had any one of many transitions:
-  //   allHide->cartesianShow
-  //   cartesianShow->cartesianHide
-  //   cartesianShow->polarShow
-  //   polarShow->allHide
+  // Complication:
+  // 1) one dialog opens for cartesian coordinates, and another opens for polar coordinates
+  // 2) we may have just had any one of many transitions:
+  //      allHide->cartesianShow
+  //      cartesianShow->cartesianHide
+  //      cartesianShow->polarShow
+  //      polarShow->allHide
   bool showCartesian = (m_actionViewGuidelines->isChecked () && cartesian);
   bool showPolar = (m_actionViewGuidelines->isChecked () && !cartesian);
 
@@ -3471,6 +3473,7 @@ void MainWindow::updateControls ()
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
   m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
+  m_groupGuidelines->setEnabled (m_transformation.transformIsDefined());
   m_groupZoom->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
