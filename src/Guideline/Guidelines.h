@@ -47,16 +47,16 @@ public:
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
-  void createGuidelineR (const QPointF &posGraph);
+  void createGuidelineR (const QPointF &posScene);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
-  void createGuidelineT (const QPointF &posGraph);
+  void createGuidelineT (const QPointF &posScene);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
-  void createGuidelineX (const QPointF &posGraph);
+  void createGuidelineX (const QPointF &posScene);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
-  void createGuidelineY (const QPointF &posGraph);
+  void createGuidelineY (const QPointF &posScene);
 
   /// DigitizeState change so active status may (or may not) be toggled 
   void handleActiveChange (bool active);

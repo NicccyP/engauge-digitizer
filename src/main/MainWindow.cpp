@@ -176,7 +176,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   qApp->setApplicationName ("Engauge Digitizer");
   qApp->setOrganizationDomain ("Mark Mitchell");
 #endif
- 
+
   LoggerUpload::bindToMainWindow(this);
 
   m_startupDirectory = QDir::currentPath();
@@ -551,7 +551,7 @@ void MainWindow::fileImport (const QString &fileName,
 
 #ifdef ENGAUGE_PDF
   if (!loaded) {
-    
+
     Pdf pdf;
     PdfReturn pdfReturn = pdf.load (fileName,
                                     image,
@@ -679,7 +679,7 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
 
 QString MainWindow::fileNameForExportOnly () const
 {
-  ExportToFile exportStrategy;      
+  ExportToFile exportStrategy;
 
   QString fileName;
   if (m_isErrorReportRegressionTest) {
@@ -827,14 +827,10 @@ QPointF MainWindow::guidelineBottomTop (double offsetVertical) const
   // Halfway across and a little above-bottom/below-top if offsetVertical is negative/positive
   double x = viewportRect.center().x();
   double y = (offsetVertical > 0 ?
-                GUIDELINE_OFFSET :
-                viewportRect.y () - GUIDELINE_OFFSET);
+              GUIDELINE_OFFSET :
+              viewportRect.height () + GUIDELINE_OFFSET);
 
-  QPointF posGraph;
-  m_transformation.transformScreenToRawGraph (QPointF (x, y),
-                                              posGraph);
-
-  return posGraph;
+  return QPointF (x, y);
 }
 
 QPointF MainWindow::guidelineLeftRight(double offsetHorizontal) const
@@ -843,14 +839,11 @@ QPointF MainWindow::guidelineLeftRight(double offsetHorizontal) const
 
   // Halfway down and a little left-of-right/right-of-left if offsetHorizontal is negative/positive
   double x= (offsetHorizontal > 0 ?
-                viewportRect.y () - GUIDELINE_OFFSET :
-                GUIDELINE_OFFSET);  double y =  viewportRect.center().y();
+             viewportRect.width () + GUIDELINE_OFFSET :
+             GUIDELINE_OFFSET);
+  double y =  viewportRect.center().y();
 
-  QPointF posGraph;
-  m_transformation.transformScreenToRawGraph (QPointF (x, y),
-                                              posGraph);
-
-  return posGraph;
+  return QPointF (x, y);
 }
 
 Guidelines &MainWindow::guidelines()
@@ -1124,7 +1117,7 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
     }
 
     // Start axis mode
-    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points  
+    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
 
     // Trigger transition so cursor gets updated immediately
     if (modeMap ()) {
@@ -1541,7 +1534,7 @@ QString MainWindow::selectedGraphCurve () const
 void MainWindow::sendGong ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::sendGong";
-  
+
   emit signalGong ();
 }
 
@@ -1968,58 +1961,58 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 
 void MainWindow::slotBtnGuidelineBottomCartesian ()
 {
-  QPointF posGraph = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
+  QPointF posScene = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineX (posGraph);
+  m_guidelines.createGuidelineX (posScene);
 }
 
 void MainWindow::slotBtnGuidelineBottomPolar ()
 {
-  QPointF posGraph = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
+  QPointF posScene = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineT (posGraph);
+  m_guidelines.createGuidelineT (posScene);
 }
 
 void MainWindow::slotBtnGuidelineLeftCartesian ()
 {
-  QPointF posGraph = guidelineLeftRight (GUIDELINE_OFFSET);
+  QPointF posScene = guidelineLeftRight (GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineY (posGraph);
+  m_guidelines.createGuidelineY (posScene);
 }
 
 void MainWindow::slotBtnGuidelineLeftPolar ()
 {
-  QPointF posGraph = guidelineLeftRight (GUIDELINE_OFFSET);
+  QPointF posScene = guidelineLeftRight (GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineR (posGraph);
+  m_guidelines.createGuidelineR (posScene);
 }
 
 void MainWindow::slotBtnGuidelineRightCartesian ()
 {
-  QPointF posGraph = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
+  QPointF posScene = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineY (posGraph);
+  m_guidelines.createGuidelineY (posScene);
 }
 
 void MainWindow::slotBtnGuidelineRightPolar ()
 {
-  QPointF posGraph = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
+  QPointF posScene = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineR (posGraph);
+  m_guidelines.createGuidelineR (posScene);
 }
 
 void MainWindow::slotBtnGuidelineTopCartesian ()
 {
-  QPointF posGraph = guidelineBottomTop (GUIDELINE_OFFSET);
+  QPointF posScene = guidelineBottomTop (GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineX (posGraph);
+  m_guidelines.createGuidelineX (posScene);
 }
 
 void MainWindow::slotBtnGuidelineTopPolar ()
 {
-  QPointF posGraph = guidelineBottomTop (GUIDELINE_OFFSET);
+  QPointF posScene = guidelineBottomTop (GUIDELINE_OFFSET);
 
-  m_guidelines.createGuidelineT (posGraph);
+  m_guidelines.createGuidelineT (posScene);
 }
 
 void MainWindow::slotBtnPrintAll ()
@@ -2496,7 +2489,7 @@ void MainWindow::slotFileImportAdvanced ()
 }
 
 void MainWindow::slotFileImportDraggedImage(QImage image)
-{  
+{
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImage";
 
   // No need to check return value from loadImage since there are no prompts that give the user a chance to cancel
@@ -3193,7 +3186,7 @@ void MainWindow::slotViewZoomFactor (ZoomFactor zoomFactor)
       m_backgroundStateContext->fitInView (*m_view);
   } else {
 
-    ZoomTransition zoomTransition;    
+    ZoomTransition zoomTransition;
     double factor = zoomTransition.mapToFactor (zoomFactor);
 
     QTransform transform;
@@ -3513,7 +3506,7 @@ void MainWindow::updateControls ()
 
     bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
     bool editable = (m_actionViewGuidelinesEdit->isChecked ());
-    
+
     m_btnGuidelineBottomCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
     m_btnGuidelineBottomPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
     m_btnGuidelineLeftCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
@@ -3530,7 +3523,7 @@ void MainWindow::updateControls ()
     m_btnGuidelineRightCartesian->setVisible (false);
     m_btnGuidelineRightPolar->setVisible (false);
     m_btnGuidelineTopCartesian->setVisible (false);
-    m_btnGuidelineTopPolar->setVisible (false);                
+    m_btnGuidelineTopPolar->setVisible (false);
   }
   m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 
@@ -3902,7 +3895,7 @@ void MainWindow::updateTransformationAndItsDependencies()
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
-  
+
   // Grid display is also affected by new transformation above, if there was a transition into defined state
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();

@@ -37,7 +37,7 @@ QColor GuidelineFormat::colorHidden () const
 
 double GuidelineFormat::lineWidthHover () const
 {
-  return 20.0; // Wide so easy to see and click on
+  return 5.0; // Wide so easy to see and click on
 }
 
 double GuidelineFormat::lineWidthNonHover () const
