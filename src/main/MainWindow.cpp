@@ -88,7 +88,6 @@
 #include <QDomDocument>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QHBoxLayout>
 #include <QImageReader>
 #include <QKeyEvent>
 #include <QKeySequence>
@@ -828,7 +827,7 @@ Guidelines &MainWindow::guidelines()
 bool MainWindow::guidelinesAreVisible () const
 {
   return (guidelinesVisibilityCanBeEnabled () &&
-          m_actionViewGuidelines->isChecked());
+          m_actionViewGuidelinesEdit->isChecked());
 }
 
 bool MainWindow::guidelinesVisibilityCanBeEnabled () const
@@ -1933,19 +1932,35 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
   m_statusBar->showTemporaryMessage (temporaryMessage);
 }
 
-void MainWindow::slotBtnGuidelineR ()
+void MainWindow::slotBtnGuidelineBottomCartesian ()
 {
 }
 
-void MainWindow::slotBtnGuidelineT ()
+void MainWindow::slotBtnGuidelineBottomPolar ()
 {
 }
 
-void MainWindow::slotBtnGuidelineX ()
+void MainWindow::slotBtnGuidelineLeftCartesian ()
 {
 }
 
-void MainWindow::slotBtnGuidelineY ()
+void MainWindow::slotBtnGuidelineLeftPolar ()
+{
+}
+
+void MainWindow::slotBtnGuidelineRightCartesian ()
+{
+}
+
+void MainWindow::slotBtnGuidelineRightPolar ()
+{
+}
+
+void MainWindow::slotBtnGuidelineTopCartesian ()
+{
+}
+
+void MainWindow::slotBtnGuidelineTopPolar ()
 {
 }
 
@@ -2994,6 +3009,7 @@ void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
 
   m_guidelines.handleVisibleChange (guidelinesAreVisible ());
+  updateControls();
 }
 
 void MainWindow::slotViewGroupStatus(QAction *action)
@@ -3081,26 +3097,6 @@ void MainWindow::slotViewToolBarGeometryWindow ()
   } else {
     m_dockGeometryWindow->hide();
   }
-}
-
-void MainWindow::slotViewToolBarGuidelines ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGuidelines";
-
-  bool cartesian = (m_cmdMediator->document().modelCoords().coordsType () == COORDS_TYPE_CARTESIAN);
-  
-  // Complication:
-  // 1) one dialog opens for cartesian coordinates, and another opens for polar coordinates
-  // 2) we may have just had any one of many transitions:
-  //      allHide->cartesianShow
-  //      cartesianShow->cartesianHide
-  //      cartesianShow->polarShow
-  //      polarShow->allHide
-  bool showCartesian = (m_actionViewGuidelines->isChecked () && cartesian);
-  bool showPolar = (m_actionViewGuidelines->isChecked () && !cartesian);
-
-  m_toolGuidelinesCartesian->setVisible (showCartesian);
-  m_toolGuidelinesPolar->setVisible (showPolar);
 }
 
 void MainWindow::slotViewToolBarSettingsViews ()
@@ -3452,10 +3448,32 @@ void MainWindow::updateControls ()
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
   }
-  m_actionViewGuidelines->setEnabled (guidelinesVisibilityCanBeEnabled ());
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
+  if (m_transformation.transformIsDefined()) {
+
+    bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
+    bool editable = (m_actionViewGuidelinesEdit->isChecked ());
+    
+    m_btnGuidelineBottomCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineBottomPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    m_btnGuidelineLeftCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineLeftPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    m_btnGuidelineRightCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineRightPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    m_btnGuidelineTopCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineTopPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+  } else {
+    m_btnGuidelineBottomCartesian->setVisible (false);
+    m_btnGuidelineBottomPolar->setVisible (false);
+    m_btnGuidelineLeftCartesian->setVisible (false);
+    m_btnGuidelineLeftPolar->setVisible (false);
+    m_btnGuidelineRightCartesian->setVisible (false);
+    m_btnGuidelineRightPolar->setVisible (false);
+    m_btnGuidelineTopCartesian->setVisible (false);
+    m_btnGuidelineTopPolar->setVisible (false);                
+  }
   m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());

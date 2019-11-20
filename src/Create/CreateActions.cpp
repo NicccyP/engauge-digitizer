@@ -480,17 +480,6 @@ void CreateActions::createView (MainWindow &mw)
                                                 "This toolbar is disabled when there is only one coordinate system."));
   connect (mw.m_actionViewCoordSystem, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarCoordSystem()));
 
-  mw.m_actionViewGuidelines = new QAction (tr ("Guidelines Toolbar"), &mw);
-  mw.m_actionViewGuidelines->setCheckable (true);
-  mw.m_actionViewGuidelines->setChecked (false);
-  mw.m_actionViewGuidelines->setStatusTip (tr ("Show or hide the guidelines toolbar and guidelines."));
-  mw.m_actionViewGuidelines->setWhatsThis (tr ("View Guidelines ToolBar and Guidelines\n\n"
-                                               "Show or hide the guidelines toolbar, and guidelines in the main window. "
-                                               "The toolbar is used to create new X and Y aligned guidelines for cartesian "
-                                               "plots, and T (theta) and R (range) guidelines for polar plots. Guidelines "
-                                               "are useful for aligning points."));
-  connect (mw.m_actionViewGuidelines, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarGuidelines ()));
-
   mw.m_actionViewToolTips = new QAction (tr ("Tool Tips"), &mw);
   mw.m_actionViewToolTips->setCheckable (true);
   mw.m_actionViewToolTips->setChecked (true);
@@ -561,11 +550,11 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_groupCurves->addAction (mw.m_actionViewCurvesAll);
   connect (mw.m_groupCurves, SIGNAL(triggered (QAction*)), &mw, SLOT (slotViewGroupCurves(QAction*)));
 
-  mw.m_actionViewGuidelinesHide = new QAction (tr ("Hide All Guidelines"), &mw);
+  mw.m_actionViewGuidelinesHide = new QAction (tr ("Hide Guidelines"), &mw);
   mw.m_actionViewGuidelinesHide->setCheckable (true);
-  mw.m_actionViewGuidelinesHide->setStatusTip (tr ("Hide all guidelines."));
-  mw.m_actionViewGuidelinesHide->setWhatsThis (tr ("Hide All Guidelines\n\n"
-                                                   "No guidelines are shown so the image is easier to see."));
+  mw.m_actionViewGuidelinesHide->setStatusTip (tr ("Hide guidelines."));
+  mw.m_actionViewGuidelinesHide->setWhatsThis (tr ("Hide Guidelines\n\n"
+                                                   "Guidelines are hidden to simplify the main window."));
 
   mw.m_actionViewGuidelinesEdit = new QAction (tr ("Edit Guidelines"), &mw);
   mw.m_actionViewGuidelinesEdit->setCheckable (true);
@@ -573,8 +562,8 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_actionViewGuidelinesEdit->setStatusTip (tr ("Edit guidelines."));
   mw.m_actionViewGuidelinesEdit->setWhatsThis (tr ("Edit Guidelines\n\n"
                                                    "Add new guidelines by clicking on the guidelines toolbar, move "
-                                                   "guidelines by dragging, and remove guidelines by dragging out "
-                                                   "of the main window."));
+                                                   "existing guidelines by dragging, or remove guidelines by dragging "
+                                                   "out of the main window."));
 
   mw.m_actionViewGuidelinesLock = new QAction (tr ("Lock Guidelines"), &mw);
   mw.m_actionViewGuidelinesLock->setCheckable (true);

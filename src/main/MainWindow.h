@@ -73,7 +73,7 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
-class QHBoxLayout;
+class QGridLayout;
 class QMenu;
 class QPushButton;
 class QSettings;
@@ -280,10 +280,14 @@ public:
   const GraphicsView &view () const;
 
 private slots:
-  void slotBtnGuidelineR ();
-  void slotBtnGuidelineT ();
-  void slotBtnGuidelineX ();
-  void slotBtnGuidelineY ();
+  void slotBtnGuidelineBottomCartesian ();
+  void slotBtnGuidelineBottomPolar ();  
+  void slotBtnGuidelineLeftCartesian ();
+  void slotBtnGuidelineLeftPolar ();  
+  void slotBtnGuidelineRightCartesian ();
+  void slotBtnGuidelineRightPolar ();  
+  void slotBtnGuidelineTopCartesian ();
+  void slotBtnGuidelineTopPolar ();  
   void slotBtnPrintAll();
   void slotBtnShowAllPressed();
   void slotBtnShowAllReleased();
@@ -364,7 +368,6 @@ private slots:
   void slotViewToolBarDigitize ();
   void slotViewToolBarFittingWindow ();
   void slotViewToolBarGeometryWindow ();
-  void slotViewToolBarGuidelines ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoomFactor (ZoomFactor);
@@ -528,7 +531,6 @@ private:
   QAction *m_actionViewBackground;
   QAction *m_actionViewChecklistGuide;
   QAction *m_actionViewCoordSystem;
-  QAction *m_actionViewGuidelines;
   QAction *m_actionViewDigitize;
   QAction *m_actionViewFittingWindow;
   QAction *m_actionViewGeometryWindow;
@@ -609,10 +611,19 @@ private:
   QAction *m_actionHelpTutorial;
   QAction *m_actionHelpWhatsThis;
 
-  QHBoxLayout *m_layout;
+  QGridLayout *m_layout;
   GraphicsScene *m_scene;
   GraphicsView *m_view;
 
+  QPushButton *m_btnGuidelineBottomCartesian;
+  QPushButton *m_btnGuidelineBottomPolar;  
+  QPushButton *m_btnGuidelineLeftCartesian;
+  QPushButton *m_btnGuidelineLeftPolar;  
+  QPushButton *m_btnGuidelineRightCartesian;
+  QPushButton *m_btnGuidelineRightPolar;  
+  QPushButton *m_btnGuidelineTopCartesian;
+  QPushButton *m_btnGuidelineTopPolar;    
+  
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
@@ -635,13 +646,6 @@ private:
   QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
 
-  QPushButton *m_btnGuidelineX;
-  QPushButton *m_btnGuidelineY;
-  QToolBar *m_toolGuidelinesCartesian;
-  QPushButton *m_btnGuidelineT;
-  QPushButton *m_btnGuidelineR;  
-  QToolBar *m_toolGuidelinesPolar;
-  
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)  
   HelpWindow *m_helpWindow;
 #endif

@@ -7,7 +7,7 @@
 #include "CreateCentralWidget.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include <QHBoxLayout>
+#include <QGridLayout>
 #include <QWidget>
 
 CreateCentralWidget::CreateCentralWidget()
@@ -20,7 +20,7 @@ void CreateCentralWidget::create(MainWindow &mw)
 
   QWidget *widget = new QWidget;
   mw.setCentralWidget (widget);
-  mw.m_layout = new QHBoxLayout;
+  mw.m_layout = new QGridLayout;
   mw.m_layout->setContentsMargins (0, 0, 0, 0);
   mw.m_layout->setSpacing (0);
   widget->setLayout (mw.m_layout);

@@ -70,7 +70,6 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuView->addAction (mw.m_actionViewGeometryWindow);
   mw.m_menuView->addAction (mw.m_actionViewSettingsViews);
   mw.m_menuView->addAction (mw.m_actionViewCoordSystem);
-  mw.m_menuView->addAction (mw.m_actionViewGuidelines);
   mw.m_menuView->insertSeparator (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewGridLines);
