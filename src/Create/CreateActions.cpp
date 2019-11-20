@@ -552,13 +552,13 @@ void CreateActions::createView (MainWindow &mw)
 
   mw.m_actionViewGuidelinesHide = new QAction (tr ("Hide Guidelines"), &mw);
   mw.m_actionViewGuidelinesHide->setCheckable (true);
+  mw.m_actionViewGuidelinesHide->setChecked (true);
   mw.m_actionViewGuidelinesHide->setStatusTip (tr ("Hide guidelines."));
   mw.m_actionViewGuidelinesHide->setWhatsThis (tr ("Hide Guidelines\n\n"
                                                    "Guidelines are hidden to simplify the main window."));
 
   mw.m_actionViewGuidelinesEdit = new QAction (tr ("Edit Guidelines"), &mw);
   mw.m_actionViewGuidelinesEdit->setCheckable (true);
-  mw.m_actionViewGuidelinesEdit->setChecked (true);
   mw.m_actionViewGuidelinesEdit->setStatusTip (tr ("Edit guidelines."));
   mw.m_actionViewGuidelinesEdit->setWhatsThis (tr ("Edit Guidelines\n\n"
                                                    "Add new guidelines by clicking on the guidelines toolbar, move "

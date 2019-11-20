@@ -128,6 +128,7 @@ static const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const int REGRESSION_INTERVAL = 400; // Milliseconds
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
+const int GUIDELINE_OFFSET = 10; // Pixels
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        const QString &fileCmdScriptFile,
@@ -817,6 +818,39 @@ void MainWindow::ghostsDestroy ()
 
   delete m_ghosts;
   m_ghosts = nullptr;
+}
+
+QPointF MainWindow::guidelineBottomTop (double offsetVertical) const
+{
+  QRect viewportRect = m_view->viewport()->rect();
+
+  // Halfway across and a little above-bottom/below-top if offsetVertical is negative/positive
+  double x = viewportRect.center().x();
+  double y = (offsetVertical > 0 ?
+                GUIDELINE_OFFSET :
+                viewportRect.y () - GUIDELINE_OFFSET);
+
+  QPointF posGraph;
+  m_transformation.transformScreenToRawGraph (QPointF (x, y),
+                                              posGraph);
+
+  return posGraph;
+}
+
+QPointF MainWindow::guidelineLeftRight(double offsetHorizontal) const
+{
+  QRect viewportRect = m_view->viewport()->rect();
+
+  // Halfway down and a little left-of-right/right-of-left if offsetHorizontal is negative/positive
+  double x= (offsetHorizontal > 0 ?
+                viewportRect.y () - GUIDELINE_OFFSET :
+                GUIDELINE_OFFSET);  double y =  viewportRect.center().y();
+
+  QPointF posGraph;
+  m_transformation.transformScreenToRawGraph (QPointF (x, y),
+                                              posGraph);
+
+  return posGraph;
 }
 
 Guidelines &MainWindow::guidelines()
@@ -1934,34 +1968,58 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 
 void MainWindow::slotBtnGuidelineBottomCartesian ()
 {
+  QPointF posGraph = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineX (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineBottomPolar ()
 {
+  QPointF posGraph = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineT (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineLeftCartesian ()
 {
+  QPointF posGraph = guidelineLeftRight (GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineY (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineLeftPolar ()
 {
+  QPointF posGraph = guidelineLeftRight (GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineR (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineRightCartesian ()
 {
+  QPointF posGraph = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineY (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineRightPolar ()
 {
+  QPointF posGraph = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineR (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineTopCartesian ()
 {
+  QPointF posGraph = guidelineBottomTop (GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineX (posGraph);
 }
 
 void MainWindow::slotBtnGuidelineTopPolar ()
 {
+  QPointF posGraph = guidelineBottomTop (GUIDELINE_OFFSET);
+
+  m_guidelines.createGuidelineT (posGraph);
 }
 
 void MainWindow::slotBtnPrintAll ()

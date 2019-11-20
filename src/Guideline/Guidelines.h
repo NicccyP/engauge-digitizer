@@ -46,6 +46,18 @@ public:
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
+  void createGuidelineR (const QPointF &posGraph);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
+  void createGuidelineT (const QPointF &posGraph);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
+  void createGuidelineX (const QPointF &posGraph);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
+  void createGuidelineY (const QPointF &posGraph);
+
   /// DigitizeState change so active status may (or may not) be toggled 
   void handleActiveChange (bool active);
   

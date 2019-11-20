@@ -66,9 +66,34 @@ CoordsType Guidelines::coordsType () const
 GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
 {
   GuidelineAbstract *guideline = m_guidelineFactory->createGuideline (*this,
-                                                     stateInitial);
+                                                                      stateInitial);
 
   return guideline;
+}
+
+void Guidelines::createGuidelineR (const QPointF &posGraph)
+{
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
+  guideline->updateGeometry (posGraph);
+}
+
+void Guidelines::createGuidelineT (const QPointF &posGraph)
+{
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
+  guideline->updateGeometry (posGraph);
+}
+
+void Guidelines::createGuidelineX (const QPointF &posGraph)
+{
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+  guideline->updateGeometry (posGraph);
+}
+
+void Guidelines::createGuidelineY (const QPointF &posGraph)
+{
+
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+  guideline->updateGeometry (posGraph);
 }
 
 const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivate () const
