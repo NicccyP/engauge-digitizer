@@ -308,6 +308,7 @@ HEADERS  += \
     Guideline/GuidelineFactory.h \
     Guideline/GuidelineFormat.h \
     Guideline/GuidelineLine.h \
+    Guideline/GuidelineOffset.h \
     Guideline/GuidelineProjectorAbstract.h \
     Guideline/GuidelineProjectorConstantR.h \
     Guideline/GuidelineProjectorConstantT.h \
@@ -697,6 +698,7 @@ SOURCES += \
     Guideline/GuidelineFactory.cpp \
     Guideline/GuidelineFormat.cpp \
     Guideline/GuidelineLine.cpp \
+    Guideline/GuidelineOffset.cpp \
     Guideline/GuidelineProjectorAbstract.cpp \
     Guideline/GuidelineProjectorConstantR.cpp \
     Guideline/GuidelineProjectorConstantT.cpp \

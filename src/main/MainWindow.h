@@ -421,8 +421,6 @@ private:
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
-  QPointF guidelineBottomTop (double offsetVertical) const;
-  QPointF guidelineLeftRight (double offsetHorizontal) const;
   Guidelines &guidelines (); /// Return guidelines for unit testing
   bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future

@@ -55,6 +55,7 @@
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
+#include "GuidelineOffset.h"
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
 #endif
@@ -128,7 +129,7 @@ static const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const int REGRESSION_INTERVAL = 400; // Milliseconds
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
-const int GUIDELINE_OFFSET = 10; // Pixels
+const double GUIDELINE_OFFSET_PORTION_OF_SCREEN_WIDTH = 0.05;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        const QString &fileCmdScriptFile,
@@ -818,36 +819,6 @@ void MainWindow::ghostsDestroy ()
 
   delete m_ghosts;
   m_ghosts = nullptr;
-}
-
-QPointF MainWindow::guidelineBottomTop (double offsetVertical) const
-{
-  // Get scrolled extent so new Guideline appears in visible portion
-  QRect viewportRect = m_view->viewport()->rect();
-  QRect scrolledRect = m_view->viewportTransform ().inverted ().mapRect (viewportRect);
-
-  // Halfway across and a little above-bottom/below-top if offsetVertical is negative/positive
-  double x = scrolledRect.center().x();
-  double y = (offsetVertical > 0 ?
-              scrolledRect.y () + offsetVertical :
-              scrolledRect.y () + scrolledRect.height () + offsetVertical);
-
-  return QPointF (x, y);
-}
-
-QPointF MainWindow::guidelineLeftRight(double offsetHorizontal) const
-{
-  // Get scrolled extent so new Guideline appears in visible portion
-  QRect viewportRect = m_view->viewport()->rect();
-  QRect scrolledRect = m_view->viewportTransform ().inverted ().mapRect (viewportRect);
-
-  // Halfway down and a little left-of-right/right-of-left if offsetHorizontal is negative/positive
-  double x= (offsetHorizontal > 0 ?
-             scrolledRect.x () + offsetHorizontal :
-             scrolledRect.x () + scrolledRect.width () + offsetHorizontal);
-  double y =  scrolledRect.center().y();
-
-  return QPointF (x, y);
 }
 
 Guidelines &MainWindow::guidelines()
@@ -1965,56 +1936,64 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 
 void MainWindow::slotBtnGuidelineBottomCartesian ()
 {
-  QPointF posScene = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.bottom (*m_view);
 
   m_guidelines.createGuidelineY (posScene);
 }
 
 void MainWindow::slotBtnGuidelineBottomPolar ()
 {
-  QPointF posScene = guidelineBottomTop (-1.0 * GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.bottom (*m_view);
 
   m_guidelines.createGuidelineR (posScene);
 }
 
 void MainWindow::slotBtnGuidelineLeftCartesian ()
 {
-  QPointF posScene = guidelineLeftRight (GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.left (*m_view);
 
   m_guidelines.createGuidelineX (posScene);
 }
 
 void MainWindow::slotBtnGuidelineLeftPolar ()
 {
-  QPointF posScene = guidelineLeftRight (GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.left (*m_view);
 
   m_guidelines.createGuidelineT (posScene);
 }
 
 void MainWindow::slotBtnGuidelineRightCartesian ()
 {
-  QPointF posScene = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.right (*m_view);
 
   m_guidelines.createGuidelineX (posScene);
 }
 
 void MainWindow::slotBtnGuidelineRightPolar ()
 {
-  QPointF posScene = guidelineLeftRight (-1.0 * GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.right (*m_view);
 
   m_guidelines.createGuidelineT (posScene);
 }
 
 void MainWindow::slotBtnGuidelineTopCartesian ()
 {
-  QPointF posScene = guidelineBottomTop (GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.top (*m_view);
 
   m_guidelines.createGuidelineY (posScene);
 }
 
 void MainWindow::slotBtnGuidelineTopPolar ()
 {
-  QPointF posScene = guidelineBottomTop (GUIDELINE_OFFSET);
+  GuidelineOffset guidelineOffset;
+  QPointF posScene = guidelineOffset.top (*m_view);
 
   m_guidelines.createGuidelineR (posScene);
 }
