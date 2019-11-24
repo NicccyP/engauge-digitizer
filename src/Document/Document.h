@@ -20,6 +20,7 @@
 #include "DocumentModelGeneral.h"
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
+#include "DocumentModelGuidelines.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "PointStyle.h"
@@ -214,6 +215,9 @@ public:
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
 
+  /// Get method for DocumentModelGuidelines.
+  DocumentModelGuidelines modelGuidelines() const;
+  
   /// Get method for DocumentModelPointMatch.
   DocumentModelPointMatch modelPointMatch() const;
 
@@ -301,6 +305,9 @@ public:
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
+  /// Set method for DocumentModelGuidelines.
+  void setModelGuidelines(const DocumentModelGuidelines &modelGuidelines);
+  
   /// Set method for DocumentModelPointMatch.
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
 

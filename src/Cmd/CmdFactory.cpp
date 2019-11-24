@@ -15,6 +15,7 @@
 #include "CmdEditPointGraph.h"
 #include "CmdFactory.h"
 #include "CmdGong.h"
+#include "CmdGuidelines.h"
 #include "CmdMoveBy.h"
 #include "CmdRedoForTest.h"
 #include "CmdSelectCoordSystem.h"
@@ -104,6 +105,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                        document,
                        cmdDescription,
                        reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINES) {
+    cmd = new CmdGuidelines (mainWindow,
+                             document,
+                             cmdDescription,
+                             reader);    
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_MOVE_BY) {
     cmd = new CmdMoveBy (mainWindow,
                          document,

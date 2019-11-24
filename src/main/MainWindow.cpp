@@ -3485,7 +3485,7 @@ void MainWindow::updateControls ()
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
-  if (m_transformation.transformIsDefined()) {
+  if (m_cmdMediator && m_transformation.transformIsDefined()) {
 
     bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
     bool editable = (m_actionViewGuidelinesEdit->isChecked ());

@@ -741,6 +741,13 @@ DocumentModelGridRemoval Document::modelGridRemoval() const
   return m_coordSystemContext.modelGridRemoval();
 }
 
+DocumentModelGuidelines Document::modelGuidelines() const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGuidelines";
+
+  return m_coordSystemContext.modelGuidelines();
+}
+
 DocumentModelPointMatch Document::modelPointMatch() const
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelPointMatch";
@@ -1031,6 +1038,13 @@ void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemo
 
   m_coordSystemContext.setModelGridRemoval(modelGridRemoval);
 }
+
+void Document::setModelGuidelines(const DocumentModelGuidelines &modelGuidelines)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setModelGuidelines";
+
+  m_coordSystemContext.setModelGuidelines(modelGuidelines);
+}  
 
 void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {

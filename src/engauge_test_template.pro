@@ -77,6 +77,7 @@ HEADERS  += \
     Cmd/CmdEditPointGraph.h \
     Cmd/CmdFactory.h \
     Cmd/CmdGong.h \
+    Cmd/CmdGuidelines.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPointChangeBase.h \
@@ -212,6 +213,7 @@ HEADERS  += \
     Document/DocumentModelGeneral.h \
     Document/DocumentModelGridDisplay.h \
     Document/DocumentModelGridRemoval.h \
+    Document/DocumentModelGuidelines.h \
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
     Document/DocumentScrub.h \
@@ -484,6 +486,7 @@ SOURCES += \
     Cmd/CmdEditPointGraph.cpp \
     Cmd/CmdFactory.cpp \
     Cmd/CmdGong.cpp \
+    Cmd/CmdGuidelines.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdRedoForTest.cpp \
@@ -612,6 +615,7 @@ SOURCES += \
     Document/DocumentModelGeneral.cpp \
     Document/DocumentModelGridDisplay.cpp \
     Document/DocumentModelGridRemoval.cpp \
+    Document/DocumentModelGuidelines.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
     Document/DocumentScrub.cpp \
