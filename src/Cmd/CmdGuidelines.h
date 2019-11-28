@@ -8,6 +8,7 @@
 #define CMD_GUIDELINES_H
 
 #include "CmdAbstract.h"
+#include "GuidelineValues.h"
 
 class QXmlStreamReader;
 
@@ -18,7 +19,13 @@ class CmdGuidelines : public CmdAbstract
 public:
   /// Constructor for normal creation
   CmdGuidelines(MainWindow &mainWindow,
-                Document &document);
+                Document &document,
+                const GuidelineValues &valuesXBefore,
+                const GuidelineValues &valuesYBefore,
+                const GuidelineValues &valuesXAfter,
+                const GuidelineValues &valuesYAfter,
+                const GuidelineValues &valuesXAppearing,
+                const GuidelineValues &valuesYAppearing);
 
   /// Constructor for parsing error report file xml
   CmdGuidelines(MainWindow &mainWindow,
@@ -34,6 +41,20 @@ public:
 
 private:
   CmdGuidelines();
+
+  // Values before redo and after undo
+  GuidelineValues m_valuesXTBefore;
+  GuidelineValues m_valuesXTAfter;
+
+  // Values after redo and before undo
+  GuidelineValues m_valuesYRBefore;
+  GuidelineValues m_valuesYRAfter;
+
+  // Special handling for just-created Guidelines just after redo. Although conceptually belonging to
+  // m_valuesXTAfter and m_valuesYRAfter, they are instantiated as Guidelines in the appearing state,
+  // which involves animation
+  GuidelineValues m_valuesXTAfterAppearing;
+  GuidelineValues m_valuesYRAfterAppearing;
 };
 
 #endif // CMD_GUIDELINES_H

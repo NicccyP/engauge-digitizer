@@ -10,6 +10,7 @@
 #include <QPointF>
 
 class QGraphicsView;
+class Transformation;
 
 /// Calculate offset from edge for new Guidelines
 class GuidelineOffset
@@ -17,23 +18,29 @@ class GuidelineOffset
 public:
   GuidelineOffset();
   
-  /// Compute offset from bottom side
-  QPointF bottom (const QGraphicsView &view) const;
+  /// Compute offset from bottom side and returns point in graph coordinates
+  QPointF bottom (const QGraphicsView &view,
+                  const Transformation &transformation) const;
   
-  /// Compute offset from left side
-  QPointF left (const QGraphicsView &view) const;
+  /// Compute offset from left side and returns point in graph coordinates
+  QPointF left (const QGraphicsView &view,
+                const Transformation &transformation) const;
   
-  /// Compute offset from right side
-  QPointF right (const QGraphicsView &view) const;
+  /// Compute offset from right side and returns point in graph coordinates
+  QPointF right (const QGraphicsView &view,
+                 const Transformation &transformation) const;
   
-  /// Compute offset from top side
-  QPointF top (const QGraphicsView &view) const;
+  /// Compute offset from top side and returns point in graph coordinates
+  QPointF top (const QGraphicsView &view,
+               const Transformation &transformation) const;
 
 private:
 
   QPointF bottomTop (const QGraphicsView &view,
+                     const Transformation &transformation,
                      bool add) const;
   QPointF leftRight (const QGraphicsView &view,
+                     const Transformation &transformation,
                      bool add) const;    
   
 };

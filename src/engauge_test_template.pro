@@ -343,6 +343,7 @@ HEADERS  += \
     Guideline/GuidelineStateDeployedConstantYLocked.h \
     Guideline/GuidelineStateDiscarded.h \
     Guideline/GuidelineStateHandle.h \
+    Guideline/GuidelineValues.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \

@@ -4,15 +4,13 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DOCUMENT_MODEL_GUIDELINES
-#define DOCUMENT_MODEL_GUIDELINES
+#ifndef DOCUMENT_MODEL_GUIDELINES_H
+#define DOCUMENT_MODEL_GUIDELINES_H
 
-#include <QList>
+#include "GuidelineValues.h"
 
 class Document;
 class QTextStream;
-
-typedef QList<double> GuidelineValues;
 
 /// Model for managing the coordinate values corresponding Guidelines.
 /// The strategy for transition between cartesian and polar reference
@@ -59,4 +57,4 @@ private:
   GuidelineValues m_valuesY;  
 };
 
-#endif // DOCUMENT_MODEL_GUIDELINES
+#endif // DOCUMENT_MODEL_GUIDELINES_H

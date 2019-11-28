@@ -13,10 +13,22 @@
 const QString CMD_DESCRIPTION ("Guidelines");
 
 CmdGuidelines::CmdGuidelines(MainWindow &mainWindow,
-                             Document &document) :
+                             Document &document,
+                             const GuidelineValues &valuesXBefore,
+                             const GuidelineValues &valuesYBefore,
+                             const GuidelineValues &valuesXAfter,
+                             const GuidelineValues &valuesYAfter,
+                             const GuidelineValues &valuesXAppearing,
+                             const GuidelineValues &valuesYAppearing) :
   CmdAbstract(mainWindow,
               document,
-              CMD_DESCRIPTION)
+              CMD_DESCRIPTION),
+  m_valuesXTBefore (valuesXBefore),
+  m_valuesXTAfter (valuesXAfter),
+  m_valuesYRBefore (valuesYBefore),
+  m_valuesYRAfter (valuesYAfter),
+  m_valuesXTAfterAppearing (valuesXAppearing),
+  m_valuesYRAfterAppearing (valuesYAppearing)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelines::CmdGuidelines";
 }
@@ -40,12 +52,21 @@ void CmdGuidelines::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelines::cmdRedo";
 
-  //mainWindow().sendGuideline ();
+  mainWindow().updateGuidelines (m_valuesXTAfter,
+                                 m_valuesYRAfter,
+                                 m_valuesXTAfterAppearing,
+                                 m_valuesYRAfterAppearing);
 }
 
 void CmdGuidelines::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelines::cmdUndo";
+
+  GuidelineValues emptyListXT, emptyListYR;
+  mainWindow().updateGuidelines (m_valuesXTBefore,
+                                 m_valuesYRBefore,
+                                 emptyListXT,
+                                 emptyListYR);
 }
 
 void CmdGuidelines::saveXml (QXmlStreamWriter & /* writer */) const

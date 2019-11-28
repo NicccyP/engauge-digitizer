@@ -6,6 +6,7 @@
 
 #include "GuidelineOffset.h"
 #include <QGraphicsView>
+#include "Transformation.h"
 
 const bool ADD_TO_EDGE = true;
 const double GUIDELINE_OFFSET_PORTION_OF_SCREEN_WIDTH = 0.05;
@@ -15,13 +16,16 @@ GuidelineOffset::GuidelineOffset()
 {
 }
 
-QPointF GuidelineOffset::bottom (const QGraphicsView &view) const
+QPointF GuidelineOffset::bottom (const QGraphicsView &view,
+                                 const Transformation &transformation) const
 {
   return bottomTop (view,
+                    transformation,
                     SUBTRACT_FROM_EDGE);
 }
 
 QPointF GuidelineOffset::bottomTop (const QGraphicsView &view,
+                                    const Transformation &transformation,
                                     bool add) const
 {
   // Get scrolled extent so new Guideline appears in visible portion
@@ -36,16 +40,24 @@ QPointF GuidelineOffset::bottomTop (const QGraphicsView &view,
               scrolledRect.y () + offset :
               scrolledRect.y () + scrolledRect.height () - offset);
 
-  return QPointF (x, y);
+  QPointF posScene (x, y), posGraph;
+
+  transformation.transformScreenToRawGraph (posScene,
+                                            posGraph);
+
+  return posGraph;
 }
 
-QPointF GuidelineOffset::left (const QGraphicsView &view) const
+QPointF GuidelineOffset::left (const QGraphicsView &view,
+                               const Transformation &transformation) const
 {
   return leftRight (view,
+                    transformation,
                     ADD_TO_EDGE);
 }
                     
 QPointF GuidelineOffset::leftRight(const QGraphicsView &view,
+                                   const Transformation &transformation,
                                    bool add) const
 {
   // Get scrolled extent so new Guideline appears in visible portion
@@ -60,17 +72,26 @@ QPointF GuidelineOffset::leftRight(const QGraphicsView &view,
               scrolledRect.x () + scrolledRect.width () - offset);
   double y =  scrolledRect.center().y();
 
-  return QPointF (x, y);
+  QPointF posScene (x, y), posGraph;
+
+  transformation.transformScreenToRawGraph (posScene,
+                                            posGraph);
+
+  return posGraph;
 }
 
-QPointF GuidelineOffset::right (const QGraphicsView &view) const
+QPointF GuidelineOffset::right (const QGraphicsView &view,
+                                const Transformation &transformation) const
 {
   return leftRight (view,
+                    transformation,
                     SUBTRACT_FROM_EDGE);
 }
 
-QPointF GuidelineOffset::top (const QGraphicsView &view) const
+QPointF GuidelineOffset::top (const QGraphicsView &view,
+                              const Transformation &transformation) const
 {
   return bottomTop (view,
+                    transformation,
                     ADD_TO_EDGE);
 }

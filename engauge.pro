@@ -386,6 +386,7 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedConstantYLocked.h \
     src/Guideline/GuidelineStateDiscarded.h \
     src/Guideline/GuidelineStateHandle.h \
+    src/Guideline/GuidelineValues.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
