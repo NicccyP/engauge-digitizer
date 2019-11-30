@@ -7,6 +7,7 @@
 #ifndef DOCUMENT_MODEL_GUIDELINES_H
 #define DOCUMENT_MODEL_GUIDELINES_H
 
+#include "DocumentModelAbstractBase.h"
 #include "GuidelineValues.h"
 
 class Document;
@@ -52,6 +53,14 @@ public:
   GuidelineValues valuesY () const;
 
 private:
+
+  void loadXmlVector (QXmlStreamReader &reader,
+                      const QString &tokenEnd,
+                      GuidelineValues &guidelineValues) const;
+  void saveXmlVector (QXmlStreamWriter &writer,
+                      const QString &tokenAll,
+                      const QString &tokenItem,
+                      const GuidelineValues &values) const;
 
   GuidelineValues m_valuesX;
   GuidelineValues m_valuesY;  

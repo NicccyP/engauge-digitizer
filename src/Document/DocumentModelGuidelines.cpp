@@ -45,10 +45,58 @@ void DocumentModelGuidelines::loadXml(QXmlStreamReader &reader)
 
   bool success = true;
 
-  QXmlStreamAttributes attributes = reader.attributes();
+  // Read until end of this subtree
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != DOCUMENT_SERIALIZE_GUIDELINES)){
+
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if ((tokenType == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_GUIDELINES_X)) {
+
+      loadXmlVector (reader,
+                     DOCUMENT_SERIALIZE_GUIDELINES_X,
+                     m_valuesX);
+    }
+
+    if ((tokenType == QXmlStreamReader::StartElement) &&
+        (reader.name() == DOCUMENT_SERIALIZE_GUIDELINES_Y)) {
+
+      loadXmlVector (reader,
+                     DOCUMENT_SERIALIZE_GUIDELINES_Y,
+                     m_valuesY);
+    }
+
+    if (reader.atEnd()) {
+      success = false;
+      break;
+    }
+  }
 
   if (!success) {
     reader.raiseError (QObject::tr ("Cannot read grid display data"));
+  }
+}
+
+void DocumentModelGuidelines::loadXmlVector (QXmlStreamReader &reader,
+                                             const QString &tokenEnd,
+                                             GuidelineValues &guidelineValues) const
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuidelines::loadXmlVector";
+
+  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+  (reader.name() != tokenEnd)){
+
+    QXmlStreamReader::TokenType tokenType = loadNextFromReader(reader);
+
+    if (reader.atEnd()) {
+      break;
+    }
+
+    if (tokenType == QXmlStreamReader::StartElement) {
+
+      guidelineValues << reader.text().toDouble();
+    }
   }
 }
 
@@ -63,6 +111,35 @@ void DocumentModelGuidelines::printStream(QString indentation,
 void DocumentModelGuidelines::saveXml(QXmlStreamWriter &writer) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuidelines::saveXml";
+
+  writer.writeStartElement(DOCUMENT_SERIALIZE_GUIDELINES);
+  saveXmlVector (writer,
+                 DOCUMENT_SERIALIZE_GUIDELINES_X,
+                 DOCUMENT_SERIALIZE_GUIDELINE,
+                 m_valuesX);
+  saveXmlVector (writer,
+                 DOCUMENT_SERIALIZE_GUIDELINES_Y,
+                 DOCUMENT_SERIALIZE_GUIDELINE,
+                 m_valuesX);
+  writer.writeEndElement();
+}
+
+void DocumentModelGuidelines::saveXmlVector(QXmlStreamWriter &writer,
+                                            const QString &tokenAll,
+                                            const QString &tokenItem,
+                                            const GuidelineValues &values) const
+{
+  writer.writeStartElement(tokenAll);
+
+  // Loop through values
+  GuidelineValues::const_iterator itr;
+  for (itr = values.begin(); itr != values.end(); itr++) {
+    double value = *itr;
+    writer.writeTextElement(tokenItem,
+                            QString::number (value));
+  }
+
+  writer.writeEndElement();
 }
 
 void DocumentModelGuidelines::setValuesX (const GuidelineValues &valuesX)
