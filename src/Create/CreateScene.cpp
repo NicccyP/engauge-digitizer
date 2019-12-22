@@ -25,18 +25,18 @@ void CreateScene::create(MainWindow &mw)
   mw.m_scene = new GraphicsScene (&mw);
   mw.m_view = new GraphicsView (mw.m_scene, mw);
 
-  QString statusTipR (tr ("Create a R (range) guideline."));
+  QString statusTipR (tr ("Create an R (range) guideline."));
   QString statusTipT (tr ("Create a T (theta) guideline."));
-  QString statusTipX (tr ("Create a X guideline."));
+  QString statusTipX (tr ("Create an X guideline."));
   QString statusTipY (tr ("Create a Y guideline."));  
 
-  QString whatsThisR (tr ("Create A R (Range) guideline\n\n"
+  QString whatsThisR (tr ("Create an R (Range) guideline\n\n"
                           "When pressed, a constant R (range) guideline is created. It can be moved by dragging"));
-  QString whatsThisT (tr ("Create A T (Theta) guideline\n\n"
+  QString whatsThisT (tr ("Create a T (Theta) guideline\n\n"
                           "When pressed, a constant T (theta) guideline is created. It can be moved by dragging"));
-  QString whatsThisX (tr ("Create A X guideline\n\n"
+  QString whatsThisX (tr ("Create an X guideline\n\n"
                           "When pressed, a constant X guideline is created. It can be moved by dragging"));
-  QString whatsThisY (tr ("Create A Y guideline\n\n"
+  QString whatsThisY (tr ("Create a Y guideline\n\n"
                           "When pressed, a constant Y guideline is created. It can be moved by dragging"));
   
   mw.m_btnGuidelineBottomCartesian = new QPushButton (QIcon(":/engauge/img/icon_guidelinesx.png"), "");
