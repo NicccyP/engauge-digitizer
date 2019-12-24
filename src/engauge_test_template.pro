@@ -77,7 +77,12 @@ HEADERS  += \
     Cmd/CmdEditPointGraph.h \
     Cmd/CmdFactory.h \
     Cmd/CmdGong.h \
-    Cmd/CmdGuidelines.h \
+    Cmd/CmdGuidelineAddXT.h \
+    Cmd/CmdGuidelineAddYR.h \
+    Cmd/CmdGuidelineMoveXT.h \
+    Cmd/CmdGuidelineMoveYR.h \
+    Cmd/CmdGuidelineRemoveXT.h \
+    Cmd/CmdGuidelineRemoveYR.h \
     Cmd/CmdMediator.h \
     Cmd/CmdMoveBy.h \
     Cmd/CmdPointChangeBase.h \
@@ -487,7 +492,12 @@ SOURCES += \
     Cmd/CmdEditPointGraph.cpp \
     Cmd/CmdFactory.cpp \
     Cmd/CmdGong.cpp \
-    Cmd/CmdGuidelines.cpp \
+    Cmd/CmdGuidelineAddXT.cpp \
+    Cmd/CmdGuidelineAddYR.cpp \
+    Cmd/CmdGuidelineMoveXT.cpp \
+    Cmd/CmdGuidelineMoveYR.cpp \
+    Cmd/CmdGuidelineRemoveXT.cpp \
+    Cmd/CmdGuidelineRemoveYR.cpp \
     Cmd/CmdMediator.cpp \
     Cmd/CmdMoveBy.cpp \
     Cmd/CmdRedoForTest.cpp \

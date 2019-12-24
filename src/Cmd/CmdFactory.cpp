@@ -15,7 +15,12 @@
 #include "CmdEditPointGraph.h"
 #include "CmdFactory.h"
 #include "CmdGong.h"
-#include "CmdGuidelines.h"
+#include "CmdGuidelineAddXT.h"
+#include "CmdGuidelineAddYR.h"
+#include "CmdGuidelineMoveXT.h"
+#include "CmdGuidelineMoveYR.h"
+#include "CmdGuidelineRemoveXT.h"
+#include "CmdGuidelineRemoveYR.h"
 #include "CmdMoveBy.h"
 #include "CmdRedoForTest.h"
 #include "CmdSelectCoordSystem.h"
@@ -105,11 +110,36 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                        document,
                        cmdDescription,
                        reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINES) {
-    cmd = new CmdGuidelines (mainWindow,
-                             document,
-                             cmdDescription,
-                             reader);    
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_ADD_X_T) {
+    cmd = new CmdGuidelineAddXT (mainWindow,
+                                 document,
+                                 cmdDescription,
+                                 reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_ADD_Y_R) {
+    cmd = new CmdGuidelineAddYR (mainWindow,
+                                 document,
+                                 cmdDescription,
+                                 reader);    
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_MOVE_X_T) {
+    cmd = new CmdGuidelineMoveXT (mainWindow,
+                                  document,
+                                  cmdDescription,
+                                  reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_MOVE_Y_R) {
+    cmd = new CmdGuidelineMoveYR (mainWindow,
+                                  document,
+                                  cmdDescription,
+                                  reader);    
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_REMOVE_X_T) {
+    cmd = new CmdGuidelineRemoveXT (mainWindow,
+                                    document,
+                                    cmdDescription,
+                                    reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_REMOVE_Y_R) {
+    cmd = new CmdGuidelineRemoveYR (mainWindow,
+                                    document,
+                                    cmdDescription,
+                                    reader);        
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_MOVE_BY) {
     cmd = new CmdMoveBy (mainWindow,
                          document,

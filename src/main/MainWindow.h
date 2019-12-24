@@ -163,6 +163,26 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
 
+  /// Add a X/T Guideline value
+  void guidelineAddXT (double value);
+  
+  /// Add a Y/R Guideline value
+  void guidelineAddYR (double value);  
+  
+  /// Move a X/T Guideline value
+  void guidelineMoveXT (double valueBefore,
+                        double valueAfter);
+  
+  /// Move a Y/R Guideline value
+  void guidelineMoveYR (double valueBefore,
+                        double valueAfter);  
+  
+  /// Remove a X/T Guideline value
+  void guidelineRemoveXT (double value);
+
+  /// Remove a Y/R Guideline value
+  void guidelineRemoveYR (double value);
+  
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
 
@@ -230,12 +250,6 @@ public:
   /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, and such. The points
   /// in the Document may (and probably are) out of date with respect to the graphics points
   void updateGraphicsLinesToMatchGraphicsPoints();
-
-  /// Update the Guideline values.
-  void updateGuidelines (const GuidelineValues &valuesX,
-                         const GuidelineValues &valuesY,
-                         const GuidelineValues &valuesXAppearing,
-                         const GuidelineValues &valuesYAppearing);
 
   /// Update with new axes indicator properties.
   void updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
@@ -427,6 +441,14 @@ private:
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
+  void guidelineAddXTEnqueue (double value);
+  void guidelineAddYREnqueue (double value);  
+  void guidelineMoveXTEnqueue (double valueBefore,
+                        double valueAfter);
+  void guidelineMoveYREnqueue (double valueBefore,
+                        double valueAfter);  
+  void guidelineRemoveXTEnqueue (double value);
+  void guidelineRemoveYREnqueue (double value);    
   Guidelines &guidelines (); /// Return guidelines for unit testing
   bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future

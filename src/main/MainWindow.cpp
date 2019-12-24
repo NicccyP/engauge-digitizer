@@ -12,7 +12,12 @@
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
-#include "CmdGuidelines.h"
+#include "CmdGuidelineAddXT.h"
+#include "CmdGuidelineAddYR.h"
+#include "CmdGuidelineMoveXT.h"
+#include "CmdGuidelineMoveYR.h"
+#include "CmdGuidelineRemoveXT.h"
+#include "CmdGuidelineRemoveYR.h"
 #include "CmdMediator.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
@@ -820,6 +825,56 @@ void MainWindow::ghostsDestroy ()
 
   delete m_ghosts;
   m_ghosts = nullptr;
+}
+
+void MainWindow::guidelineAddXT (double value)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddXT";
+}
+
+void MainWindow::guidelineAddXTEnqueue (double value)
+{
+  CmdGuidelineAddXT *cmd = new CmdGuidelineAddXT (*this,
+                                                  m_cmdMediator->document(),
+                                                  value);
+
+  m_cmdMediator->push (cmd);
+}
+
+void MainWindow::guidelineAddYR (double value)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddYR";
+}
+
+void MainWindow::guidelineAddYREnqueue (double value)
+{
+  CmdGuidelineAddYR *cmd = new CmdGuidelineAddYR (*this,
+                                                  m_cmdMediator->document(),
+                                                  value);
+
+  m_cmdMediator->push (cmd);
+}
+
+void MainWindow::guidelineMoveXT (double valueBefore,
+                                  double valueAfter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveXT";
+}
+
+void MainWindow::guidelineMoveYR (double valueBefore,
+                                  double valueAfter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveYR";
+}
+
+void MainWindow::guidelineRemoveXT (double value)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveXT";
+}
+
+void MainWindow::guidelineRemoveYR (double value)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveYR";
 }
 
 Guidelines &MainWindow::guidelines()
@@ -1938,46 +1993,41 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 void MainWindow::slotBtnGuidelineBottomCartesian ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posScene = guidelineOffset.bottom (*m_view,
+  QPointF posGraph = guidelineOffset.bottom (*m_view,
                                              m_transformation);
-
-//  m_guidelines.createGuidelineY (posScene);
+  guidelineAddYREnqueue (posGraph.y ());  
 }
 
 void MainWindow::slotBtnGuidelineBottomPolar ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posScene = guidelineOffset.bottom (*m_view,
+  QPointF posGraph = guidelineOffset.bottom (*m_view,
                                              m_transformation);
-
-//  m_guidelines.createGuidelineR (posScene);
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnGuidelineLeftCartesian ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posScene = guidelineOffset.left (*m_view,
+  QPointF posGraph = guidelineOffset.left (*m_view,
                                            m_transformation);
-
-//  m_guidelines.createGuidelineX (posScene);
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineLeftPolar ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posScene = guidelineOffset.left (*m_view,
+  QPointF posGraph = guidelineOffset.left (*m_view,
                                            m_transformation);
-
-//  m_guidelines.createGuidelineT (posScene);
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineRightCartesian ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posScene = guidelineOffset.right (*m_view,
+  QPointF posGraph = guidelineOffset.right (*m_view,
                                             m_transformation);
-
-//  m_guidelines.createGuidelineX (posScene);
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineRightPolar ()
@@ -1985,8 +2035,7 @@ void MainWindow::slotBtnGuidelineRightPolar ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.right (*m_view,
                                             m_transformation);
-
-//  m_guidelines.createGuidelineT (posScene);
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineTopCartesian ()
@@ -1994,18 +2043,7 @@ void MainWindow::slotBtnGuidelineTopCartesian ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.top (*m_view,
                                           m_transformation);
-  GuidelineValues xAppearing, yAppearing;
-  yAppearing << posGraph.y();
-  CmdGuidelines *cmd = new CmdGuidelines (*this,
-                                          m_cmdMediator->document(),
-                                          m_cmdMediator->document().modelGuidelines().valuesX(),
-                                          m_cmdMediator->document().modelGuidelines().valuesY(),
-                                          m_cmdMediator->document().modelGuidelines().valuesX(),
-                                          m_cmdMediator->document().modelGuidelines().valuesY(),
-                                          xAppearing,
-                                          yAppearing);
-
-  m_cmdMediator->push (cmd);
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnGuidelineTopPolar ()
@@ -2013,8 +2051,7 @@ void MainWindow::slotBtnGuidelineTopPolar ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.top (*m_view,
                                           m_transformation);
-
-//  m_guidelines.createGuidelineR (posScene);
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnPrintAll ()
@@ -3674,16 +3711,6 @@ void MainWindow::updateGridLines ()
                                               m_gridLines);
 
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
-}
-
-void MainWindow::updateGuidelines (const GuidelineValues &valuesX,
-                                   const GuidelineValues &valuesY,
-                                   const GuidelineValues &valuesXAppearing,
-                                   const GuidelineValues &valuesYAppearing)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateGuidelines";
-
-
 }
 
 void MainWindow::updateHighlightOpacity ()
