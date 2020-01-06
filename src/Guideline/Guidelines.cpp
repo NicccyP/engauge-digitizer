@@ -71,36 +71,69 @@ GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
   return guideline;
 }
 
-void Guidelines::createGuidelineR (const QPointF &posScene)
+void Guidelines::createGuidelineR (double r)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
   if (guideline) {
-    guideline->updateGeometry (posScene);
+    guideline->updateGeometry (r);
   }
 }
 
-void Guidelines::createGuidelineT (const QPointF &posScene)
+void Guidelines::createGuidelineR (const QPointF &posScreen)
+{
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
+  if (guideline) {
+    guideline->updateGeometry (posScreen);
+  }
+}
+
+void Guidelines::createGuidelineT (double t)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
   if (guideline) {
-    guideline->updateGeometry (posScene);
+    guideline->updateGeometry (t);
   }
 }
 
-void Guidelines::createGuidelineX (const QPointF &posScene)
+void Guidelines::createGuidelineT (const QPointF &posScreen)
+{
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
+  if (guideline) {
+    guideline->updateGeometry (posScreen);
+  }
+}
+
+void Guidelines::createGuidelineX (double x)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
   if (guideline) {
-    guideline->updateGeometry (posScene);
+    guideline->updateGeometry (x);
   }
 }
 
-void Guidelines::createGuidelineY (const QPointF &posScene)
+void Guidelines::createGuidelineX (const QPointF &posScreen)
+{
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+  if (guideline) {
+    guideline->updateGeometry (posScreen);
+  }
+}
+
+void Guidelines::createGuidelineY (double y)
 {
 
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
   if (guideline) {
-    guideline->updateGeometry (posScene);
+    guideline->updateGeometry (y);
+  }
+}
+
+void Guidelines::createGuidelineY (const QPointF &posScreen)
+{
+
+  GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+  if (guideline) {
+    guideline->updateGeometry (posScreen);
   }
 }
 
@@ -137,6 +170,46 @@ void Guidelines::initialize (GraphicsScene &scene)
 void Guidelines::registerGuideline (GuidelineAbstract *guideline)
 {
   m_guidelineContainer.push_back (guideline);
+}
+
+void Guidelines::moveGuidelineR (double valueBefore,
+                                 double valueAfter)
+{
+}
+
+void Guidelines::moveGuidelineT (double valueBefore,
+                                 double valueAfter)
+{
+}
+
+void Guidelines::moveGuidelineX (double valueBefore,
+                                 double valueAfter)
+{
+}
+
+void Guidelines::moveGuidelineY (double valueBefore,
+                                 double valueAfter)
+{
+}
+
+void Guidelines::removeGuidelineR (double value)
+{
+
+}
+
+void Guidelines::removeGuidelineT (double value)
+{
+
+}
+
+void Guidelines::removeGuidelineX (double value)
+{
+
+}
+
+void Guidelines::removeGuidelineY (double value)
+{
+
 }
 
 QString Guidelines::stateDump () const

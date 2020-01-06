@@ -28,6 +28,9 @@ public:
   /// Transition into state
   virtual void begin () = 0;
 
+  /// Convert single graph coordinate into screen point pair
+  virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph) = 0;
+
   /// Allow/skip painting of the owner Guideline. This prevents display of selection markings on
   /// otherwise-invisible handle Guideline
   virtual bool doPaint () const = 0;

@@ -23,6 +23,16 @@ GuidelineStateDeployedConstantRAbstract::~GuidelineStateDeployedConstantRAbstrac
 {
 }
 
+QPointF GuidelineStateDeployedConstantRAbstract::convertGraphCoordinateToScreenPoint (double valueGraph)
+{
+  const double ARBITRARY_THETA = 0; // Value that is legal in all cases
+  QPointF posScreen;
+  context().transformation().transformRawGraphToScreen (QPointF (ARBITRARY_THETA,
+                                                                 valueGraph),
+                                                        posScreen);
+  return posScreen;
+}
+
 EllipseParameters GuidelineStateDeployedConstantRAbstract::pointToEllipse (const QPointF &posScreen) const
 {
   GuidelineProjectorConstantR projector;

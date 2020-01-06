@@ -146,8 +146,11 @@ public:
   /// Force a color update
   virtual void updateColor () = 0;
 
-  /// Update the geometry so it passes through the specified point
-  virtual void updateGeometry (const QPointF &pos) = 0;
+  /// Update the geometry so it passes through the specified coordinate value in graph coordinates
+  virtual void updateGeometry (double valueGraph) = 0;
+
+  /// Update the geometry so it passes through the specified point in screen coordinates
+  virtual void updateGeometry (const QPointF &posScreen) = 0;
 
   /// Update given Transformation in GuidelineStateContext. This is called after a command has been executed
   void updateWithLatestTransformation ();

@@ -76,6 +76,11 @@ ColorPalette GuidelineStateContext::color () const
   return m_guidelines.color ();
 }
 
+QPointF GuidelineStateContext::convertGraphCoordinateToScreenPoint (double valueGraph)
+{
+  return m_states[m_currentState]->convertGraphCoordinateToScreenPoint (valueGraph);
+}
+
 GuidelineAbstract *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const
 {
   return m_guidelines.createGuideline (stateInitial);

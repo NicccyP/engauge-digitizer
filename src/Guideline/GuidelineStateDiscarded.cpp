@@ -36,6 +36,16 @@ void GuidelineStateDiscarded::begin ()
                                             guidelineFormat.lineWidthNonHover ());
 }
 
+QPointF GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint (double /* valueGraph */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint "
+                               << "should not be called";
+
+  ENGAUGE_ASSERT (false);
+
+  return QPointF (0, 0); // No-harm value
+}
+
 bool GuidelineStateDiscarded::doPaint () const
 {
   return false;

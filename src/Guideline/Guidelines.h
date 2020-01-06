@@ -47,16 +47,28 @@ public:
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
-  void createGuidelineR (const QPointF &posScene);
+  void createGuidelineR (double r);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
+  void createGuidelineR (const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
-  void createGuidelineT (const QPointF &posScene);
+  void createGuidelineT (double t);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
+  void createGuidelineT (const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
-  void createGuidelineX (const QPointF &posScene);
+  void createGuidelineX (double x);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
-  void createGuidelineY (const QPointF &posScene);
+  void createGuidelineX (const QPointF &posScreen);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
+  void createGuidelineY (double y);
+
+  /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
+  void createGuidelineY (const QPointF &posScreen);
 
   /// DigitizeState change so active status may (or may not) be toggled 
   void handleActiveChange (bool active);
@@ -66,6 +78,34 @@ public:
 
   /// Initialize Guideline factory
   void initialize (GraphicsScene &scene);
+
+  /// Move an R guideline from one value to another. Closest value wins
+  void moveGuidelineR (double valueBefore,
+                       double valueAfter);
+
+  /// Move a T guideline from one value to another. Closest value wins
+  void moveGuidelineT (double valueBefore,
+                       double valueAfter);
+
+  /// Move an X guideline from one value to another. Closest value wins
+  void moveGuidelineX (double valueBefore,
+                       double valueAfter);
+
+  /// Move a Y guideline from one value to another. Closest value wins
+  void moveGuidelineY (double valueBefore,
+                       double valueAfter);
+
+  /// Remove an R guideline. Closest value wins
+  void removeGuidelineR (double value);
+
+  /// Remove a T guideline. Closest value wins
+  void removeGuidelineT (double value);
+
+  /// Remove an X guideline. Closest value wins
+  void removeGuidelineX (double value);
+
+  /// Remove a Y guideline. Closest value wins
+  void removeGuidelineY (double value);
 
   /// States listed as a string for debugging only
   QString stateDump () const;

@@ -164,24 +164,24 @@ public:
   virtual bool eventFilter(QObject *, QEvent *);
 
   /// Add a X/T Guideline value
-  void guidelineAddXT (double value);
+  void guidelineAddXT (double xT);
   
   /// Add a Y/R Guideline value
-  void guidelineAddYR (double value);  
+  void guidelineAddYR (double yR);
   
   /// Move a X/T Guideline value
-  void guidelineMoveXT (double valueBefore,
-                        double valueAfter);
+  void guidelineMoveXT (double xTBefore,
+                        double xTAfter);
   
   /// Move a Y/R Guideline value
-  void guidelineMoveYR (double valueBefore,
-                        double valueAfter);  
+  void guidelineMoveYR (double yRBefore,
+                        double yRAfter);
   
   /// Remove a X/T Guideline value
-  void guidelineRemoveXT (double value);
+  void guidelineRemoveXT (double xT);
 
   /// Remove a Y/R Guideline value
-  void guidelineRemoveYR (double value);
+  void guidelineRemoveYR (double yR);
   
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;

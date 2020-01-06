@@ -67,6 +67,7 @@ public:
   virtual void setGraphicsItemVisible (bool visible);
   virtual void setGraphicsItemZValue (double z);
   virtual void updateColor ();
+  virtual void updateGeometry (double valueGraph);
   virtual void updateGeometry (const QPointF &posScreen);
   
 private:

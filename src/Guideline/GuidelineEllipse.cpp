@@ -223,6 +223,13 @@ void GuidelineEllipse::updateColor ()
                       lineWidth);
 }
 
+void GuidelineEllipse::updateGeometry (double valueGraph)
+{
+  // Convert single graph coordinate, which is range, into screen point pair,
+  // then update with the screen point
+  updateGeometry (context ()->convertGraphCoordinateToScreenPoint (valueGraph));
+}
+
 void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineEllipse::updateGeometry scale=" << scale()

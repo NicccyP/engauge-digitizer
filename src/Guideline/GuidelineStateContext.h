@@ -100,6 +100,9 @@ public:
   /// Color to be used for guidelines
   ColorPalette color () const;
 
+  /// Convert single graph coordinate into screen point pair
+  QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
+
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial) const;
 

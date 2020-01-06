@@ -827,30 +827,42 @@ void MainWindow::ghostsDestroy ()
   m_ghosts = nullptr;
 }
 
-void MainWindow::guidelineAddXT (double value)
+void MainWindow::guidelineAddXT (double xT)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddXT";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.createGuidelineX (xT);
+  } else {
+    m_guidelines.createGuidelineT (xT);
+  }
 }
 
-void MainWindow::guidelineAddXTEnqueue (double value)
+void MainWindow::guidelineAddXTEnqueue (double xT)
 {
   CmdGuidelineAddXT *cmd = new CmdGuidelineAddXT (*this,
                                                   m_cmdMediator->document(),
-                                                  value);
+                                                  xT);
 
   m_cmdMediator->push (cmd);
 }
 
-void MainWindow::guidelineAddYR (double value)
+void MainWindow::guidelineAddYR (double yR)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddYR";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.createGuidelineY (yR);
+  } else {
+    m_guidelines.createGuidelineR (yR);
+  }
 }
 
-void MainWindow::guidelineAddYREnqueue (double value)
+void MainWindow::guidelineAddYREnqueue (double yR)
 {
   CmdGuidelineAddYR *cmd = new CmdGuidelineAddYR (*this,
                                                   m_cmdMediator->document(),
-                                                  value);
+                                                  yR);
 
   m_cmdMediator->push (cmd);
 }
@@ -859,22 +871,50 @@ void MainWindow::guidelineMoveXT (double valueBefore,
                                   double valueAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveXT";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.moveGuidelineX (valueBefore,
+                                 valueAfter);
+  } else {
+    m_guidelines.moveGuidelineT (valueBefore,
+                                 valueAfter);
+  }
 }
 
 void MainWindow::guidelineMoveYR (double valueBefore,
                                   double valueAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveYR";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.moveGuidelineY (valueBefore,
+                                 valueAfter);
+  } else {
+    m_guidelines.moveGuidelineR (valueBefore,
+                                 valueAfter);
+  }
 }
 
 void MainWindow::guidelineRemoveXT (double value)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveXT";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.removeGuidelineX (value);
+  } else {
+    m_guidelines.removeGuidelineT (value);
+  }
 }
 
 void MainWindow::guidelineRemoveYR (double value)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveYR";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.removeGuidelineY (value);
+  } else {
+    m_guidelines.removeGuidelineR (value);
+  }
 }
 
 Guidelines &MainWindow::guidelines()
@@ -3554,6 +3594,15 @@ void MainWindow::updateControls ()
     m_btnGuidelineRightPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
     m_btnGuidelineTopCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
     m_btnGuidelineTopPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+
+    m_btnGuidelineBottomCartesian->setEnabled (m_btnGuidelineBottomCartesian->isVisible());
+    m_btnGuidelineBottomPolar->setEnabled (m_btnGuidelineBottomPolar->isVisible());
+    m_btnGuidelineLeftCartesian->setEnabled (m_btnGuidelineLeftCartesian->isVisible());
+    m_btnGuidelineLeftPolar->setEnabled (m_btnGuidelineLeftPolar->isVisible());
+    m_btnGuidelineRightCartesian->setEnabled (m_btnGuidelineRightCartesian->isVisible());
+    m_btnGuidelineRightPolar->setEnabled (m_btnGuidelineRightPolar->isVisible());
+    m_btnGuidelineTopCartesian->setEnabled (m_btnGuidelineTopCartesian->isVisible());
+    m_btnGuidelineTopPolar->setEnabled (m_btnGuidelineTopPolar->isVisible());
   } else {
     m_btnGuidelineBottomCartesian->setVisible (false);
     m_btnGuidelineBottomPolar->setVisible (false);
@@ -3563,6 +3612,15 @@ void MainWindow::updateControls ()
     m_btnGuidelineRightPolar->setVisible (false);
     m_btnGuidelineTopCartesian->setVisible (false);
     m_btnGuidelineTopPolar->setVisible (false);
+
+    m_btnGuidelineBottomCartesian->setEnabled (false);
+    m_btnGuidelineBottomPolar->setEnabled (false);
+    m_btnGuidelineLeftCartesian->setEnabled (false);
+    m_btnGuidelineLeftPolar->setEnabled (false);
+    m_btnGuidelineRightCartesian->setEnabled (false);
+    m_btnGuidelineRightPolar->setEnabled (false);
+    m_btnGuidelineTopCartesian->setEnabled (false);
+    m_btnGuidelineTopPolar->setEnabled (false);
   }
   m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 

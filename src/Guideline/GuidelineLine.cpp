@@ -167,6 +167,13 @@ void GuidelineLine::updateColor ()
                       lineWidth);
 }
 
+void GuidelineLine::updateGeometry (double valueGraph)
+{
+  // Convert single graph coordinate, which is range, into screen point pair,
+  // then update with the screen point
+  updateGeometry (context ()->convertGraphCoordinateToScreenPoint (valueGraph));
+}
+
 void GuidelineLine::updateGeometry (const QPointF &posScreen)
 {
   QLineF line = context()->pointToLine (posScreen);

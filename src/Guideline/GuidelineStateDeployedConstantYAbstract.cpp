@@ -22,6 +22,16 @@ GuidelineStateDeployedConstantYAbstract::~GuidelineStateDeployedConstantYAbstrac
 {
 }
 
+QPointF GuidelineStateDeployedConstantYAbstract::convertGraphCoordinateToScreenPoint (double valueGraph)
+{
+  const double ARBITRARY_X = 1.0; // Value that is legal in all cases, including log scaling
+  QPointF posScreen;
+  context().transformation().transformRawGraphToScreen (QPointF (ARBITRARY_X,
+                                                                 valueGraph),
+                                                        posScreen);
+  return posScreen;
+}
+
 EllipseParameters GuidelineStateDeployedConstantYAbstract::pointToEllipse (const QPointF & /* posScreen */) const
 {
   return EllipseParameters();
