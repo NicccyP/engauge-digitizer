@@ -107,6 +107,9 @@ public:
   /// User toggled Guideline visibility
   void handleVisibleChange (bool visible);
 
+  /// Get position in graph coordinates
+  QPointF posCursorGraph () const;
+
   /// Make graphics item remove itself from the scene
   virtual void removeFromScene (QGraphicsScene *scene) = 0;
   

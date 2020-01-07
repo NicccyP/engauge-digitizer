@@ -128,6 +128,11 @@ QGraphicsScene &GuidelineAbstract::scene ()
   return m_scene;
 }
 
+QPointF GuidelineAbstract::posCursorGraph () const
+{
+  return m_context->posCursorGraph ();
+}
+
 void GuidelineAbstract::setContext (GuidelineStateContext *context)
 {
   m_context = context;

@@ -135,7 +135,6 @@ static const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const int REGRESSION_INTERVAL = 400; // Milliseconds
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
-const double GUIDELINE_OFFSET_PORTION_OF_SCREEN_WIDTH = 0.05;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        const QString &fileCmdScriptFile,
@@ -872,13 +871,8 @@ void MainWindow::guidelineMoveXT (double valueBefore,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveXT";
 
-  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_guidelines.moveGuidelineX (valueBefore,
-                                 valueAfter);
-  } else {
-    m_guidelines.moveGuidelineT (valueBefore,
-                                 valueAfter);
-  }
+  m_guidelines.moveGuidelineXT (valueBefore,
+                                valueAfter);
 }
 
 void MainWindow::guidelineMoveYR (double valueBefore,
@@ -886,35 +880,22 @@ void MainWindow::guidelineMoveYR (double valueBefore,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveYR";
 
-  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_guidelines.moveGuidelineY (valueBefore,
-                                 valueAfter);
-  } else {
-    m_guidelines.moveGuidelineR (valueBefore,
-                                 valueAfter);
-  }
+  m_guidelines.moveGuidelineYR (valueBefore,
+                                valueAfter);
 }
 
 void MainWindow::guidelineRemoveXT (double value)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveXT";
 
-  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_guidelines.removeGuidelineX (value);
-  } else {
-    m_guidelines.removeGuidelineT (value);
-  }
+  m_guidelines.removeGuidelineXT (value);
 }
 
 void MainWindow::guidelineRemoveYR (double value)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveYR";
 
-  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_guidelines.removeGuidelineY (value);
-  } else {
-    m_guidelines.removeGuidelineR (value);
-  }
+  m_guidelines.removeGuidelineYR (value);
 }
 
 Guidelines &MainWindow::guidelines()

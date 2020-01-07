@@ -79,33 +79,19 @@ public:
   /// Initialize Guideline factory
   void initialize (GraphicsScene &scene);
 
-  /// Move an R guideline from one value to another. Closest value wins
-  void moveGuidelineR (double valueBefore,
+  /// Move an X/T guideline from one value to another. Closest value wins
+  void moveGuidelineXT (double valueBefore,
                        double valueAfter);
 
-  /// Move a T guideline from one value to another. Closest value wins
-  void moveGuidelineT (double valueBefore,
-                       double valueAfter);
+  /// Move an Y/R guideline from one value to another. Closest value wins
+  void moveGuidelineYR (double valueBefore,
+                        double valueAfter);
 
-  /// Move an X guideline from one value to another. Closest value wins
-  void moveGuidelineX (double valueBefore,
-                       double valueAfter);
+  /// Remove an X/T guideline. Closest value wins
+  void removeGuidelineXT (double value);
 
-  /// Move a Y guideline from one value to another. Closest value wins
-  void moveGuidelineY (double valueBefore,
-                       double valueAfter);
-
-  /// Remove an R guideline. Closest value wins
-  void removeGuidelineR (double value);
-
-  /// Remove a T guideline. Closest value wins
-  void removeGuidelineT (double value);
-
-  /// Remove an X guideline. Closest value wins
-  void removeGuidelineX (double value);
-
-  /// Remove a Y guideline. Closest value wins
-  void removeGuidelineY (double value);
+  /// Remove an Y/R guideline. Closest value wins
+  void removeGuidelineYR (double value);
 
   /// States listed as a string for debugging only
   QString stateDump () const;
@@ -121,6 +107,9 @@ public:
 
 private:
   Guidelines();
+
+  GuidelineContainerPrivate::iterator findClosestGuidelineXT (double value);
+  GuidelineContainerPrivate::iterator findClosestGuidelineYR (double value);
 
   /// For unit testing
   const GuidelineContainerPrivate &guidelineContainerPrivate () const;

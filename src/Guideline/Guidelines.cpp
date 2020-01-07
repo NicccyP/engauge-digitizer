@@ -137,6 +137,50 @@ void Guidelines::createGuidelineY (const QPointF &posScreen)
   }
 }
 
+GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineXT (double value)
+{
+  bool isFirst = true;
+  GuidelineContainerPrivate::iterator itrClosest;
+  double missClosest = 0;
+
+  GuidelineContainerPrivate::iterator itr;
+
+  // Find the closest point
+  for (itr = m_guidelineContainer.begin (); itr != m_guidelineContainer.end (); itr++) {
+    GuidelineAbstract *guideline = *itr;
+    double miss = qAbs (guideline->posCursorGraph ().x() - value);
+    if (isFirst || (miss < missClosest)) {
+      isFirst = false;
+      missClosest = miss;
+      itrClosest = itr;
+    }
+  }
+
+  return itrClosest;
+}
+
+GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineYR (double value)
+{
+  bool isFirst = true;
+  GuidelineContainerPrivate::iterator itrClosest;
+  double missClosest = 0;
+
+  GuidelineContainerPrivate::iterator itr;
+
+  // Find the closest point
+  for (itr = m_guidelineContainer.begin (); itr != m_guidelineContainer.end (); itr++) {
+    GuidelineAbstract *guideline = *itr;
+    double miss = qAbs (guideline->posCursorGraph ().y() - value);
+    if (isFirst || (miss < missClosest)) {
+      isFirst = false;
+      missClosest = miss;
+      itrClosest = itr;
+    }
+  }
+
+  return itrClosest;
+}
+
 const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivate () const
 {
   return m_guidelineContainer;
@@ -172,44 +216,48 @@ void Guidelines::registerGuideline (GuidelineAbstract *guideline)
   m_guidelineContainer.push_back (guideline);
 }
 
-void Guidelines::moveGuidelineR (double valueBefore,
-                                 double valueAfter)
+void Guidelines::moveGuidelineXT (double valueBefore,
+                                  double valueAfter)
 {
+  GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (valueBefore);
+
+  // Move it
+  if (itr != m_guidelineContainer.end ()) {
+    GuidelineAbstract *guideline = *itr;
+    guideline->updateGeometry (valueAfter);
+  }
 }
 
-void Guidelines::moveGuidelineT (double valueBefore,
-                                 double valueAfter)
+void Guidelines::moveGuidelineYR (double valueBefore,
+                                  double valueAfter)
 {
+  GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (valueBefore);
+
+  // Move it
+  if (itr != m_guidelineContainer.end ()) {
+    GuidelineAbstract *guideline = *itr;
+    guideline->updateGeometry (valueAfter);
+  }
 }
 
-void Guidelines::moveGuidelineX (double valueBefore,
-                                 double valueAfter)
+void Guidelines::removeGuidelineXT (double value)
 {
+  GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (value);
+
+  // Move it
+  if (itr != m_guidelineContainer.end ()) {
+    m_guidelineContainer.erase (itr);
+  }
 }
 
-void Guidelines::moveGuidelineY (double valueBefore,
-                                 double valueAfter)
+void Guidelines::removeGuidelineYR (double value)
 {
-}
+  GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (value);
 
-void Guidelines::removeGuidelineR (double value)
-{
-
-}
-
-void Guidelines::removeGuidelineT (double value)
-{
-
-}
-
-void Guidelines::removeGuidelineX (double value)
-{
-
-}
-
-void Guidelines::removeGuidelineY (double value)
-{
-
+  // Move it
+  if (itr != m_guidelineContainer.end ()) {
+    m_guidelineContainer.erase (itr);
+  }
 }
 
 QString Guidelines::stateDump () const
