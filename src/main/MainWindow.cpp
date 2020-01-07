@@ -2035,7 +2035,7 @@ void MainWindow::slotBtnGuidelineBottomCartesian ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.bottom (*m_view,
                                              m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());  
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineBottomPolar ()
@@ -2043,7 +2043,7 @@ void MainWindow::slotBtnGuidelineBottomPolar ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.bottom (*m_view,
                                              m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineLeftCartesian ()
@@ -2051,7 +2051,7 @@ void MainWindow::slotBtnGuidelineLeftCartesian ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.left (*m_view,
                                            m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnGuidelineLeftPolar ()
@@ -2059,7 +2059,7 @@ void MainWindow::slotBtnGuidelineLeftPolar ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.left (*m_view,
                                            m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnGuidelineRightCartesian ()
@@ -2067,7 +2067,7 @@ void MainWindow::slotBtnGuidelineRightCartesian ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.right (*m_view,
                                             m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnGuidelineRightPolar ()
@@ -2075,7 +2075,7 @@ void MainWindow::slotBtnGuidelineRightPolar ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.right (*m_view,
                                             m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
+  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnGuidelineTopCartesian ()
@@ -2083,7 +2083,7 @@ void MainWindow::slotBtnGuidelineTopCartesian ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.top (*m_view,
                                           m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnGuidelineTopPolar ()
@@ -2091,7 +2091,7 @@ void MainWindow::slotBtnGuidelineTopPolar ()
   GuidelineOffset guidelineOffset;
   QPointF posGraph = guidelineOffset.top (*m_view,
                                           m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnPrintAll ()

@@ -28,7 +28,7 @@
         <file>img/icon_print_all.png</file>
         <file>img/icon_guidelinesr.png</file>
         <file>img/icon_guidelinest.png</file>
-        <file>img/icon_guidelinesx.png</file>
         <file>img/icon_guidelinesy.png</file>
+        <file>img/icon_guidelinesx.png</file>
     </qresource>
 </RCC>
