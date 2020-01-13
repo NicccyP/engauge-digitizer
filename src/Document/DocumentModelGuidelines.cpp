@@ -39,6 +39,13 @@ DocumentModelGuidelines &DocumentModelGuidelines::operator=(const DocumentModelG
   return *this;
 }
 
+DocumentModelGuidelines::DocumentModelGuidelines(const GuidelineValues &valuesXT,
+                                                 const GuidelineValues &valuesYR) :
+  m_valuesX (valuesXT),
+  m_valuesY (valuesYR)
+{
+}
+
 void DocumentModelGuidelines::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuidelines::loadXml";
@@ -120,7 +127,7 @@ void DocumentModelGuidelines::saveXml(QXmlStreamWriter &writer) const
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_Y,
                  DOCUMENT_SERIALIZE_GUIDELINE,
-                 m_valuesX);
+                 m_valuesY);
   writer.writeEndElement();
 }
 

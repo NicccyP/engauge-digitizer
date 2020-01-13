@@ -44,6 +44,7 @@
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
 #include "DocumentModelCoords.h"
+#include "DocumentModelGuidelines.h"
 #include "DocumentScrub.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
@@ -835,6 +836,8 @@ void MainWindow::guidelineAddXT (double xT)
   } else {
     m_guidelines.createGuidelineT (xT);
   }
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
 void MainWindow::guidelineAddXTEnqueue (double xT)
@@ -855,6 +858,8 @@ void MainWindow::guidelineAddYR (double yR)
   } else {
     m_guidelines.createGuidelineR (yR);
   }
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
 void MainWindow::guidelineAddYREnqueue (double yR)
@@ -873,6 +878,8 @@ void MainWindow::guidelineMoveXT (double valueBefore,
 
   m_guidelines.moveGuidelineXT (valueBefore,
                                 valueAfter);
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
 void MainWindow::guidelineMoveYR (double valueBefore,
@@ -882,6 +889,8 @@ void MainWindow::guidelineMoveYR (double valueBefore,
 
   m_guidelines.moveGuidelineYR (valueBefore,
                                 valueAfter);
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
 void MainWindow::guidelineRemoveXT (double value)
@@ -889,6 +898,7 @@ void MainWindow::guidelineRemoveXT (double value)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveXT";
 
   m_guidelines.removeGuidelineXT (value);
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
 void MainWindow::guidelineRemoveYR (double value)
@@ -896,6 +906,7 @@ void MainWindow::guidelineRemoveYR (double value)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveYR";
 
   m_guidelines.removeGuidelineYR (value);
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
 Guidelines &MainWindow::guidelines()

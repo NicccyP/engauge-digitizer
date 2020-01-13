@@ -37,7 +37,8 @@ Guidelines::~Guidelines ()
 void Guidelines::clear ()
 {
   GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+  
+  for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
 
     // Remove the guideline from its scene
@@ -50,7 +51,21 @@ void Guidelines::clear ()
     }
   }
 
-  m_guidelineContainer.clear ();
+  for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    // Remove the guideline from its scene
+    QGraphicsScene *scene = &guideline->scene();
+
+    if (scene != nullptr) {
+
+      guideline->removeFromScene (scene);
+
+    }
+  }
+
+  m_guidelineContainerXT.clear ();
+  m_guidelineContainerYR.clear ();
 }
 
 ColorPalette Guidelines::color () const
@@ -77,6 +92,8 @@ void Guidelines::createGuidelineR (double r)
   if (guideline) {
     guideline->updateGeometry (r);
   }
+
+  m_guidelineContainerYR.append (guideline);
 }
 
 void Guidelines::createGuidelineR (const QPointF &posScreen)
@@ -85,6 +102,8 @@ void Guidelines::createGuidelineR (const QPointF &posScreen)
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
+
+  m_guidelineContainerYR.append (guideline);
 }
 
 void Guidelines::createGuidelineT (double t)
@@ -93,6 +112,8 @@ void Guidelines::createGuidelineT (double t)
   if (guideline) {
     guideline->updateGeometry (t);
   }
+
+  m_guidelineContainerXT.append (guideline);
 }
 
 void Guidelines::createGuidelineT (const QPointF &posScreen)
@@ -101,6 +122,8 @@ void Guidelines::createGuidelineT (const QPointF &posScreen)
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
+
+  m_guidelineContainerXT.append (guideline);
 }
 
 void Guidelines::createGuidelineX (double x)
@@ -109,6 +132,8 @@ void Guidelines::createGuidelineX (double x)
   if (guideline) {
     guideline->updateGeometry (x);
   }
+
+  m_guidelineContainerXT.append (guideline);
 }
 
 void Guidelines::createGuidelineX (const QPointF &posScreen)
@@ -117,6 +142,8 @@ void Guidelines::createGuidelineX (const QPointF &posScreen)
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
+
+  m_guidelineContainerXT.append (guideline);
 }
 
 void Guidelines::createGuidelineY (double y)
@@ -126,6 +153,8 @@ void Guidelines::createGuidelineY (double y)
   if (guideline) {
     guideline->updateGeometry (y);
   }
+
+  m_guidelineContainerYR.append (guideline);
 }
 
 void Guidelines::createGuidelineY (const QPointF &posScreen)
@@ -135,6 +164,8 @@ void Guidelines::createGuidelineY (const QPointF &posScreen)
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
+
+  m_guidelineContainerYR.append (guideline);
 }
 
 GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineXT (double value)
@@ -146,7 +177,7 @@ GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineXT (double v
   GuidelineContainerPrivate::iterator itr;
 
   // Find the closest point
-  for (itr = m_guidelineContainer.begin (); itr != m_guidelineContainer.end (); itr++) {
+  for (itr = m_guidelineContainerXT.begin (); itr != m_guidelineContainerXT.end (); itr++) {
     GuidelineAbstract *guideline = *itr;
     double miss = qAbs (guideline->posCursorGraph ().x() - value);
     if (isFirst || (miss < missClosest)) {
@@ -168,7 +199,7 @@ GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineYR (double v
   GuidelineContainerPrivate::iterator itr;
 
   // Find the closest point
-  for (itr = m_guidelineContainer.begin (); itr != m_guidelineContainer.end (); itr++) {
+  for (itr = m_guidelineContainerYR.begin (); itr != m_guidelineContainerYR.end (); itr++) {
     GuidelineAbstract *guideline = *itr;
     double miss = qAbs (guideline->posCursorGraph ().y() - value);
     if (isFirst || (miss < missClosest)) {
@@ -181,15 +212,27 @@ GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineYR (double v
   return itrClosest;
 }
 
-const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivate () const
+const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivateXT () const
 {
-  return m_guidelineContainer;
+  return m_guidelineContainerXT;
+}
+
+const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivateYR () const
+{
+  return m_guidelineContainerYR;
 }
 
 void Guidelines::handleActiveChange (bool active)
 {
   GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+
+  for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    guideline->handleActiveChange (active);
+  }
+
+  for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
 
     guideline->handleActiveChange (active);
@@ -199,7 +242,14 @@ void Guidelines::handleActiveChange (bool active)
 void Guidelines::handleVisibleChange (bool visible)
 {
   GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+
+  for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    guideline->handleVisibleChange (visible);
+  }
+
+  for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
 
     guideline->handleVisibleChange (visible);
@@ -211,9 +261,26 @@ void Guidelines::initialize (GraphicsScene &scene)
   m_guidelineFactory = new GuidelineFactory (&scene);
 }
 
-void Guidelines::registerGuideline (GuidelineAbstract *guideline)
+DocumentModelGuidelines Guidelines::modelGuidelines () const
 {
-  m_guidelineContainer.push_back (guideline);
+  GuidelineValues valuesXT, valuesYR;
+
+  GuidelineContainerPrivate::const_iterator itr;
+
+  for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
+    const GuidelineAbstract *guideline = *itr;
+    valuesXT << guideline->posCursorGraph().x();
+  }
+
+  for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
+    const GuidelineAbstract *guideline = *itr;
+    valuesYR << guideline->posCursorGraph().y();
+  }
+  
+  DocumentModelGuidelines model (valuesXT,
+                                 valuesYR);
+
+  return model;
 }
 
 void Guidelines::moveGuidelineXT (double valueBefore,
@@ -222,7 +289,7 @@ void Guidelines::moveGuidelineXT (double valueBefore,
   GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (valueBefore);
 
   // Move it
-  if (itr != m_guidelineContainer.end ()) {
+  if (itr != m_guidelineContainerXT.end ()) {
     GuidelineAbstract *guideline = *itr;
     guideline->updateGeometry (valueAfter);
   }
@@ -234,10 +301,20 @@ void Guidelines::moveGuidelineYR (double valueBefore,
   GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (valueBefore);
 
   // Move it
-  if (itr != m_guidelineContainer.end ()) {
+  if (itr != m_guidelineContainerYR.end ()) {
     GuidelineAbstract *guideline = *itr;
     guideline->updateGeometry (valueAfter);
   }
+}
+
+void Guidelines::registerGuidelineXT (GuidelineAbstract *guideline)
+{
+  m_guidelineContainerXT.push_back (guideline);
+}
+
+void Guidelines::registerGuidelineYR (GuidelineAbstract *guideline)
+{
+  m_guidelineContainerYR.push_back (guideline);
 }
 
 void Guidelines::removeGuidelineXT (double value)
@@ -245,8 +322,8 @@ void Guidelines::removeGuidelineXT (double value)
   GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (value);
 
   // Move it
-  if (itr != m_guidelineContainer.end ()) {
-    m_guidelineContainer.erase (itr);
+  if (itr != m_guidelineContainerXT.end ()) {
+    m_guidelineContainerXT.erase (itr);
   }
 }
 
@@ -255,24 +332,31 @@ void Guidelines::removeGuidelineYR (double value)
   GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (value);
 
   // Move it
-  if (itr != m_guidelineContainer.end ()) {
-    m_guidelineContainer.erase (itr);
+  if (itr != m_guidelineContainerYR.end ()) {
+    m_guidelineContainerYR.erase (itr);
   }
 }
 
 QString Guidelines::stateDump () const
 {
   // Sort the entries
-  QStringList sorted;
+  QStringList sortedXT, sortedYR;
   GuidelineContainerPrivate::const_iterator itrSort;
-  for (itrSort = m_guidelineContainer.begin(); itrSort != m_guidelineContainer.end(); itrSort++) {
-    GuidelineAbstract *guideline = *itrSort;
 
-    sorted << guideline->stateDump ();
+  for (itrSort = m_guidelineContainerXT.begin(); itrSort != m_guidelineContainerXT.end(); itrSort++) {
+    GuidelineAbstract *guideline = *itrSort;
+    sortedXT << guideline->stateDump ();
   }
 
-  qSort (sorted.begin(),
-         sorted.end());
+  for (itrSort = m_guidelineContainerYR.begin(); itrSort != m_guidelineContainerYR.end(); itrSort++) {
+    GuidelineAbstract *guideline = *itrSort;
+    sortedYR << guideline->stateDump ();
+  }
+
+  qSort (sortedXT.begin(),
+         sortedXT.end());
+  qSort (sortedYR.begin(),
+         sortedYR.end());
 
   // Convert entries to output text
   QString out;
@@ -281,9 +365,14 @@ QString Guidelines::stateDump () const
   str << "Guidelines::stateDump:\n";
 
   QStringList::const_iterator itrOut;
-  for (itrOut = sorted.begin(); itrOut != sorted.end(); itrOut++) {
-    QString entry = *itrOut;
 
+  for (itrOut = sortedXT.begin(); itrOut != sortedXT.end(); itrOut++) {
+    QString entry = *itrOut;
+    str << "                    " << entry << "\n";
+  }
+
+  for (itrOut = sortedYR.begin(); itrOut != sortedYR.end(); itrOut++) {
+    QString entry = *itrOut;
     str << "                    " << entry << "\n";
   }
 
@@ -298,9 +387,14 @@ Transformation Guidelines::transformation() const
 void Guidelines::updateColor ()
 {
   GuidelineContainerPrivate::const_iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    GuidelineAbstract *guideline = *itr;
 
+  for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+    guideline->updateColor ();
+  }
+
+  for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
     guideline->updateColor ();
   }
 }
@@ -308,7 +402,13 @@ void Guidelines::updateColor ()
 void Guidelines::updateWithLatestTransformation ()
 {
   GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+
+  for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+    guideline->updateWithLatestTransformation ();
+  }
+
+  for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
     guideline->updateWithLatestTransformation ();
   }

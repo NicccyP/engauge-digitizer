@@ -79,6 +79,9 @@ public:
   /// Initialize Guideline factory
   void initialize (GraphicsScene &scene);
 
+  /// Return complete set of guidelines information for Document
+  DocumentModelGuidelines modelGuidelines () const;
+
   /// Move an X/T guideline from one value to another. Closest value wins
   void moveGuidelineXT (double valueBefore,
                        double valueAfter);
@@ -111,13 +114,17 @@ private:
   GuidelineContainerPrivate::iterator findClosestGuidelineXT (double value);
   GuidelineContainerPrivate::iterator findClosestGuidelineYR (double value);
 
-  /// For unit testing
-  const GuidelineContainerPrivate &guidelineContainerPrivate () const;
+  /// Return read-only reference to X/T and Y/R containers for testing only
+  const GuidelineContainerPrivate &guidelineContainerPrivateXT () const;
+  const GuidelineContainerPrivate &guidelineContainerPrivateYR () const;
 
   /// Add a new Guideline to the global list maintained by this class
-  void registerGuideline (GuidelineAbstract *guideline);
+  void registerGuidelineXT (GuidelineAbstract *guideline);
+  void registerGuidelineYR (GuidelineAbstract *guideline);
 
-  GuidelineContainerPrivate m_guidelineContainer; // Save for easy removal later
+  // Save for easy removal later
+  GuidelineContainerPrivate m_guidelineContainerXT;
+  GuidelineContainerPrivate m_guidelineContainerYR;
 
   MainWindow &m_mainWindow;
 

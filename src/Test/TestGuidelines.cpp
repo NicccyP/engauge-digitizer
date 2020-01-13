@@ -40,7 +40,7 @@ QString TestGuidelines::Result::problem () const
 // TestGuidelines
 TestGuidelines::TestGuidelines(QObject *parent) :
   QObject(parent),
-  m_mainWindow (0)
+  m_mainWindow (nullptr)
 {
 }
 
@@ -48,26 +48,38 @@ void TestGuidelines::cleanupTestCase ()
 {
 }
 
-TestGuidelines::Result TestGuidelines::compareExpectedAndGot (const QVector<int> &countsExpected)
+TestGuidelines::Result TestGuidelines::compareExpectedAndGot (const QVector<int> &countsExpectedXT,
+                                                              const QVector<int> &countsExpectedYR)
 {
   Guidelines &guidelines = m_mainWindow->guidelines();
-  const GuidelineContainerPrivate &container = guidelines.guidelineContainerPrivate();
+  const GuidelineContainerPrivate &containerXT = guidelines.guidelineContainerPrivateXT ();
+  const GuidelineContainerPrivate &containerYR = guidelines.guidelineContainerPrivateYR ();  
 
-  QVector<int> countsGot (NUM_GUIDELINE_STATES);
   GuidelineContainerPrivate::const_iterator itr;
-  for (itr = container.begin(); itr != container.end(); itr++) {
+  
+  QVector<int> countsGotXT (NUM_GUIDELINE_STATES);
+  for (itr = containerXT.begin(); itr != containerXT.end(); itr++) {
     const GuidelineAbstract *guideline = *itr;
 
     GuidelineState state = guidelineStateFromString (guideline->stateName ());
-    countsGot [state] += 1;
+    countsGotXT [state] += 1;
   }
+  
+  QVector<int> countsGotYR (NUM_GUIDELINE_STATES);
+  for (itr = containerYR.begin(); itr != containerYR.end(); itr++) {
+    const GuidelineAbstract *guideline = *itr;
+
+    GuidelineState state = guidelineStateFromString (guideline->stateName ());
+    countsGotYR [state] += 1;
+  }  
 
   // Compare expected and got counts
   bool success = true;
   for (int state = 0; state < NUM_GUIDELINE_STATES; state++) {
 
     // We look for a difference, except for the discarded state which is not important
-    if (countsExpected [state] != countsGot [state]) {
+    if (countsExpectedXT [state] != countsGotXT [state] ||
+        countsExpectedYR [state] != countsGotYR [state]) {
       if (state != GUIDELINE_STATE_DISCARDED) {
 
         success = false;
@@ -88,15 +100,24 @@ TestGuidelines::Result TestGuidelines::compareExpectedAndGot (const QVector<int>
     QTextStream str (&text);
     str << "Expected/got=";
     for (int state = 0; state < NUM_GUIDELINE_STATES; state++) {
-      if ((countsExpected [state] != 0) || (countsGot [state] != 0)) {
+      if ((countsExpectedXT [state] != 0) ||
+          (countsExpectedYR [state] != 0) ||
+          (countsGotXT [state] != 0) ||
+          (countsGotYR [state] != 0)) {
 
         str << guidelineStateAsString (static_cast<GuidelineState> (state)) << "=";
         if (state == GUIDELINE_STATE_DISCARDED) {
           str << "ARBITRARY";
         } else {
-          str << countsExpected [state];
+          str << countsExpectedXT [state];
         }
-        str << "/" << countsGot [state] << " ";
+        str << "/" << countsGotXT [state] << " and ";
+        if (state == GUIDELINE_STATE_DISCARDED) {
+          str << "ARBITRARY";
+        } else {
+          str << countsExpectedYR [state];
+        }
+        str << "/" << countsGotYR [state] << " ";
       }
     }
 
@@ -167,9 +188,10 @@ void TestGuidelines::initTestCase ()
 void TestGuidelines::test00StartupWithoutTransformation ()
 {
   // Expected and got counts
-  QVector<int> countsExpected (NUM_GUIDELINE_STATES);
+  QVector<int> countsExpectedXT (NUM_GUIDELINE_STATES), countsExpectedYR (NUM_GUIDELINE_STATES);
 
-  m_results.push_back (compareExpectedAndGot (countsExpected));
+  m_results.push_back (compareExpectedAndGot (countsExpectedXT,
+                                              countsExpectedYR));
 
   // Connect to next test here
   test01AfterAddingTransformationPrepare ();
@@ -205,9 +227,10 @@ void TestGuidelines::test00StartupWithoutTransformationReport ()
 void TestGuidelines::test01AfterAddingTransformation ()
 {
   // Expected and got counts
-  QVector<int> countsExpected (NUM_GUIDELINE_STATES);
+  QVector<int> countsExpectedXT (NUM_GUIDELINE_STATES), countsExpectedYR (NUM_GUIDELINE_STATES);
 
-  m_results.push_back (compareExpectedAndGot (countsExpected));
+  m_results.push_back (compareExpectedAndGot (countsExpectedXT,
+                                              countsExpectedYR));
 
   // Connect to next test here
   test02AfterRemovingTransformationPrepare ();
@@ -271,9 +294,10 @@ void TestGuidelines::test01AfterAddingTransformationReport ()
 void TestGuidelines::test02AfterRemovingTransformation ()
 {
   // Expected and got counts
-  QVector<int> countsExpected (NUM_GUIDELINE_STATES);
+  QVector<int> countsExpectedXT (NUM_GUIDELINE_STATES), countsExpectedYR (NUM_GUIDELINE_STATES);
 
-  m_results.push_back (compareExpectedAndGot (countsExpected));
+  m_results.push_back (compareExpectedAndGot (countsExpectedXT,
+                                              countsExpectedYR));
 
   // Connect to next test here
   //test03... ();

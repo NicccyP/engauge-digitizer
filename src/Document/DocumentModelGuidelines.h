@@ -32,6 +32,10 @@ public:
   /// Assignment constructor.
   DocumentModelGuidelines &operator=(const DocumentModelGuidelines &other);
 
+  /// Constructor used by Guidelines class to send guidelines to Document
+  DocumentModelGuidelines(const GuidelineValues &valuesXT,
+                          const GuidelineValues &valuesYR);
+
   virtual void loadXml(QXmlStreamReader &reader);
   
   /// Debugging method that supports print method of this class and printStream method of some other class(es)

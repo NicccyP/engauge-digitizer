@@ -31,6 +31,7 @@
 
 class CoordSystem;
 class Curve;
+class DocumentModelGuidelines;
 class QByteArray;
 class QFile;
 class QImage;
@@ -162,6 +163,9 @@ public:
                        double y,
                        const QStringList &identifiers,
                        const Transformation &transformation);
+
+  /// Sync all Guideline instances from screen to Document
+  void guidelinesSyncScreenToDocument (const DocumentModelGuidelines &modelGuidelines);
 
   /// Initialize grid display. This is called immediately after the transformation has been defined for the first time
   void initializeGridDisplay (const Transformation &transformation);

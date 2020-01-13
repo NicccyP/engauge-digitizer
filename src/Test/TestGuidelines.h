@@ -70,7 +70,8 @@ private:
   /// Data collection
   typedef QList<Result> Results;
 
-  Result compareExpectedAndGot (const QVector<int> &countsExpected);
+  Result compareExpectedAndGot (const QVector<int> &countsExpectedXT,
+                                const QVector<int> &countsExpectedYR);
   GuidelineState guidelineStateFromString (const QString &string) const;
 
   // Number of methods here must agree with NUMBER_TESTS

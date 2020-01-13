@@ -9,7 +9,6 @@
 
 #include <QList>
 
-/// Container for a set of X, Y, T or R values
 typedef QList<double> GuidelineValues;
 
 #endif // GUIDELINE_VALUES_H
