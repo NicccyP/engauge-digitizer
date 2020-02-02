@@ -321,9 +321,10 @@ void Guidelines::removeGuidelineXT (double value)
 {
   GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (value);
 
-  // Move it
+  // Remove it
   if (itr != m_guidelineContainerXT.end ()) {
     m_guidelineContainerXT.erase (itr);
+    delete *itr;
   }
 }
 
@@ -331,9 +332,10 @@ void Guidelines::removeGuidelineYR (double value)
 {
   GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (value);
 
-  // Move it
+  // Remove it
   if (itr != m_guidelineContainerYR.end ()) {
     m_guidelineContainerYR.erase (itr);
+    delete *itr;
   }
 }
 
