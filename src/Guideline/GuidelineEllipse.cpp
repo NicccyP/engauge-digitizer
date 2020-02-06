@@ -230,7 +230,7 @@ void GuidelineEllipse::updateGeometry (double valueGraph)
   updateGeometry (context ()->convertGraphCoordinateToScreenPoint (valueGraph));
 }
 
-void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
+double GuidelineEllipse::updateGeometry (const QPointF &posScreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineEllipse::updateGeometry scale=" << scale()
                               << " rotation(deg)=" << rotation();
@@ -240,7 +240,7 @@ void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
   QPointF posCenter = ellipseParameters.posCenter();
 
   double a = ellipseParameters.a();
-  double b=  ellipseParameters.b();
+  double b = ellipseParameters.b();
 
   setRect (QRectF (- QPointF (a, b),
                    + QPointF (a, b)));
@@ -255,4 +255,6 @@ void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
   context()->transformation().transformScreenToRawGraph (posScreen,
                                                          posGraph);
   context()->setPosCursorGraph (posGraph);
+
+  return context()->extractComponentFromGraphPosition (posGraph);
 }

@@ -68,7 +68,7 @@ public:
   virtual void setGraphicsItemZValue (double z);
   virtual void updateColor ();
   virtual void updateGeometry (double valueGraph);
-  virtual void updateGeometry (const QPointF &posScreen);
+  virtual double updateGeometry (const QPointF &posScreen);
   
 private:
   GuidelineEllipse();

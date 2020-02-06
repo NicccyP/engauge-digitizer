@@ -99,6 +99,13 @@ void GuidelineStateContext::draggedOffScreen ()
   transitionIfRequested ();
 }
 
+double GuidelineStateContext::extractComponentFromGraphPosition (const QPointF &posGraph) const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->extractComponentFromGraphPosition (posGraph);
+}
+
 GuidelineAbstract &GuidelineStateContext::guideline ()
 {
   return m_guideline;

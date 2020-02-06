@@ -33,6 +33,11 @@ QPointF GuidelineStateDeployedConstantRAbstract::convertGraphCoordinateToScreenP
   return posScreen;
 }
 
+double GuidelineStateDeployedConstantRAbstract::extractComponentFromGraphPosition (const QPointF &posGraph) const
+{
+  return posGraph.y ();
+}
+
 EllipseParameters GuidelineStateDeployedConstantRAbstract::pointToEllipse (const QPointF &posScreen) const
 {
   GuidelineProjectorConstantR projector;

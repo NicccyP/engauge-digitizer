@@ -21,6 +21,7 @@ public:
   virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
   virtual bool doPaint () const;
   virtual void end ();
+  virtual double extractComponentFromGraphPosition (const QPointF &posGraph) const;
   virtual void handleActiveChange (bool active);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();

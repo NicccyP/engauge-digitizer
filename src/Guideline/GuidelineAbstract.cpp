@@ -140,7 +140,12 @@ void GuidelineAbstract::setContext (GuidelineStateContext *context)
 
 void GuidelineAbstract::slotHandleMoved (QPointF posScreen)
 {
-  updateGeometry (posScreen);
+  // Update geometry
+  QPointF oldPosition = posCursorGraph();
+  double oldValue = context()->extractComponentFromGraphPosition (oldPosition);
+  double newValue = updateGeometry (posScreen);
+
+  // Create a Cmd to go with this move event
 }
 
 QString GuidelineAbstract::stateDump () const
