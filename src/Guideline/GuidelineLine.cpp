@@ -174,7 +174,7 @@ void GuidelineLine::updateGeometry (double valueGraph)
   updateGeometry (context ()->convertGraphCoordinateToScreenPoint (valueGraph));
 }
 
-double GuidelineLine::updateGeometry (const QPointF &posScreen)
+void GuidelineLine::updateGeometry (const QPointF &posScreen)
 {
   QLineF line = context()->pointToLine (posScreen);
 
@@ -185,6 +185,4 @@ double GuidelineLine::updateGeometry (const QPointF &posScreen)
   context()->transformation().transformScreenToRawGraph (posScreen,
                                                          posGraph);
   context()->setPosCursorGraph (posGraph);
-
-  return context()->extractComponentFromGraphPosition (posGraph);
 }

@@ -42,7 +42,7 @@ public:
   /// Unset highlighting triggered by hover enter
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
-  /// Forwad movements to visible Guideline
+  /// Forward movements to visible Guideline
   virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
 
   /// Forward press event to state machine
@@ -66,7 +66,7 @@ public:
   virtual void setGraphicsItemZValue (double z);
   virtual void updateColor ();
   virtual void updateGeometry (double valueGraph);
-  virtual double updateGeometry (const QPointF &posScreen);
+  virtual void updateGeometry (const QPointF &posScreen);
   
 private:
   GuidelineLine();

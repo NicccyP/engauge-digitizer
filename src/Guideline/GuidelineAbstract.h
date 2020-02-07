@@ -95,7 +95,7 @@ public:
   /// Unset highlighting triggered by hover enter
   void handleHoverLeaveEvent();
 
-  /// Forwad movements to visible Guideline
+  /// Forward movements to visible Guideline
   void handleMouseMoveEvent (const QPointF &posScene);
 
   /// Forward press event to state machine
@@ -152,9 +152,8 @@ public:
   /// Update the geometry so it passes through the specified coordinate value in graph coordinates
   virtual void updateGeometry (double valueGraph) = 0;
 
-  /// Update the geometry so it passes through the specified point in screen coordinates. This returns
-  /// the new Guideline value
-  virtual double updateGeometry (const QPointF &posScreen) = 0;
+  /// Update the geometry so it passes through the specified point in screen coordinates
+  virtual void updateGeometry (const QPointF &posScreen) = 0;
 
   /// Update given Transformation in GuidelineStateContext. This is called after a command has been executed
   void updateWithLatestTransformation ();
