@@ -113,9 +113,6 @@ public:
   /// Guideline has been dragged off screen so remove it
   void draggedOffScreen ();
 
-  /// Extract the relevant X/T or Y/R component
-  double extractComponentFromGraphPosition (const QPointF &posGraph) const;
-
   /// Guideline that owns this context class
   GuidelineAbstract &guideline ();
 

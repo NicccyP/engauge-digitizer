@@ -38,9 +38,6 @@ public:
   /// Transition out of state
   virtual void end () = 0;
 
-  /// Extract the relevant X/T or Y/R component. This applies to deployed states only, for moving from old to new value
-  virtual double extractComponentFromGraphPosition (const QPointF &posGraph) const = 0;
-
   /// DigitizeState change so active status may (or may not) be toggled
   virtual void handleActiveChange (bool active) = 0;
 

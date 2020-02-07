@@ -18,7 +18,6 @@ public:
   virtual ~GuidelineStateDeployedConstantRAbstract();
 
   virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
-  virtual double extractComponentFromGraphPosition (const QPointF &posGraph) const;
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &posScreen) const;
   virtual void updateWithLatestTransformation ();

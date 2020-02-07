@@ -56,13 +56,6 @@ void GuidelineStateDiscarded::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::end";
 }
 
-double GuidelineStateDiscarded::extractComponentFromGraphPosition (const QPointF & /* posGraph */) const
-{
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDiscarded::extractComponentFromGraphPosition unexpected call";
-
-  return 0.0;
-}
-
 void GuidelineStateDiscarded::handleActiveChange (bool /* active */)
 {
 }
