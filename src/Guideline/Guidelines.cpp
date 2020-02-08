@@ -148,7 +148,6 @@ void Guidelines::createGuidelineX (const QPointF &posScreen)
 
 void Guidelines::createGuidelineY (double y)
 {
-
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
   if (guideline) {
     guideline->updateGeometry (y);
@@ -159,7 +158,6 @@ void Guidelines::createGuidelineY (double y)
 
 void Guidelines::createGuidelineY (const QPointF &posScreen)
 {
-
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
   if (guideline) {
     guideline->updateGeometry (posScreen);
