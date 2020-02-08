@@ -350,6 +350,7 @@ private slots:
   void slotFittingWindowClosed();
   void slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool);
   void slotGeometryWindowClosed();
+  void slotGuidelineDragged();
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);

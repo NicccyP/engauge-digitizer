@@ -14,6 +14,7 @@
 class GraphicsScene;
 class GuidelineAbstract;
 class Guidelines;
+class MainWindow;
 class QGraphicsScene;
 
 typedef QMap<GuidelineState, QGraphicsScene*> MapStateToScene;
@@ -30,7 +31,8 @@ public:
   virtual ~GuidelineFactory();
 
   GuidelineAbstract *createGuideline (Guidelines &guidelines,
-                                      GuidelineState stateInitial);
+                                      GuidelineState stateInitial,
+                                      MainWindow &mainWindow);
   
 private:
   GuidelineFactory ();

@@ -311,6 +311,7 @@ HEADERS  += \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
     Guideline/GuidelineAbstract.h \
+    Guideline/GuidelineDragCommandFactory.h \
     Guideline/GuidelineEllipse.h \
     Guideline/GuidelineFactory.h \
     Guideline/GuidelineFormat.h \
@@ -709,6 +710,7 @@ SOURCES += \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
     Guideline/GuidelineAbstract.cpp \
+    Guideline/GuidelineDragCommandFactory.cpp \
     Guideline/GuidelineEllipse.cpp \
     Guideline/GuidelineFactory.cpp \
     Guideline/GuidelineFormat.cpp \

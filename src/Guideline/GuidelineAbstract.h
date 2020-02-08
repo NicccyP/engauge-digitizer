@@ -160,6 +160,9 @@ public:
 
 signals:
 
+  /// Signal indicating end of Guideline drag
+  void signalGuidelineDragged ();
+
   /// Signal for cloned deployed Guideline from handle Guideline
   void signalHandleMoved (QPointF);
 

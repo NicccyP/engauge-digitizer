@@ -62,6 +62,7 @@
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
+#include "GuidelineDragCommandFactory.h"
 #include "GuidelineOffset.h"
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
@@ -2737,6 +2738,16 @@ void MainWindow::slotGeometryWindowClosed()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGeometryWindowClosed";
 
   m_actionViewGeometryWindow->setChecked (false);
+}
+
+void MainWindow::slotGuidelineDragged()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
+
+  // Drag could be just a move, or (if dragged offscreen) then a delete
+  GuidelineDragCommandFactory dragFactory;
+
+  CmdAbstract *cmd = dragFactory.create (m_guidelines);
 }
 
 void MainWindow::slotHelpAbout()

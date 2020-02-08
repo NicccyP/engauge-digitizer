@@ -95,6 +95,8 @@ void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
   handleMouseReleaseEvent (event->scenePos ());
   
   QGraphicsLineItem::mouseReleaseEvent (event);
+
+  emit signalGuidelineDragged();
 }
 
 void GuidelineLine::paint(QPainter *painter,

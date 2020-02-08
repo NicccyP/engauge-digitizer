@@ -11,6 +11,7 @@
 #include "GuidelineLine.h"
 #include "Guidelines.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include <QGraphicsScene>
 
 GuidelineFactory::GuidelineFactory (GraphicsScene *sceneMain) :
@@ -24,7 +25,8 @@ GuidelineFactory::~GuidelineFactory ()
 }
 
 GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
-                                                      GuidelineState stateInitial)
+                                                      GuidelineState stateInitial,
+                                                      MainWindow &mainWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineFactory::createGuideline";
 
@@ -46,6 +48,9 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
                                     guidelines,
                                     stateInitial);
   }
+
+  QObject::connect (guideline, SIGNAL (signalGuidelineDragged ()),
+                    &mainWindow, SLOT (slotGuidelineDragged ()));
 
   return guideline;
 }

@@ -81,7 +81,8 @@ CoordsType Guidelines::coordsType () const
 GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
 {
   GuidelineAbstract *guideline = m_guidelineFactory->createGuideline (*this,
-                                                                      stateInitial);
+                                                                      stateInitial,
+                                                                      m_mainWindow);
 
   return guideline;
 }
