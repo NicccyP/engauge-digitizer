@@ -2747,7 +2747,8 @@ void MainWindow::slotGuidelineDragged()
   // Drag could be just a move, or (if dragged offscreen) then a delete
   GuidelineDragCommandFactory dragFactory;
 
-  CmdAbstract *cmd = dragFactory.create (m_guidelines);
+  CmdAbstract *cmd = dragFactory.createAfterDrag (m_guidelines.modelGuidelines (),
+                                                  m_cmdMediator->document().modelGuidelines ());
 }
 
 void MainWindow::slotHelpAbout()

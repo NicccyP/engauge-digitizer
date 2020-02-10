@@ -7,7 +7,10 @@
 #ifndef GUIDELINE_DRAG_COMMAND_FACTORY_H
 #define GUIDELINE_DRAG_COMMAND_FACTORY_H
 
+#include "GuidelineValues.h"
+
 class CmdAbstract;
+class DocumentModelGuidelines;
 class Guidelines;
 
 /// Determine if inputs that were collected after a Guideline drag should result in a Cmd to move or
@@ -18,8 +21,14 @@ public:
   /// Single constructor.
   GuidelineDragCommandFactory();
 
-  /// Create delete or move Cmd
-  CmdAbstract *create (const Guidelines &guidelines);
+  /// Create delete or move Cmd. The selected Cmd will act on the document Guidelines to make that set
+  /// consistent with the displayed Guidelines (which includes the just-moved Guideline)
+  CmdAbstract *createAfterDrag (const DocumentModelGuidelines &modelGuidelinesDisplay,
+                                const DocumentModelGuidelines &modelGuidelinesDocument);
+
+private:
+  void removeAllMatchesExceptTheWorst (GuidelineValues &valuesDisplay,
+                                       GuidelineValues &valuesDocument) const;
 };
 
 #endif // GUIDELINE_DRAG_COMMAND_FACTORY_H
