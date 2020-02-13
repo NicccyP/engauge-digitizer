@@ -14,11 +14,13 @@ const QString CMD_DESCRIPTION ("GuidelineMoveXT");
 
 CmdGuidelineMoveXT::CmdGuidelineMoveXT(MainWindow &mainWindow,
                                        Document &document,
+                                       const QString &identifier,
                                        double valueBefore,
                                        double valueAfter) :
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION),
+  m_identifier (identifier),
   m_valueBefore (valueBefore),
   m_valueAfter (valueAfter)
 {
@@ -44,15 +46,15 @@ void CmdGuidelineMoveXT::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveXT::cmdRedo";
 
-  mainWindow().guidelineMoveXT (m_valueAfter,
-                                m_valueBefore);
+  mainWindow().guidelineMoveXT (m_identifier,
+                                m_valueAfter);
 }
 
 void CmdGuidelineMoveXT::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveXT::cmdUndo";
 
-  mainWindow().guidelineMoveXT (m_valueAfter,
+  mainWindow().guidelineMoveXT (m_identifier,
                                 m_valueBefore);
 }
 

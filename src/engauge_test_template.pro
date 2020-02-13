@@ -315,6 +315,7 @@ HEADERS  += \
     Guideline/GuidelineEllipse.h \
     Guideline/GuidelineFactory.h \
     Guideline/GuidelineFormat.h \
+    Guideline/GuidelineIdentifierGenerator.h \
     Guideline/GuidelineLine.h \
     Guideline/GuidelineOffset.h \
     Guideline/GuidelineProjectorAbstract.h \
@@ -714,6 +715,7 @@ SOURCES += \
     Guideline/GuidelineEllipse.cpp \
     Guideline/GuidelineFactory.cpp \
     Guideline/GuidelineFormat.cpp \
+    Guideline/GuidelineIdentifierGenerator.cpp \
     Guideline/GuidelineLine.cpp \
     Guideline/GuidelineOffset.cpp \
     Guideline/GuidelineProjectorAbstract.cpp \

@@ -24,7 +24,8 @@
 
 GuidelineLine::GuidelineLine(QGraphicsScene &scene,
                              Guidelines &guidelines,
-                             GuidelineState guidelineStateInitial) :
+                             GuidelineState guidelineStateInitial,
+                             int guidelineCounter) :
   GuidelineAbstract (scene)
 {
   // Create context after all virtual methods have been created
@@ -33,6 +34,7 @@ GuidelineLine::GuidelineLine(QGraphicsScene &scene,
                                          guidelineStateInitial));
 
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
+  setData (DATA_KEY_IDENTIFIER, QVariant (QString ("guideline%1").arg (guidelineCounter)));
 
   scene.addItem (this);
 }
@@ -70,6 +72,11 @@ void GuidelineLine::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
   QGraphicsLineItem::hoverLeaveEvent (event);  
 }
 
+QString GuidelineLine::identifier () const
+{
+  return data (DATA_KEY_IDENTIFIER).toString ();
+}
+
 void GuidelineLine::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 {
   handleMouseMoveEvent (event->scenePos ());
@@ -93,10 +100,8 @@ void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mouseReleaseEvent state=" << context()->stateName ().toLatin1().data();
 
   handleMouseReleaseEvent (event->scenePos ());
-  
-  QGraphicsLineItem::mouseReleaseEvent (event);
 
-  emit signalGuidelineDragged();
+  QGraphicsLineItem::mouseReleaseEvent (event);
 }
 
 void GuidelineLine::paint(QPainter *painter,
@@ -148,6 +153,11 @@ void GuidelineLine::setGraphicsItemVisible (bool visible)
 void GuidelineLine::setGraphicsItemZValue (double z)
 {
   QGraphicsLineItem::setZValue (z);
+}
+
+void GuidelineLine::setIdentifier (const QString &identifier)
+{
+  setData (DATA_KEY_IDENTIFIER, QVariant (identifier));
 }
 
 void GuidelineLine::updateColor ()

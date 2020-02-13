@@ -164,24 +164,26 @@ public:
   virtual bool eventFilter(QObject *, QEvent *);
 
   /// Add a X/T Guideline value
-  void guidelineAddXT (double xT);
+  void guidelineAddXT (const QString &identifier,
+                       double xT);
   
   /// Add a Y/R Guideline value
-  void guidelineAddYR (double yR);
+  void guidelineAddYR (const QString &identifier,
+                       double yR);
   
   /// Move a X/T Guideline value
-  void guidelineMoveXT (double xTBefore,
+  void guidelineMoveXT (const QString &identifier,
                         double xTAfter);
   
   /// Move a Y/R Guideline value
-  void guidelineMoveYR (double yRBefore,
+  void guidelineMoveYR (const QString &identifier,
                         double yRAfter);
   
   /// Remove a X/T Guideline value
-  void guidelineRemoveXT (double xT);
+  void guidelineRemoveXT (const QString &identifier);
 
   /// Remove a Y/R Guideline value
-  void guidelineRemoveYR (double yR);
+  void guidelineRemoveYR (const QString &identifier);
   
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
@@ -350,7 +352,7 @@ private slots:
   void slotFittingWindowClosed();
   void slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool);
   void slotGeometryWindowClosed();
-  void slotGuidelineDragged();
+  void slotGuidelineDragged(QString, bool);
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
@@ -443,11 +445,11 @@ private:
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
   void guidelineAddXTEnqueue (double value);
-  void guidelineAddYREnqueue (double value);  
+  void guidelineAddYREnqueue (double value);
   void guidelineMoveXTEnqueue (double valueBefore,
-                        double valueAfter);
+                               double valueAfter);
   void guidelineMoveYREnqueue (double valueBefore,
-                        double valueAfter);  
+                               double valueAfter);
   void guidelineRemoveXTEnqueue (double value);
   void guidelineRemoveYREnqueue (double value);    
   Guidelines &guidelines (); /// Return guidelines for unit testing

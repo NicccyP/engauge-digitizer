@@ -37,6 +37,7 @@ private:
   CmdGuidelineAddXT();
 
   // Value
+  QString m_identifier;
   double m_value;
 
 };

@@ -41,7 +41,10 @@ private:
 
   GraphicsScene *m_sceneMain;
 
-  MapStatesWithEllipse m_mapStatesWithEllipse;  
+  MapStatesWithEllipse m_mapStatesWithEllipse;
+
+  // Generate unique id for each Guideline
+  int m_guidelineCounter;
 };
 
 #endif // GUIDELINE_FACTORY_H

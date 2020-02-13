@@ -87,9 +87,11 @@ GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
   return guideline;
 }
 
-void Guidelines::createGuidelineR (double r)
+void Guidelines::createGuidelineR (const QString &identifier,
+                                   double r)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
+  guideline->setIdentifier (identifier);
   if (guideline) {
     guideline->updateGeometry (r);
   }
@@ -107,9 +109,11 @@ void Guidelines::createGuidelineR (const QPointF &posScreen)
   m_guidelineContainerYR.append (guideline);
 }
 
-void Guidelines::createGuidelineT (double t)
+void Guidelines::createGuidelineT (const QString &identifier,
+                                   double t)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
+  guideline->setIdentifier (identifier);
   if (guideline) {
     guideline->updateGeometry (t);
   }
@@ -127,9 +131,11 @@ void Guidelines::createGuidelineT (const QPointF &posScreen)
   m_guidelineContainerXT.append (guideline);
 }
 
-void Guidelines::createGuidelineX (double x)
+void Guidelines::createGuidelineX (const QString &identifier,
+                                   double x)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+  guideline->setIdentifier (identifier);
   if (guideline) {
     guideline->updateGeometry (x);
   }
@@ -147,9 +153,11 @@ void Guidelines::createGuidelineX (const QPointF &posScreen)
   m_guidelineContainerXT.append (guideline);
 }
 
-void Guidelines::createGuidelineY (double y)
+void Guidelines::createGuidelineY (const QString &identifier,
+                                   double y)
 {
   GuidelineAbstract *guideline = createGuideline (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+  guideline->setIdentifier (identifier);
   if (guideline) {
     guideline->updateGeometry (y);
   }
@@ -167,48 +175,38 @@ void Guidelines::createGuidelineY (const QPointF &posScreen)
   m_guidelineContainerYR.append (guideline);
 }
 
-GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineXT (double value)
+GuidelineContainerPrivate::iterator Guidelines::findIdentifierXT (const QString &identifier)
 {
-  bool isFirst = true;
-  GuidelineContainerPrivate::iterator itrClosest;
-  double missClosest = 0;
-
   GuidelineContainerPrivate::iterator itr;
 
   // Find the closest point
   for (itr = m_guidelineContainerXT.begin (); itr != m_guidelineContainerXT.end (); itr++) {
     GuidelineAbstract *guideline = *itr;
-    double miss = qAbs (guideline->posCursorGraph ().x() - value);
-    if (isFirst || (miss < missClosest)) {
-      isFirst = false;
-      missClosest = miss;
-      itrClosest = itr;
+    if (identifier == guideline->identifier()) {
+        return itr;
     }
   }
 
-  return itrClosest;
+  LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::findIdentifierXT could not find " << identifier.toLatin1().data();
+
+  return m_guidelineContainerXT.end();
 }
 
-GuidelineContainerPrivate::iterator Guidelines::findClosestGuidelineYR (double value)
+GuidelineContainerPrivate::iterator Guidelines::findIdentifierYR (const QString &identifier)
 {
-  bool isFirst = true;
-  GuidelineContainerPrivate::iterator itrClosest;
-  double missClosest = 0;
-
   GuidelineContainerPrivate::iterator itr;
 
   // Find the closest point
   for (itr = m_guidelineContainerYR.begin (); itr != m_guidelineContainerYR.end (); itr++) {
     GuidelineAbstract *guideline = *itr;
-    double miss = qAbs (guideline->posCursorGraph ().y() - value);
-    if (isFirst || (miss < missClosest)) {
-      isFirst = false;
-      missClosest = miss;
-      itrClosest = itr;
+    if (identifier == guideline->identifier()) {
+      return itr;
     }
   }
 
-  return itrClosest;
+  LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::findIdentifierYR could not find " << identifier.toLatin1().data();
+
+  return m_guidelineContainerYR.end(); // Return something
 }
 
 const GuidelineContainerPrivate &Guidelines::guidelineContainerPrivateXT () const
@@ -268,12 +266,16 @@ DocumentModelGuidelines Guidelines::modelGuidelines () const
 
   for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
     const GuidelineAbstract *guideline = *itr;
-    valuesXT << guideline->posCursorGraph().x();
+    QString identifier = guideline->identifier();
+    double value = guideline->posCursorGraph().x();
+    valuesXT [identifier] = value;
   }
 
   for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
     const GuidelineAbstract *guideline = *itr;
-    valuesYR << guideline->posCursorGraph().y();
+    QString identifier = guideline->identifier();
+    double value = guideline->posCursorGraph().y();
+    valuesYR [identifier] = value;
   }
   
   DocumentModelGuidelines model (valuesXT,
@@ -282,10 +284,10 @@ DocumentModelGuidelines Guidelines::modelGuidelines () const
   return model;
 }
 
-void Guidelines::moveGuidelineXT (double valueBefore,
+void Guidelines::moveGuidelineXT (const QString &identifier,
                                   double valueAfter)
 {
-  GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (valueBefore);
+  GuidelineContainerPrivate::iterator itr = findIdentifierXT (identifier);
 
   // Move it
   if (itr != m_guidelineContainerXT.end ()) {
@@ -294,10 +296,10 @@ void Guidelines::moveGuidelineXT (double valueBefore,
   }
 }
 
-void Guidelines::moveGuidelineYR (double valueBefore,
+void Guidelines::moveGuidelineYR (const QString &identifier,
                                   double valueAfter)
 {
-  GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (valueBefore);
+  GuidelineContainerPrivate::iterator itr = findIdentifierYR (identifier);
 
   // Move it
   if (itr != m_guidelineContainerYR.end ()) {
@@ -316,9 +318,9 @@ void Guidelines::registerGuidelineYR (GuidelineAbstract *guideline)
   m_guidelineContainerYR.push_back (guideline);
 }
 
-void Guidelines::removeGuidelineXT (double value)
+void Guidelines::removeGuidelineXT (const QString &identifier)
 {
-  GuidelineContainerPrivate::iterator itr = findClosestGuidelineXT (value);
+  GuidelineContainerPrivate::iterator itr = findIdentifierXT (identifier);
 
   // Remove it
   if (itr != m_guidelineContainerXT.end ()) {
@@ -327,9 +329,9 @@ void Guidelines::removeGuidelineXT (double value)
   }
 }
 
-void Guidelines::removeGuidelineYR (double value)
+void Guidelines::removeGuidelineYR (const QString &identifier)
 {
-  GuidelineContainerPrivate::iterator itr = findClosestGuidelineYR (value);
+  GuidelineContainerPrivate::iterator itr = findIdentifierYR (identifier);
 
   // Remove it
   if (itr != m_guidelineContainerYR.end ()) {

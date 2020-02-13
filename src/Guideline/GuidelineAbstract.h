@@ -85,7 +85,7 @@ public:
 
   /// Wraps QGraphicsItem::flags
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const = 0;
-  
+
   /// DigitizeState change so active status may (or may not) be toggled
   void handleActiveChange (bool active);
 
@@ -106,6 +106,9 @@ public:
 
   /// User toggled Guideline visibility
   void handleVisibleChange (bool visible);
+
+  /// Unique identifier from QGraphicsItem
+  virtual QString identifier () const = 0;
 
   /// Get position in graph coordinates
   QPointF posCursorGraph () const;
@@ -135,6 +138,9 @@ public:
   /// Wrapper for QGraphicsItem::setZValue
   virtual void setGraphicsItemZValue (double z) = 0;
 
+  /// Set identifier in QGraphicsItem
+  virtual void setIdentifier (const QString &identifier) = 0;
+
   /// Dump of state as a string for debugging only. Context like the QGraphicsItem flags is included
   QString stateDump () const;
 
@@ -161,7 +167,8 @@ public:
 signals:
 
   /// Signal indicating end of Guideline drag
-  void signalGuidelineDragged ();
+  void signalGuidelineDragged (QString,
+                               bool);
 
   /// Signal for cloned deployed Guideline from handle Guideline
   void signalHandleMoved (QPointF);

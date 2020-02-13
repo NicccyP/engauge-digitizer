@@ -828,14 +828,17 @@ void MainWindow::ghostsDestroy ()
   m_ghosts = nullptr;
 }
 
-void MainWindow::guidelineAddXT (double xT)
+void MainWindow::guidelineAddXT (const QString &identifier,
+                                 double xT)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddXT";
 
   if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_guidelines.createGuidelineX (xT);
+    m_guidelines.createGuidelineX (identifier,
+                                   xT);
   } else {
-    m_guidelines.createGuidelineT (xT);
+    m_guidelines.createGuidelineT (identifier,
+                                   xT);
   }
 
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
@@ -850,14 +853,17 @@ void MainWindow::guidelineAddXTEnqueue (double xT)
   m_cmdMediator->push (cmd);
 }
 
-void MainWindow::guidelineAddYR (double yR)
+void MainWindow::guidelineAddYR (const QString &identifier,
+                                 double yR)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddYR";
 
   if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_guidelines.createGuidelineY (yR);
+    m_guidelines.createGuidelineY (identifier,
+                                   yR);
   } else {
-    m_guidelines.createGuidelineR (yR);
+    m_guidelines.createGuidelineR (identifier,
+                                   yR);
   }
 
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
@@ -872,41 +878,41 @@ void MainWindow::guidelineAddYREnqueue (double yR)
   m_cmdMediator->push (cmd);
 }
 
-void MainWindow::guidelineMoveXT (double valueBefore,
+void MainWindow::guidelineMoveXT (const QString &identifier,
                                   double valueAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveXT";
 
-  m_guidelines.moveGuidelineXT (valueBefore,
+  m_guidelines.moveGuidelineXT (identifier,
                                 valueAfter);
 
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
-void MainWindow::guidelineMoveYR (double valueBefore,
+void MainWindow::guidelineMoveYR (const QString &identifier,
                                   double valueAfter)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveYR";
 
-  m_guidelines.moveGuidelineYR (valueBefore,
+  m_guidelines.moveGuidelineYR (identifier,
                                 valueAfter);
 
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
-void MainWindow::guidelineRemoveXT (double value)
+void MainWindow::guidelineRemoveXT (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveXT";
 
-  m_guidelines.removeGuidelineXT (value);
+  m_guidelines.removeGuidelineXT (identifier);
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
-void MainWindow::guidelineRemoveYR (double value)
+void MainWindow::guidelineRemoveYR (const QString &identifier)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveYR";
 
-  m_guidelines.removeGuidelineYR (value);
+  m_guidelines.removeGuidelineYR (identifier);
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
@@ -2740,15 +2746,21 @@ void MainWindow::slotGeometryWindowClosed()
   m_actionViewGeometryWindow->setChecked (false);
 }
 
-void MainWindow::slotGuidelineDragged()
+void MainWindow::slotGuidelineDragged(QString identifier,
+                                      bool draggedOffscreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
 
-  // Drag could be just a move, or (if dragged offscreen) then a delete
-  GuidelineDragCommandFactory dragFactory;
+  GuidelineDragCommandFactory cmdFactory;
 
-  CmdAbstract *cmd = dragFactory.createAfterDrag (m_guidelines.modelGuidelines (),
-                                                  m_cmdMediator->document().modelGuidelines ());
+  CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,
+                                                 m_cmdMediator->document(),
+                                                 m_guidelines.modelGuidelines (),
+                                                 m_cmdMediator->document().modelGuidelines (),
+                                                 identifier,
+                                                 draggedOffscreen);
+
+  m_cmdMediator->push (cmd);
 }
 
 void MainWindow::slotHelpAbout()

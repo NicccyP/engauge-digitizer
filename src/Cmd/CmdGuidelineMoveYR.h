@@ -19,6 +19,7 @@ public:
   /// Constructor for normal creation
   CmdGuidelineMoveYR(MainWindow &mainWindow,
                      Document &document,
+                     const QString &identifier,
                      double valueBefore,
                      double valueAfter);
   
@@ -38,6 +39,7 @@ private:
   CmdGuidelineMoveYR();
 
   // Values
+  QString m_identifier;
   double m_valueBefore;
   double m_valueAfter;
 };

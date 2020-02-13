@@ -14,11 +14,13 @@ const QString CMD_DESCRIPTION ("GuidelineRemoveXT");
 
 CmdGuidelineRemoveXT::CmdGuidelineRemoveXT(MainWindow &mainWindow,
                                            Document &document,
-                                           double value) :
+                                           const QString &identifier,
+                                           double valueBefore) :
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION),
-  m_value (value)
+  m_identifier (identifier),
+  m_valueBefore (valueBefore)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveXT::CmdGuidelineRemoveXT";
 }
@@ -42,14 +44,15 @@ void CmdGuidelineRemoveXT::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveXT::cmdRedo";
 
-  mainWindow().guidelineRemoveXT (m_value);
+  mainWindow().guidelineRemoveXT (m_identifier);
 }
 
 void CmdGuidelineRemoveXT::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveXT::cmdUndo";
 
-  mainWindow().guidelineAddXT (m_value);
+  mainWindow().guidelineAddXT (m_identifier,
+                               m_valueBefore);
 }
 
 void CmdGuidelineRemoveXT::saveXml (QXmlStreamWriter & /* writer */) const

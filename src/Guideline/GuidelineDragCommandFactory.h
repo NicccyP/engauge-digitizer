@@ -10,8 +10,10 @@
 #include "GuidelineValues.h"
 
 class CmdAbstract;
+class Document;
 class DocumentModelGuidelines;
 class Guidelines;
+class MainWindow;
 
 /// Determine if inputs that were collected after a Guideline drag should result in a Cmd to move or
 /// Cmd to delete, and then generate the appropriate Cmd
@@ -23,12 +25,13 @@ public:
 
   /// Create delete or move Cmd. The selected Cmd will act on the document Guidelines to make that set
   /// consistent with the displayed Guidelines (which includes the just-moved Guideline)
-  CmdAbstract *createAfterDrag (const DocumentModelGuidelines &modelGuidelinesDisplay,
-                                const DocumentModelGuidelines &modelGuidelinesDocument);
+  CmdAbstract *createAfterDrag (MainWindow &mainWindow,
+                                Document &document,
+                                const DocumentModelGuidelines &modelGuidelinesDisplay,
+                                const DocumentModelGuidelines &modelGuidelinesDocument,
+                                const QString &identifier,
+                                bool draggedOffscreen);
 
-private:
-  void removeAllMatchesExceptTheWorst (GuidelineValues &valuesDisplay,
-                                       GuidelineValues &valuesDocument) const;
 };
 
 #endif // GUIDELINE_DRAG_COMMAND_FACTORY_H

@@ -60,16 +60,22 @@ const GuidelineStateContext *GuidelineAbstract::context () const
 
 void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
 {
+  // Current Guideline is the permanent Guideline that has been dragged (indirectly along with the visible Guideline),
+
   if (m_guidelineVisible != nullptr) {
 
     // If scene position is off-screen then user is removing the visible Guideline
+    bool offscreen = false;
     if (!m_scene.sceneRect().contains (posScene)) {
 
       m_guidelineVisible->draggedOffScreen ();
-
+      offscreen = true;
     }
 
     m_guidelineVisible = nullptr;
+
+    emit signalGuidelineDragged(identifier(),
+                                offscreen);
   }
 }
 
@@ -114,6 +120,8 @@ void GuidelineAbstract::handleMousePressEvent(const QPointF &posScene)
 void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent state=" << m_context->stateName ().toLatin1().data();
+
+  // Current Guideline is the temporary visible Guideline and not the permanent Guideline (see detachVisibleGuideline)
 
   m_context->handleMouseRelease (posScene);
 }

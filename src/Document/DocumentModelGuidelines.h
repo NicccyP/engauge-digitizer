@@ -63,7 +63,6 @@ private:
                       GuidelineValues &guidelineValues) const;
   void saveXmlVector (QXmlStreamWriter &writer,
                       const QString &tokenAll,
-                      const QString &tokenItem,
                       const GuidelineValues &values) const;
 
   GuidelineValues m_valuesX;

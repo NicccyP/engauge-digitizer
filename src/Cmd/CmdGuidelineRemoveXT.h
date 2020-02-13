@@ -19,7 +19,8 @@ public:
   /// Constructor for normal creation
   CmdGuidelineRemoveXT(MainWindow &mainWindow,
                        Document &document,
-                       double value);
+                       const QString &identifier,
+                       double valueBefore);
 
   /// Constructor for parsing error report file xml
   CmdGuidelineRemoveXT(MainWindow &mainWindow,
@@ -37,8 +38,8 @@ private:
   CmdGuidelineRemoveXT();
 
   // Value
-  double m_value;
-
+  QString m_identifier;
+  double m_valueBefore;
 };
 
 #endif // CMD_GUIDELINE_REMOVE_X_T_H

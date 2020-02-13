@@ -102,7 +102,14 @@ void DocumentModelGuidelines::loadXmlVector (QXmlStreamReader &reader,
 
     if (tokenType == QXmlStreamReader::StartElement) {
 
-      guidelineValues << reader.text().toDouble();
+      if (reader.attributes().hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_IDENTIFIER) &&
+          reader.attributes().hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_VALUE)) {
+
+        QString identifier = reader.attributes ().value (DOCUMENT_SERIALIZE_GUIDELINE_IDENTIFIER).toString ();
+        double value = reader.attributes ().value (DOCUMENT_SERIALIZE_GUIDELINE_VALUE).toDouble ();
+
+        guidelineValues [identifier] = value;
+      }
     }
   }
 }
@@ -122,18 +129,15 @@ void DocumentModelGuidelines::saveXml(QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_GUIDELINES);
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_X,
-                 DOCUMENT_SERIALIZE_GUIDELINE,
                  m_valuesX);
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_Y,
-                 DOCUMENT_SERIALIZE_GUIDELINE,
                  m_valuesY);
   writer.writeEndElement();
 }
 
 void DocumentModelGuidelines::saveXmlVector(QXmlStreamWriter &writer,
                                             const QString &tokenAll,
-                                            const QString &tokenItem,
                                             const GuidelineValues &values) const
 {
   writer.writeStartElement(tokenAll);
@@ -141,9 +145,12 @@ void DocumentModelGuidelines::saveXmlVector(QXmlStreamWriter &writer,
   // Loop through values
   GuidelineValues::const_iterator itr;
   for (itr = values.begin(); itr != values.end(); itr++) {
-    double value = *itr;
-    writer.writeTextElement(tokenItem,
-                            QString::number (value));
+    QString identifier = itr.key();
+    double value = itr.value();
+    writer.writeStartElement (DOCUMENT_SERIALIZE_GUIDELINE);
+    writer.writeAttribute (DOCUMENT_SERIALIZE_GUIDELINE_IDENTIFIER, identifier);
+    writer.writeAttribute (DOCUMENT_SERIALIZE_GUIDELINE_VALUE, QString::number (value));
+    writer.writeEndElement ();
   }
 
   writer.writeEndElement();

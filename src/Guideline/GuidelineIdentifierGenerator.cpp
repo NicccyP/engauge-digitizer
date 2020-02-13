@@ -1,14 +1,18 @@
 /******************************************************************************************************
- * (C) 2019 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
+ * (C) 2020 markummitchell@github.com. This file is part of Engauge Digitizer, which is released      *
  * under GNU General Public License version 2 (GPLv2) or (at your option) any later version. See file *
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_VALUES_H
-#define GUIDELINE_VALUES_H
+#include "GuidelineIdentifierGenerator.h"
 
-#include <QMap>
+int GuidelineIdentifierGenerator::m_count = 0;
 
-typedef QMap<QString, double> GuidelineValues;
+GuidelineIdentifierGenerator::GuidelineIdentifierGenerator()
+{
+}
 
-#endif // GUIDELINE_VALUES_H
+QString GuidelineIdentifierGenerator::next ()
+{
+  return QString ("guideline%1").arg (m_count++);
+}

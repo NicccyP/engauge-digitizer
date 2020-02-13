@@ -7,6 +7,7 @@
 #include "CmdGuidelineAddYR.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
+#include "GuidelineIdentifierGenerator.h"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -18,6 +19,7 @@ CmdGuidelineAddYR::CmdGuidelineAddYR(MainWindow &mainWindow,
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION),
+  m_identifier (GuidelineIdentifierGenerator::next ()),
   m_value (value)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineAddYR::CmdGuidelineAddYR";
@@ -42,14 +44,15 @@ void CmdGuidelineAddYR::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineAddYR::cmdRedo";
 
-  mainWindow().guidelineAddYR (m_value);
+  mainWindow().guidelineAddYR (m_identifier,
+                               m_value);
 }
 
 void CmdGuidelineAddYR::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineAddYR::cmdUndo";
 
-  mainWindow().guidelineRemoveYR (m_value);
+  mainWindow().guidelineRemoveYR (m_identifier);
 }
 
 void CmdGuidelineAddYR::saveXml (QXmlStreamWriter & /* writer */) const

@@ -15,7 +15,8 @@
 #include <QGraphicsScene>
 
 GuidelineFactory::GuidelineFactory (GraphicsScene *sceneMain) :
-  m_sceneMain (sceneMain)
+  m_sceneMain (sceneMain),
+  m_guidelineCounter (0)
 {
   createEllipseMap ();
 }
@@ -40,17 +41,19 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
 
     guideline = new GuidelineEllipse (*scene,
                                       guidelines,
-                                      stateInitial);
+                                      stateInitial,
+                                      m_guidelineCounter++);
     
   } else {
 
     guideline = new GuidelineLine (*scene,
-                                    guidelines,
-                                    stateInitial);
+                                   guidelines,
+                                   stateInitial,
+                                   m_guidelineCounter++);
   }
 
-  QObject::connect (guideline, SIGNAL (signalGuidelineDragged ()),
-                    &mainWindow, SLOT (slotGuidelineDragged ()));
+  QObject::connect (guideline, SIGNAL (signalGuidelineDragged (QString, bool)),
+                    &mainWindow, SLOT (slotGuidelineDragged (QString, bool)));
 
   return guideline;
 }

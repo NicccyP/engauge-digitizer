@@ -19,7 +19,8 @@ public:
   /// Constructor for normal creation
   CmdGuidelineRemoveYR(MainWindow &mainWindow,
                        Document &document,
-                       double value);
+                       const QString &identifier,
+                       double oldBefore);
 
   /// Constructor for parsing error report file xml
   CmdGuidelineRemoveYR(MainWindow &mainWindow,
@@ -37,8 +38,8 @@ private:
   CmdGuidelineRemoveYR();
 
   // Value
-  double m_value;
-
+  QString m_identifier;
+  double m_valueBefore;
 };
 
 #endif // CMD_GUIDELINE_REMOVE_Y_R_H

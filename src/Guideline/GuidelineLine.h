@@ -24,7 +24,8 @@ public:
   /// Single constructor.
   GuidelineLine(QGraphicsScene &scene,
                 Guidelines &guidelines,
-                GuidelineState guidelineStateInitial);
+                GuidelineState guidelineStateInitial,
+                int guidelineCounter);
   ~GuidelineLine();
 
   virtual bool getGraphicsItemAcceptHover () const;
@@ -41,6 +42,8 @@ public:
 
   /// Unset highlighting triggered by hover enter
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+
+  virtual QString identifier () const;
 
   /// Forward movements to visible Guideline
   virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
@@ -64,6 +67,7 @@ public:
                                    double lineWidth);
   virtual void setGraphicsItemVisible (bool visible);
   virtual void setGraphicsItemZValue (double z);
+  virtual void setIdentifier (const QString &identifier);
   virtual void updateColor ();
   virtual void updateGeometry (double valueGraph);
   virtual void updateGeometry (const QPointF &posScreen);

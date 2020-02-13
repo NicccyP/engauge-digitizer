@@ -47,25 +47,29 @@ public:
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
-  void createGuidelineR (double r);
+  void createGuidelineR (const QString &identifier,
+                         double r);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
   void createGuidelineR (const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
-  void createGuidelineT (double t);
+  void createGuidelineT (const QString &identifier,
+                         double t);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
   void createGuidelineT (const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
-  void createGuidelineX (double x);
+  void createGuidelineX (const QString &identifier,
+                         double x);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
   void createGuidelineX (const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
-  void createGuidelineY (double y);
+  void createGuidelineY (const QString &identifier,
+                         double y);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
   void createGuidelineY (const QPointF &posScreen);
@@ -83,18 +87,18 @@ public:
   DocumentModelGuidelines modelGuidelines () const;
 
   /// Move an X/T guideline from one value to another. Closest value wins
-  void moveGuidelineXT (double valueBefore,
-                       double valueAfter);
+  void moveGuidelineXT (const QString &identifier,
+                        double valueAfter);
 
   /// Move an Y/R guideline from one value to another. Closest value wins
-  void moveGuidelineYR (double valueBefore,
+  void moveGuidelineYR (const QString &identifier,
                         double valueAfter);
 
   /// Remove an X/T guideline. Closest value wins
-  void removeGuidelineXT (double value);
+  void removeGuidelineXT (const QString &identifier);
 
   /// Remove an Y/R guideline. Closest value wins
-  void removeGuidelineYR (double value);
+  void removeGuidelineYR (const QString &identifier);
 
   /// States listed as a string for debugging only
   QString stateDump () const;
@@ -111,8 +115,8 @@ public:
 private:
   Guidelines();
 
-  GuidelineContainerPrivate::iterator findClosestGuidelineXT (double value);
-  GuidelineContainerPrivate::iterator findClosestGuidelineYR (double value);
+  GuidelineContainerPrivate::iterator findIdentifierXT (const QString &identifier);
+  GuidelineContainerPrivate::iterator findIdentifierYR (const QString &identifier);
 
   /// Return read-only reference to X/T and Y/R containers for testing only
   const GuidelineContainerPrivate &guidelineContainerPrivateXT () const;
