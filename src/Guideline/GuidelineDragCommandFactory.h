@@ -31,12 +31,13 @@ public:
                                 const DocumentModelGuidelines &modelGuidelinesDisplay,
                                 const DocumentModelGuidelines &modelGuidelinesDocument,
                                 const QString &identifier,
-                                bool draggedOffscreen,
-                                bool isXT);
+                                bool draggedOffscreen);
 
 private:
+  bool isXTForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+                          const QString &identifier) const;
   double valueForIdentifier (const DocumentModelGuidelines &modelGuidelines,
-                             const QString &identifier) const;
+                             const QString &identifier) const;  
 
 };
 

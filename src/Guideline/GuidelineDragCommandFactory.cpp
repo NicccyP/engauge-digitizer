@@ -24,8 +24,7 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
                                                            const DocumentModelGuidelines &modelGuidelinesDisplay,
                                                            const DocumentModelGuidelines &modelGuidelinesDocument,
                                                            const QString &identifier,
-                                                           bool draggedOffscreen,
-                                                           bool isXT)
+                                                           bool draggedOffscreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineDragCommandFactory::GuidelineDragCommandFactory";
 
@@ -41,6 +40,10 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
   double valueAfter = valueForIdentifier (modelGuidelinesDisplay,
                                           identifier);
 
+  // What type was the Guideline?
+  bool isXT = isXTForIdentifier (modelGuidelinesDisplay,
+                                 identifier);
+  
   CmdAbstract *cmd = nullptr;
 
   if (draggedOffscreen) {
@@ -76,6 +79,22 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
   }
 
   return cmd;
+}
+
+bool GuidelineDragCommandFactory::isXTForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+                                                     const QString &identifierWanted) const
+{
+  GuidelineValues::const_iterator itr;
+
+  const GuidelineValues &valuesX = modelGuidelines.valuesX();
+  for (itr = valuesX.begin(); itr != valuesX.end(); itr++) {
+    QString identifierGot = itr.key();
+    if (identifierWanted == identifierGot) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 double GuidelineDragCommandFactory::valueForIdentifier (const DocumentModelGuidelines &modelGuidelines,

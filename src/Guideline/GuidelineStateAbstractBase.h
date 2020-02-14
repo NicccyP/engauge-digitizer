@@ -57,9 +57,8 @@ public:
   /// User toggled Guideline visibility
   virtual void handleVisibleChange (bool visibility) = 0;
 
-  /// Method used by MainWindow to create Guidelines for X and T versus Y and R. Not to be used for any
-  /// other state dependent behavior
-  virtual bool isXT () const = 0;
+  /// Return true if this Guideline has been discarded
+  virtual bool isDiscarded () const = 0;
 
   /// Return ellipse representing constant range, that passes through the specified point
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const = 0;

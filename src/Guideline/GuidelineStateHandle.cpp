@@ -94,7 +94,9 @@ void GuidelineStateHandle::handleMouseRelease (const QPointF &posScene)
   // Go dark. This is not a significant memory leak (versus immediately deleting this object)
   // since the Guideline states are extremely lightweight (few bytes), and there are so few of
   // them (max expected to be well below 100). Plus, whenever the scene is closed (on exit or
-  // before loading a new Document) all Guidelines get deleted
+  // before loading a new Document) all Guidelines get deleted. Also, there may be some earlier
+  // purging of GUIDELINE_STATE_DISCARDED entries. This class is still on the stack now so
+  // it cannot be deleted immediately
   context().requestStateTransition (GUIDELINE_STATE_DISCARDED);
 }
 
@@ -102,11 +104,9 @@ void GuidelineStateHandle::handleVisibleChange (bool /* visible */)
 {
 }
 
-bool GuidelineStateHandle::isXT () const
+bool GuidelineStateHandle::isDiscarded () const
 {
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateHandle::isXT unexpected state";
-
-  return false;
+  return true;
 }
 
 EllipseParameters GuidelineStateHandle::pointToEllipse (const QPointF & /* poscreen */) const

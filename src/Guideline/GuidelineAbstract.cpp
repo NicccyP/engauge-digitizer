@@ -71,8 +71,7 @@ void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
     }
 
     emit signalGuidelineDragged(m_guidelineVisible->identifier(),
-                                offscreen,
-                                m_guidelineVisible->isXT ());
+                                offscreen);
 
     m_guidelineVisible = nullptr;
   }
@@ -130,9 +129,9 @@ void GuidelineAbstract::handleVisibleChange (bool visible)
   m_context->handleVisibleChange (visible);
 }
 
-bool GuidelineAbstract::isXT () const
+bool GuidelineAbstract::isDiscarded () const
 {
-  return  m_context->isXT ();
+  return m_context->isDiscarded ();
 }
 
 QGraphicsScene &GuidelineAbstract::scene ()

@@ -53,8 +53,11 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
     }
   }
 
-  // Visible Guideline will follow this one. Its geometry will be set after every drag event
-  GuidelineAbstract *guidelineVisible = context().createGuideline (GuidelineIdentifierGenerator::next (),
+  // Visible Guideline will follow this one. Its geometry will be set after every drag event.
+  // Subtle stuff happening here - the visible Guideline is given the same identifier as the
+  // original Guideline so later on there will be no need to have each Guideline remember the
+  // other Guidelines (different) identifier
+  GuidelineAbstract *guidelineVisible = context().createGuideline (context().guideline().identifier(),
                                                                    stateDeployed);
 
   GuidelineFormat guidelineFormat (context().color());

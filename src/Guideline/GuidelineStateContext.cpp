@@ -153,11 +153,11 @@ void GuidelineStateContext::handleVisibleChange (bool visible)
   transitionIfRequested ();
 }
 
-bool GuidelineStateContext::isXT () const
+bool GuidelineStateContext::isDiscarded () const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  return m_states[m_currentState]->isXT ();
+  m_states[m_currentState]->isDiscarded ();
 }
 
 EllipseParameters GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const
