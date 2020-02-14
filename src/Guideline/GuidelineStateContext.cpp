@@ -81,9 +81,11 @@ QPointF GuidelineStateContext::convertGraphCoordinateToScreenPoint (double value
   return m_states[m_currentState]->convertGraphCoordinateToScreenPoint (valueGraph);
 }
 
-GuidelineAbstract *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const
+GuidelineAbstract *GuidelineStateContext::createGuideline (const QString &identifier,
+                                                           GuidelineState stateInitial) const
 {
-  return m_guidelines.createGuideline (stateInitial);
+  return m_guidelines.createGuideline (identifier,
+                                       stateInitial);
 }
 
 bool GuidelineStateContext::doPaint () const
@@ -149,6 +151,13 @@ void GuidelineStateContext::handleVisibleChange (bool visible)
 
   m_states[m_currentState]->handleVisibleChange (visible);
   transitionIfRequested ();
+}
+
+bool GuidelineStateContext::isXT () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->isXT ();
 }
 
 EllipseParameters GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const

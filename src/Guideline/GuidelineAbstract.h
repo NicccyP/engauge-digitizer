@@ -110,6 +110,10 @@ public:
   /// Unique identifier from QGraphicsItem
   virtual QString identifier () const = 0;
 
+  /// Method used by MainWindow to create Guidelines for X and T versus Y and R. Not to be used for any
+  /// other state dependent behavior
+  bool isXT () const;
+
   /// Get position in graph coordinates
   QPointF posCursorGraph () const;
 
@@ -138,9 +142,6 @@ public:
   /// Wrapper for QGraphicsItem::setZValue
   virtual void setGraphicsItemZValue (double z) = 0;
 
-  /// Set identifier in QGraphicsItem
-  virtual void setIdentifier (const QString &identifier) = 0;
-
   /// Dump of state as a string for debugging only. Context like the QGraphicsItem flags is included
   QString stateDump () const;
 
@@ -168,6 +169,7 @@ signals:
 
   /// Signal indicating end of Guideline drag
   void signalGuidelineDragged (QString,
+                               bool,
                                bool);
 
   /// Signal for cloned deployed Guideline from handle Guideline

@@ -26,7 +26,7 @@
 GuidelineEllipse::GuidelineEllipse(QGraphicsScene &scene,
                                    Guidelines &guidelines,
                                    GuidelineState guidelineStateInitial,
-                                   int guidelineCounter) :
+                                   const QString &identifier) :
   GuidelineAbstract (scene)
 {
   // Create context after all virtual methods have been created. The transition
@@ -36,7 +36,7 @@ GuidelineEllipse::GuidelineEllipse(QGraphicsScene &scene,
                                          guidelineStateInitial));
 
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
-  setData (DATA_KEY_IDENTIFIER, QVariant (QString ("guideline%1").arg (guidelineCounter)));
+  setData (DATA_KEY_IDENTIFIER, QVariant (identifier));
 
   scene.addItem (this);
 }
@@ -210,11 +210,6 @@ void GuidelineEllipse::setGraphicsItemVisible (bool visible)
 void GuidelineEllipse::setGraphicsItemZValue (double z)
 {
   QGraphicsEllipseItem::setZValue (z);
-}
-
-void GuidelineEllipse::setIdentifier (const QString &identifier)
-{
-  setData (DATA_KEY_IDENTIFIER, QVariant (identifier));
 }
 
 void GuidelineEllipse::updateColor ()

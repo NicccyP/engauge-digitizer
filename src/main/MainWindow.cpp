@@ -2747,7 +2747,8 @@ void MainWindow::slotGeometryWindowClosed()
 }
 
 void MainWindow::slotGuidelineDragged(QString identifier,
-                                      bool draggedOffscreen)
+                                      bool draggedOffscreen,
+                                      bool isXT)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
 
@@ -2758,7 +2759,8 @@ void MainWindow::slotGuidelineDragged(QString identifier,
                                                  m_guidelines.modelGuidelines (),
                                                  m_cmdMediator->document().modelGuidelines (),
                                                  identifier,
-                                                 draggedOffscreen);
+                                                 draggedOffscreen,
+                                                 isXT);
 
   m_cmdMediator->push (cmd);
 }

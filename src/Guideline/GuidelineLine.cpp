@@ -25,7 +25,7 @@
 GuidelineLine::GuidelineLine(QGraphicsScene &scene,
                              Guidelines &guidelines,
                              GuidelineState guidelineStateInitial,
-                             int guidelineCounter) :
+                             const QString &identifier) :
   GuidelineAbstract (scene)
 {
   // Create context after all virtual methods have been created
@@ -34,7 +34,7 @@ GuidelineLine::GuidelineLine(QGraphicsScene &scene,
                                          guidelineStateInitial));
 
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
-  setData (DATA_KEY_IDENTIFIER, QVariant (QString ("guideline%1").arg (guidelineCounter)));
+  setData (DATA_KEY_IDENTIFIER, QVariant (identifier));
 
   scene.addItem (this);
 }
@@ -153,11 +153,6 @@ void GuidelineLine::setGraphicsItemVisible (bool visible)
 void GuidelineLine::setGraphicsItemZValue (double z)
 {
   QGraphicsLineItem::setZValue (z);
-}
-
-void GuidelineLine::setIdentifier (const QString &identifier)
-{
-  setData (DATA_KEY_IDENTIFIER, QVariant (identifier));
 }
 
 void GuidelineLine::updateColor ()

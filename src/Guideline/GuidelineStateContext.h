@@ -104,7 +104,8 @@ public:
   QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
 
   /// Factory method for creating a new Guideline
-  GuidelineAbstract *createGuideline (GuidelineState stateInitial) const;
+  GuidelineAbstract *createGuideline (const QString &identifier,
+                                      GuidelineState stateInitial) const;
 
   /// Allow/skip painting of the owner Guideline. This prevents display of selection markings on
   /// otherwise-invisible handle Guideline
@@ -134,6 +135,10 @@ public:
 
   /// User toggled Guideline visibility
   void handleVisibleChange (bool visibile);
+
+  /// Method used by MainWindow to create Guidelines for X and T versus Y and R. Not to be used for any
+  /// other state dependent behavior
+  bool isXT () const;
 
   /// Return ellipse representing constant range, that passes through the specified point
   EllipseParameters pointToEllipse (const QPointF &posScreen) const;

@@ -25,7 +25,7 @@ public:
   GuidelineEllipse(QGraphicsScene &scene,
                    Guidelines &guidelines,
                    GuidelineState guidelineStateInitial,
-                   int guidelineCounter);
+                   const QString &identifier);
   ~GuidelineEllipse();
 
   /// Override normal QGraphicsEllipseItem collision detection that covers ellipse boundary
@@ -69,7 +69,6 @@ public:
                                    double lineWidth);
   virtual void setGraphicsItemVisible (bool visible);
   virtual void setGraphicsItemZValue (double z);
-  virtual void setIdentifier (const QString &identifier);
   virtual void updateColor ();
   virtual void updateGeometry (double valueGraph);
   virtual void updateGeometry (const QPointF &posScreen);

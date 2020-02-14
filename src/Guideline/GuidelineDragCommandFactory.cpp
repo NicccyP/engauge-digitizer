@@ -24,7 +24,8 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
                                                            const DocumentModelGuidelines &modelGuidelinesDisplay,
                                                            const DocumentModelGuidelines &modelGuidelinesDocument,
                                                            const QString &identifier,
-                                                           bool draggedOffscreen)
+                                                           bool draggedOffscreen,
+                                                           bool isXT)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineDragCommandFactory::GuidelineDragCommandFactory";
 
@@ -35,16 +36,17 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
   GuidelineValues valuesYDocument = modelGuidelinesDocument.valuesY ();
 
   // So which Guideline moved?
-  bool useX = true;
-  double valueBefore = 0;
-  double valueAfter = 0;
+  double valueBefore = valueForIdentifier (modelGuidelinesDocument,
+                                           identifier);
+  double valueAfter = valueForIdentifier (modelGuidelinesDisplay,
+                                          identifier);
 
   CmdAbstract *cmd = nullptr;
 
   if (draggedOffscreen) {
 
     // Delete
-    if (useX) {
+    if (isXT) {
       cmd = new CmdGuidelineRemoveXT(mainWindow,
                                      document,
                                      identifier,
@@ -58,7 +60,7 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
   } else {
 
     // Move
-    if (useX) {
+    if (isXT) {
       cmd = new CmdGuidelineMoveXT(mainWindow,
                                    document,
                                    identifier,
@@ -74,4 +76,31 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
   }
 
   return cmd;
+}
+
+double GuidelineDragCommandFactory::valueForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+                                                        const QString &identifierWanted) const
+{
+  GuidelineValues::const_iterator itr;
+
+  const GuidelineValues &valuesX = modelGuidelines.valuesX();
+  for (itr = valuesX.begin(); itr != valuesX.end(); itr++) {
+    QString identifierGot = itr.key();
+    if (identifierWanted == identifierGot) {
+      return itr.value ();
+    }
+  }
+
+  const GuidelineValues &valuesY = modelGuidelines.valuesY();
+  for (itr = valuesY.begin(); itr != valuesY.end(); itr++) {
+    QString identifierGot = itr.key();
+    if (identifierWanted == identifierGot) {
+      return itr.value ();
+    }
+  }
+
+  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineDragCommandFactory::valueForIdentifier identifier "
+                               << identifierWanted.toLatin1().data() << " was not found";
+
+  return 0.0;
 }

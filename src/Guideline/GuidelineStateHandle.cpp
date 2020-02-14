@@ -102,6 +102,13 @@ void GuidelineStateHandle::handleVisibleChange (bool /* visible */)
 {
 }
 
+bool GuidelineStateHandle::isXT () const
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateHandle::isXT unexpected state";
+
+  return false;
+}
+
 EllipseParameters GuidelineStateHandle::pointToEllipse (const QPointF & /* poscreen */) const
 {
   return EllipseParameters();

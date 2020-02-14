@@ -8,6 +8,7 @@
 #define GUIDELINE_DRAG_COMMAND_FACTORY_H
 
 #include "GuidelineValues.h"
+#include <QString>
 
 class CmdAbstract;
 class Document;
@@ -30,7 +31,12 @@ public:
                                 const DocumentModelGuidelines &modelGuidelinesDisplay,
                                 const DocumentModelGuidelines &modelGuidelinesDocument,
                                 const QString &identifier,
-                                bool draggedOffscreen);
+                                bool draggedOffscreen,
+                                bool isXT);
+
+private:
+  double valueForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+                             const QString &identifier) const;
 
 };
 

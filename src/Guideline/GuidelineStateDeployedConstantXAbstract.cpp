@@ -32,6 +32,11 @@ QPointF GuidelineStateDeployedConstantXAbstract::convertGraphCoordinateToScreenP
   return posScreen;
 }
 
+bool GuidelineStateDeployedConstantXAbstract::isXT () const
+{
+  return true;
+}
+
 EllipseParameters GuidelineStateDeployedConstantXAbstract::pointToEllipse (const QPointF & /* posScreen */) const
 {
   return EllipseParameters();

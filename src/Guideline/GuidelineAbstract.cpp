@@ -60,8 +60,6 @@ const GuidelineStateContext *GuidelineAbstract::context () const
 
 void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
 {
-  // Current Guideline is the permanent Guideline that has been dragged (indirectly along with the visible Guideline),
-
   if (m_guidelineVisible != nullptr) {
 
     // If scene position is off-screen then user is removing the visible Guideline
@@ -72,10 +70,11 @@ void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
       offscreen = true;
     }
 
-    m_guidelineVisible = nullptr;
+    emit signalGuidelineDragged(m_guidelineVisible->identifier(),
+                                offscreen,
+                                m_guidelineVisible->isXT ());
 
-    emit signalGuidelineDragged(identifier(),
-                                offscreen);
+    m_guidelineVisible = nullptr;
   }
 }
 
@@ -129,6 +128,11 @@ void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
 void GuidelineAbstract::handleVisibleChange (bool visible)
 {
   m_context->handleVisibleChange (visible);
+}
+
+bool GuidelineAbstract::isXT () const
+{
+  return  m_context->isXT ();
 }
 
 QGraphicsScene &GuidelineAbstract::scene ()

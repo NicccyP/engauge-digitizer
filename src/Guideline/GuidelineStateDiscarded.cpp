@@ -88,6 +88,13 @@ void GuidelineStateDiscarded::handleVisibleChange (bool /* visible */)
 {
 }
 
+bool GuidelineStateDiscarded::isXT () const
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDiscarded::isXT unexpected state";
+
+  return false;
+}
+
 EllipseParameters GuidelineStateDiscarded::pointToEllipse (const QPointF & /* poscreen */) const
 {
   return EllipseParameters();

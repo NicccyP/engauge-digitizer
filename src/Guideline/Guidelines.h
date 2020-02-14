@@ -44,35 +44,40 @@ public:
   CoordsType coordsType () const;
 
   /// Factory method for creating a new Guideline
-  GuidelineAbstract *createGuideline (GuidelineState stateInitial);
+  GuidelineAbstract *createGuideline (const QString &identifier,
+                                      GuidelineState stateInitial);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
   void createGuidelineR (const QString &identifier,
                          double r);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
-  void createGuidelineR (const QPointF &posScreen);
+  void createGuidelineR (const QString &identifier,
+                         const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
   void createGuidelineT (const QString &identifier,
                          double t);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
-  void createGuidelineT (const QPointF &posScreen);
+  void createGuidelineT (const QString &identifier,
+                         const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
   void createGuidelineX (const QString &identifier,
                          double x);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE
-  void createGuidelineX (const QPointF &posScreen);
+  void createGuidelineX (const QString &identifier,
+                         const QPointF &posScreen);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
   void createGuidelineY (const QString &identifier,
                          double y);
 
   /// Factory method for creating a new GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
-  void createGuidelineY (const QPointF &posScreen);
+  void createGuidelineY (const QString &identifier,
+                         const QPointF &posScreen);
 
   /// DigitizeState change so active status may (or may not) be toggled 
   void handleActiveChange (bool active);

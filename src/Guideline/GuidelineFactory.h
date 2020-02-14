@@ -32,7 +32,8 @@ public:
 
   GuidelineAbstract *createGuideline (Guidelines &guidelines,
                                       GuidelineState stateInitial,
-                                      MainWindow &mainWindow);
+                                      MainWindow &mainWindow,
+                                      const QString &identifier);
   
 private:
   GuidelineFactory ();
@@ -42,9 +43,6 @@ private:
   GraphicsScene *m_sceneMain;
 
   MapStatesWithEllipse m_mapStatesWithEllipse;
-
-  // Generate unique id for each Guideline
-  int m_guidelineCounter;
 };
 
 #endif // GUIDELINE_FACTORY_H
