@@ -31,6 +31,7 @@ GuidelineStateContext &GuidelineStateAbstractBase::context () const
 }
 
 void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene,
+                                                         GuidelineState stateHandle,
                                                          GuidelineState stateDeployed)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateAbstractBase::handleMousePressCommon "
@@ -64,7 +65,7 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
   context().guideline().bindGuidelineVisibleToInvisible (guidelineVisible);
   guidelineVisible->bindGuidelineInvisibleToVisible (context().guideline().identifier());
 
-  context().requestStateTransition (stateDeployed);
+  context().requestStateTransition (stateHandle);
 }
 
 QRectF GuidelineStateAbstractBase::sceneRect () const

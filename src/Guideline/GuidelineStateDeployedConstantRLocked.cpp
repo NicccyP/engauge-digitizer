@@ -58,6 +58,7 @@ void GuidelineStateDeployedConstantRLocked::handleHoverLeaveEvent ()
 void GuidelineStateDeployedConstantRLocked::handleMousePress (const QPointF &posScene)
 {
   handleMousePressCommon (posScene,
+                          GUIDELINE_STATE_HANDLE_R,
                           GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
 }
 
