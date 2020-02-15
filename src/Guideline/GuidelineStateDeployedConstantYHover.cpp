@@ -58,8 +58,7 @@ void GuidelineStateDeployedConstantYHover::handleHoverLeaveEvent ()
 void GuidelineStateDeployedConstantYHover::handleMousePress (const QPointF &posScene)
 {
   handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER,
-                          GUIDELINE_STATE_DISCARDED);
+                          GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
 }
 
 void GuidelineStateDeployedConstantYHover::handleVisibleChange (bool visible)

@@ -38,9 +38,14 @@ GuidelineAbstract::~GuidelineAbstract ()
   delete m_context;
 }
 
-void GuidelineAbstract::bindGuidelineVisible (GuidelineAbstract *guidelineVisible)
+void GuidelineAbstract::bindGuidelineInvisibleToVisible(const QString &identifierInvisible)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::bindGuidelineVisible state=" << m_context->stateName ().toLatin1().data();
+  m_identifierInvisible = identifierInvisible;
+}
+
+void GuidelineAbstract::bindGuidelineVisibleToInvisible (GuidelineAbstract *guidelineVisible)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::bindGuidelineVisibleToInvisible";
 
   m_guidelineVisible = guidelineVisible;
 
@@ -110,14 +115,14 @@ void GuidelineAbstract::handleMouseMoveEvent (const QPointF &posScene)
 
 void GuidelineAbstract::handleMousePressEvent(const QPointF &posScene)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMousePressEvent state=" << m_context->stateName ().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMousePressEvent";
 
   m_context->handleMousePress(posScene);
 }
 
 void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent state=" << m_context->stateName ().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent";
 
   // Current Guideline is the temporary visible Guideline and not the permanent Guideline (see detachVisibleGuideline)
 

@@ -26,7 +26,10 @@
 #include "GuidelineStateDeployedConstantYHover.h"
 #include "GuidelineStateDeployedConstantYLocked.h"
 #include "GuidelineStateDiscarded.h"
-#include "GuidelineStateHandle.h"
+#include "GuidelineStateHandleR.h"
+#include "GuidelineStateHandleT.h"
+#include "GuidelineStateHandleX.h"
+#include "GuidelineStateHandleY.h"
 #include <QGraphicsScene>
 #include "Transformation.h"
 
@@ -53,7 +56,10 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER         , new GuidelineStateDeployedConstantYHover         (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED        , new GuidelineStateDeployedConstantYLocked        (*this));   
   m_states.insert (GUIDELINE_STATE_DISCARDED                         , new GuidelineStateDiscarded                      (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE                            , new GuidelineStateHandle                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_R                          , new GuidelineStateHandleR                        (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_T                          , new GuidelineStateHandleT                        (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_X                          , new GuidelineStateHandleX                        (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_Y                          , new GuidelineStateHandleY                        (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_GUIDELINE_STATES);
 
   m_currentState = NUM_GUIDELINE_STATES; // Value that forces a transition right away
@@ -157,7 +163,7 @@ bool GuidelineStateContext::isDiscarded () const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  m_states[m_currentState]->isDiscarded ();
+  return m_states[m_currentState]->isDiscarded ();
 }
 
 EllipseParameters GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const
@@ -193,11 +199,6 @@ void GuidelineStateContext::setPosCursorGraph (const QPointF &posGraph)
   m_posCursorGraph = posGraph;
 }
 
-void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
-{
-  m_stateReplacement = stateReplacement;
-}
-
 QString GuidelineStateContext::stateDump () const
 {
   return m_guidelines.stateDump ();
@@ -208,11 +209,6 @@ QString GuidelineStateContext::stateName () const
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
   return m_states[m_currentState]->stateName();
-}
-
-GuidelineState GuidelineStateContext::stateReplacement () const
-{
-  return m_stateReplacement;
 }
 
 Transformation GuidelineStateContext::transformation() const

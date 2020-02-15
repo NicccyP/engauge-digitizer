@@ -31,13 +31,10 @@ GuidelineStateContext &GuidelineStateAbstractBase::context () const
 }
 
 void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene,
-                                                         GuidelineState stateDeployed,
-                                                         GuidelineState stateReplacement)
+                                                         GuidelineState stateDeployed)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateAbstractBase::handleMousePressCommon "
                               << m_context.stateDump ().toLatin1().data();
-
-  context().setStateReplacement (stateReplacement);
 
   // Unselect all selected items. This prevents the extremely confusing error where an
   // a currently-selected axis point stays selected and gets dragged along with this Guideline,
@@ -53,11 +50,8 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
     }
   }
 
-  // Visible Guideline will follow this one. Its geometry will be set after every drag event.
-  // Subtle stuff happening here - the visible Guideline is given the same identifier as the
-  // original Guideline so later on there will be no need to have each Guideline remember the
-  // other Guidelines (different) identifier
-  GuidelineAbstract *guidelineVisible = context().createGuideline (context().guideline().identifier(),
+  // Visible Guideline will follow this one. Its geometry will be set after every drag event
+  GuidelineAbstract *guidelineVisible = context().createGuideline (GuidelineIdentifierGenerator::next (),
                                                                    stateDeployed);
 
   GuidelineFormat guidelineFormat (context().color());
@@ -67,9 +61,10 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
   // Place new Guideline at cursor position
   guidelineVisible->updateGeometry (posScene);
 
-  context().guideline().bindGuidelineVisible (guidelineVisible);
+  context().guideline().bindGuidelineVisibleToInvisible (guidelineVisible);
+  guidelineVisible->bindGuidelineInvisibleToVisible (context().guideline().identifier());
 
-  context().requestStateTransition (GUIDELINE_STATE_HANDLE);
+  context().requestStateTransition (stateDeployed);
 }
 
 QRectF GuidelineStateAbstractBase::sceneRect () const

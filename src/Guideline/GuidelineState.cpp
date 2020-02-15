@@ -33,7 +33,10 @@ QString guidelineStateAsString (GuidelineState state)
     guidelineStateHash [GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER]          = "DeployedConstantYHover";
     guidelineStateHash [GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED]         = "DeployedConstantYLocked";
     guidelineStateHash [GUIDELINE_STATE_DISCARDED]                          = "Discarded";
-    guidelineStateHash [GUIDELINE_STATE_HANDLE]                             = "Handle";
+    guidelineStateHash [GUIDELINE_STATE_HANDLE_R]                           = "HandleR";
+    guidelineStateHash [GUIDELINE_STATE_HANDLE_T]                           = "HandleT";
+    guidelineStateHash [GUIDELINE_STATE_HANDLE_X]                           = "HandleX";
+    guidelineStateHash [GUIDELINE_STATE_HANDLE_Y]                           = "HandleY";        
   }
 
   if (guidelineStateHash.contains (state)) {

@@ -68,8 +68,11 @@ public:
   GuidelineAbstract(QGraphicsScene &scene);
   ~GuidelineAbstract();
 
+  /// Bind the other Guideline to this newly-created Guideline
+  void bindGuidelineInvisibleToVisible (const QString &identifierInvisible);
+
   /// Bind a newly-created visible Guideline to this Guideline, and make this one invisible
-  void bindGuidelineVisible (GuidelineAbstract *guidelineVisible);
+  void bindGuidelineVisibleToInvisible (GuidelineAbstract *guidelineVisible);
   
   /// Detach visible Guideline after click and drag
   void detachVisibleGuideline (const QPointF &posScene);
@@ -196,6 +199,9 @@ private:
   // Context is allocated as a final step in the constructor, at which point
   // this class has registered with the QGraphicsScene
   GuidelineStateContext *m_context;
+
+  // After binding to invisible Guideline
+  QString m_identifierInvisible;
 
   // After binding to visible Guideline
   GuidelineAbstract *m_guidelineVisible;

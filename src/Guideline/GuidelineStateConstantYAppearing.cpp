@@ -59,8 +59,7 @@ void GuidelineStateConstantYAppearing::handleHoverLeaveEvent ()
 void GuidelineStateConstantYAppearing::handleMousePress (const QPointF &posScene)
 {
   handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_CONSTANT_Y_APPEARING,
-                          GUIDELINE_STATE_DISCARDED);
+                          GUIDELINE_STATE_HANDLE_Y);
 }
 
 void GuidelineStateConstantYAppearing::handleVisibleChange (bool visible)

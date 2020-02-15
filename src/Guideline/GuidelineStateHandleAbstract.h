@@ -4,41 +4,40 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_HANDLE_H
-#define GUIDELINE_STATE_HANDLE_H
+#ifndef GUIDELINE_STATE_HANDLE_ABSTRACT_H
+#define GUIDELINE_STATE_HANDLE_ABSTRACT_H
 
 #include "GuidelineStateAbstractBase.h"
 
 /// State for an invisible handle which was previously a deployed Guideline but morphed
 /// into an invisible handle that the user is dragging. At the end of the drag
-/// this disappears. Since the Guideline in this state is invisible we do not
+/// this reappears. Since the Guideline in this state is invisible we do not
 /// have to worry about rotating this to be parallel with an axis. A visible
 /// deployed Guideline is dragged along with this handle. We have total freedom 
 /// to rotated and/or move (and in the range isocontour case even bend) the
 /// slaved deployed Guideline during the dragging
-class GuidelineStateHandle : public GuidelineStateAbstractBase
+class GuidelineStateHandleAbstract : public GuidelineStateAbstractBase
 {
 public:
   /// Single constructor.
-  GuidelineStateHandle(GuidelineStateContext &context);
-  virtual ~GuidelineStateHandle();
+  GuidelineStateHandleAbstract(GuidelineStateContext &context);
+  virtual ~GuidelineStateHandleAbstract();
 
-  virtual void begin ();
   virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
   virtual bool doPaint () const;
-  virtual void end ();
   virtual void handleActiveChange (bool active);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
   virtual bool isDiscarded () const;
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;
-  virtual QString stateName () const;
   virtual void updateWithLatestTransformation ();
 
+protected:
+  void beginCommon ();
+  
 };
 
-#endif // GUIDELINE_STATE_HANDLE_H
+#endif // GUIDELINE_STATE_HANDLE_ABSTRACT_H

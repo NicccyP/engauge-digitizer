@@ -392,7 +392,11 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedConstantYHover.h \
     src/Guideline/GuidelineStateDeployedConstantYLocked.h \
     src/Guideline/GuidelineStateDiscarded.h \
-    src/Guideline/GuidelineStateHandle.h \
+    src/Guideline/GuidelineStateHandleAbstract.h \
+    src/Guideline/GuidelineStateHandleR.h \
+    src/Guideline/GuidelineStateHandleT.h \
+    src/Guideline/GuidelineStateHandleX.h \
+    src/Guideline/GuidelineStateHandleY.h \
     src/Guideline/GuidelineValues.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
@@ -788,7 +792,11 @@ SOURCES += \
     src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
     src/Guideline/GuidelineStateDeployedConstantYLocked.cpp \
     src/Guideline/GuidelineStateDiscarded.cpp \
-    src/Guideline/GuidelineStateHandle.cpp \
+    src/Guideline/GuidelineStateHandleAbstract.cpp \
+    src/Guideline/GuidelineStateHandleR.cpp \
+    src/Guideline/GuidelineStateHandleT.cpp \
+    src/Guideline/GuidelineStateHandleX.cpp \
+    src/Guideline/GuidelineStateHandleY.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \

@@ -81,8 +81,7 @@ protected:
   /// every derived leaf class except GUIDELINE_STATE_HANDLE (which this method creates)
   /// and GUIDELINE_STATE_DISCARDED (which is a noop)
   void handleMousePressCommon (const QPointF &posAbsolute,
-                               GuidelineState stateDeployed,
-                               GuidelineState stateReplacement);
+                               GuidelineState stateDeployed);
 
   /// Scene rectangle in screen coordinates (=pixels)
   QRectF sceneRect () const;

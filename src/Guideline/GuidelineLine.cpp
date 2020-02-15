@@ -86,7 +86,7 @@ void GuidelineLine::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 
 void GuidelineLine::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mousePressEvent state=" << context()->stateName ().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mousePressEvent";
 
   handleMousePressEvent (event->scenePos ());
   
@@ -97,7 +97,7 @@ void GuidelineLine::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mouseReleaseEvent state=" << context()->stateName ().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mouseReleaseEvent";
 
   handleMouseReleaseEvent (event->scenePos ());
 

@@ -155,17 +155,11 @@ public:
   /// later adjustement when the transformation changes
   void setPosCursorGraph (const QPointF &posGraph);
 
-  /// Pass replacement Guideline state from original Guideline to handle Guideline
-  void setStateReplacement (GuidelineState stateReplacement);
-
   /// Dump state for debugging only
   QString stateDump () const;
 
   /// State as a string for debugging only
   QString stateName () const;
-
-  /// Get method for replacement state
-  GuidelineState stateReplacement () const;
 
   /// Return copy of transformation owned by MainWindow
   Transformation transformation () const;
@@ -185,8 +179,6 @@ private:
   QVector<GuidelineStateAbstractBase*> m_states;
   GuidelineState m_currentState;
   GuidelineState m_nextState;
-
-  GuidelineState m_stateReplacement;
 
   QPointF m_posCursorGraph;
 };

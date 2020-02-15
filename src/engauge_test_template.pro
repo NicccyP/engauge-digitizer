@@ -349,7 +349,11 @@ HEADERS  += \
     Guideline/GuidelineStateDeployedConstantYHover.h \
     Guideline/GuidelineStateDeployedConstantYLocked.h \
     Guideline/GuidelineStateDiscarded.h \
-    Guideline/GuidelineStateHandle.h \
+    Guideline/GuidelineStateHandleAbstract.h \
+    Guideline/GuidelineStateHandleR.h \
+    Guideline/GuidelineStateHandleT.h \
+    Guideline/GuidelineStateHandleX.h \
+    Guideline/GuidelineStateHandleY.h \
     Guideline/GuidelineValues.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
@@ -749,7 +753,11 @@ SOURCES += \
     Guideline/GuidelineStateDeployedConstantYHover.cpp \
     Guideline/GuidelineStateDeployedConstantYLocked.cpp \
     Guideline/GuidelineStateDiscarded.cpp \
-    Guideline/GuidelineStateHandle.cpp \
+    Guideline/GuidelineStateHandleAbstract.cpp \
+    Guideline/GuidelineStateHandleR.cpp \
+    Guideline/GuidelineStateHandleT.cpp \
+    Guideline/GuidelineStateHandleX.cpp \
+    Guideline/GuidelineStateHandleY.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \
