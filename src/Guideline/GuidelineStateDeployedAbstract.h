@@ -21,7 +21,6 @@ public:
 
   virtual void end ();
   virtual void handleMouseRelease (const QPointF &posScene);
-  virtual bool isDiscarded () const;
 
 protected:
 

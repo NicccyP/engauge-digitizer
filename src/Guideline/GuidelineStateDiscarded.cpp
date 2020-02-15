@@ -88,11 +88,6 @@ void GuidelineStateDiscarded::handleVisibleChange (bool /* visible */)
 {
 }
 
-bool GuidelineStateDiscarded::isDiscarded () const
-{
-  return true;
-}
-
 EllipseParameters GuidelineStateDiscarded::pointToEllipse (const QPointF & /* poscreen */) const
 {
   return EllipseParameters();

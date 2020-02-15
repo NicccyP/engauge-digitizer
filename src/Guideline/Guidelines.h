@@ -99,9 +99,6 @@ public:
   void moveGuidelineYR (const QString &identifier,
                         double valueAfter);
 
-  /// Remove GUIDELINE_STATE_DISCARDED Guidelines that are no longer needed
-  void purgeDiscardedEntries ();
-
   /// Remove an X/T guideline. Closest value wins
   void removeGuidelineXT (const QString &identifier);
 

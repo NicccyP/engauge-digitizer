@@ -57,9 +57,6 @@ public:
   /// User toggled Guideline visibility
   virtual void handleVisibleChange (bool visibility) = 0;
 
-  /// Return true if this Guideline has been discarded
-  virtual bool isDiscarded () const = 0;
-
   /// Return ellipse representing constant range, that passes through the specified point
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const = 0;
 

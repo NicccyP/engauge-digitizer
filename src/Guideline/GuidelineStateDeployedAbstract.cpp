@@ -53,7 +53,3 @@ void GuidelineStateDeployedAbstract::handleMouseRelease (const QPointF & /* posS
   // Noop
 }
 
-bool GuidelineStateDeployedAbstract::isDiscarded () const
-{
-  return false;
-}

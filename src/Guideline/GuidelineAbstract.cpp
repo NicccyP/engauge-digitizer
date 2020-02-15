@@ -134,11 +134,6 @@ void GuidelineAbstract::handleVisibleChange (bool visible)
   m_context->handleVisibleChange (visible);
 }
 
-bool GuidelineAbstract::isDiscarded () const
-{
-  return m_context->isDiscarded ();
-}
-
 QGraphicsScene &GuidelineAbstract::scene ()
 {
   return m_scene;

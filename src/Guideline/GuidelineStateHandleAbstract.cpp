@@ -86,11 +86,6 @@ void GuidelineStateHandleAbstract::handleVisibleChange (bool /* visible */)
   // Noop
 }
 
-bool GuidelineStateHandleAbstract::isDiscarded () const
-{
-  return true;
-}
-
 EllipseParameters GuidelineStateHandleAbstract::pointToEllipse (const QPointF & /* poscreen */) const
 {
   return EllipseParameters();

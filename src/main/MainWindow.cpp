@@ -2751,11 +2751,6 @@ void MainWindow::slotGuidelineDragged(QString identifier,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
 
-  // The just-dragged Guideline has the original entry and a just-discarded entry, with
-  // both sharing the same identifier. To eliminate confusion when the Cmd below executes,
-  // we purge all discarded entries (which are now safely off the stack)
-  m_guidelines.purgeDiscardedEntries ();
-
   GuidelineDragCommandFactory cmdFactory;
 
   CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,

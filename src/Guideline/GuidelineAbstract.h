@@ -113,9 +113,6 @@ public:
   /// Unique identifier from QGraphicsItem
   virtual QString identifier () const = 0;
 
-  /// Return true if this Guideline has been discarded
-  bool isDiscarded () const;
-
   /// Get position in graph coordinates
   QPointF posCursorGraph () const;
 

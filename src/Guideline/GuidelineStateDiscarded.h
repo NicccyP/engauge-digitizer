@@ -27,7 +27,6 @@ public:
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleMouseRelease (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
-  virtual bool isDiscarded () const;
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;
   virtual QString stateName () const;

@@ -318,29 +318,6 @@ void Guidelines::moveGuidelineYR (const QString &identifier,
   }
 }
 
-void Guidelines::purgeDiscardedEntries ()
-{
-  GuidelineContainerPrivate::iterator itr;
-
-  // There can only be one at most of each type (XT or YR)
-
-  for (itr = m_guidelineContainerXT.begin (); itr != m_guidelineContainerXT.end (); itr++) {
-    GuidelineAbstract *guideline = *itr;
-    if (guideline->isDiscarded ()) {
-      m_guidelineContainerXT.erase (itr);
-      break;
-    }
-  }
-
-  for (itr = m_guidelineContainerYR.begin (); itr != m_guidelineContainerYR.end (); itr++) {
-    GuidelineAbstract *guideline = *itr;
-    if (guideline->isDiscarded ()) {
-      m_guidelineContainerYR.erase (itr);
-      break;
-    }
-  }
-}
-
 void Guidelines::registerGuidelineXT (GuidelineAbstract *guideline)
 {
   m_guidelineContainerXT.push_back (guideline);

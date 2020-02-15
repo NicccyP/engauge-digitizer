@@ -136,9 +136,6 @@ public:
   /// User toggled Guideline visibility
   void handleVisibleChange (bool visibile);
 
-  /// Return true if this Guideline has been discarded
-  bool isDiscarded () const;
-
   /// Return ellipse representing constant range, that passes through the specified point
   EllipseParameters pointToEllipse (const QPointF &posScreen) const;
 
