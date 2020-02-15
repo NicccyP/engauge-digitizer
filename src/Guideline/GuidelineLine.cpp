@@ -28,6 +28,8 @@ GuidelineLine::GuidelineLine(QGraphicsScene &scene,
                              const QString &identifier) :
   GuidelineAbstract (scene)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::Guideline identifier=" << identifier.toLatin1().data();
+
   // Create context after all virtual methods have been created
   setContext (new GuidelineStateContext (*this,
                                          guidelines,

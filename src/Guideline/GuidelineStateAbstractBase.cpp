@@ -51,7 +51,8 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
     }
   }
 
-  // Visible Guideline will follow this one. Its geometry will be set after every drag event
+  // Visible Guideline will follow this one. Its geometry will be set after every drag event. It is
+  // not registered with Guidelines container
   GuidelineAbstract *guidelineVisible = context().createGuideline (GuidelineIdentifierGenerator::next (),
                                                                    stateDeployed);
 
@@ -63,7 +64,6 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
   guidelineVisible->updateGeometry (posScene);
 
   context().guideline().bindGuidelineVisibleToInvisible (guidelineVisible);
-  guidelineVisible->bindGuidelineInvisibleToVisible (context().guideline().identifier());
 
   context().requestStateTransition (stateHandle);
 }

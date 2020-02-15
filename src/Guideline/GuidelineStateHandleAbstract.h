@@ -23,7 +23,6 @@ public:
   GuidelineStateHandleAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateHandleAbstract();
 
-  virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
   virtual bool doPaint () const;
   virtual void handleActiveChange (bool active);
   virtual void handleHoverEnterEvent ();

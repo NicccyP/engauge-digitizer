@@ -12,6 +12,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandleT.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 GuidelineStateHandleT::GuidelineStateHandleT (GuidelineStateContext &context) :
   GuidelineStateHandleAbstract (context)
@@ -27,6 +28,28 @@ void GuidelineStateHandleT::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandleT::begin";
 
   beginCommon ();
+}
+
+QPointF GuidelineStateHandleT::convertGraphCoordinateToScreenPoint (double valueGraph) const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleT::convertGraphCoordinateToScreenPoint";
+
+  const double ARBITRARY_RANGE = 0; // Value that is legal in all cases
+  QPointF posScreen;
+  context().transformation().transformRawGraphToScreen (QPointF (valueGraph,
+                                                                 ARBITRARY_RANGE),
+                                                        posScreen);
+  return posScreen;
+}
+
+double GuidelineStateHandleT::convertScreenPointToGraphCoordinate(const QPointF &posScreen) const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleT::convertScreenPointToGraphCoordinate";
+
+  QPointF posGraph;
+  context().transformation().transformScreenToRawGraph (posScreen,
+                                                        posGraph);
+  return posGraph.x();
 }
 
 void GuidelineStateHandleT::end ()

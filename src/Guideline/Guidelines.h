@@ -99,11 +99,9 @@ public:
   void moveGuidelineYR (const QString &identifier,
                         double valueAfter);
 
-  /// Remove an X/T guideline. Closest value wins
-  void removeGuidelineXT (const QString &identifier);
-
-  /// Remove an Y/R guideline. Closest value wins
-  void removeGuidelineYR (const QString &identifier);
+  /// Remove an X/T or Y/R guideline. Since Guideline identifiers are unique this
+  /// method is not implemented with separate X/T and Y/R versions
+  void removeGuideline (const QString &identifier);
 
   /// States listed as a string for debugging only
   QString stateDump () const;

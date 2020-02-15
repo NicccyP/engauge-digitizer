@@ -29,6 +29,8 @@ GuidelineEllipse::GuidelineEllipse(QGraphicsScene &scene,
                                    const QString &identifier) :
   GuidelineAbstract (scene)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineEllipse::GuidelineEllipse identifier=" << identifier.toLatin1().data();
+
   // Create context after all virtual methods have been created. The transition
   // into the initial state will position the line if it was created by a button press
   setContext (new GuidelineStateContext (*this,

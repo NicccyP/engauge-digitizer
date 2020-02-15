@@ -17,6 +17,8 @@ public:
   virtual ~GuidelineStateHandleR();
 
   virtual void begin ();
+  virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph) const;
+  virtual double convertScreenPointToGraphCoordinate (const QPointF &posScreen) const;
   virtual void end ();
   virtual void handleMouseRelease (const QPointF &posScene);
   virtual QString stateName () const;

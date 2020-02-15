@@ -18,7 +18,8 @@ public:
   virtual ~GuidelineStateDiscarded();
 
   virtual void begin ();
-  virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
+  virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph) const;
+  virtual double convertScreenPointToGraphCoordinate (const QPointF &posScreen) const;
   virtual bool doPaint () const;
   virtual void end ();
   virtual void handleActiveChange (bool active);

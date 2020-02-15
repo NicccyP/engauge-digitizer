@@ -38,11 +38,6 @@ GuidelineAbstract::~GuidelineAbstract ()
   delete m_context;
 }
 
-void GuidelineAbstract::bindGuidelineInvisibleToVisible(const QString &identifierInvisible)
-{
-  m_identifierInvisible = identifierInvisible;
-}
-
 void GuidelineAbstract::bindGuidelineVisibleToInvisible (GuidelineAbstract *guidelineVisible)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::bindGuidelineVisibleToInvisible";
@@ -68,23 +63,20 @@ void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
   if (m_guidelineVisible != nullptr) {
 
     // If scene position is off-screen then user is removing the visible Guideline
-    bool offscreen = false;
-    if (!m_scene.sceneRect().contains (posScene)) {
+    bool offscreen = !m_scene.sceneRect().contains (posScene);
 
-      m_guidelineVisible->draggedOffScreen ();
-      offscreen = true;
-    }
+    // Remove transient Guideline, which was never registered with Guidelines
+    m_guidelineVisible->removeFromScene (&m_scene);
+    m_guidelineVisible = nullptr;
 
-    emit signalGuidelineDragged(m_guidelineVisible->identifier(),
+    // Update Guideline value from cursor position
+    double value = context()->convertScreenPointToGraphCoordinate (posScene);
+
+    emit signalGuidelineDragged(identifier (),
+                                value,
                                 offscreen);
 
-    m_guidelineVisible = nullptr;
   }
-}
-
-void GuidelineAbstract::draggedOffScreen ()
-{
-  m_context->draggedOffScreen ();
 }
 
 void GuidelineAbstract::handleActiveChange (bool active)

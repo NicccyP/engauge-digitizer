@@ -82,9 +82,18 @@ ColorPalette GuidelineStateContext::color () const
   return m_guidelines.color ();
 }
 
-QPointF GuidelineStateContext::convertGraphCoordinateToScreenPoint (double valueGraph)
+QPointF GuidelineStateContext::convertGraphCoordinateToScreenPoint (double valueGraph) const
 {
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
   return m_states[m_currentState]->convertGraphCoordinateToScreenPoint (valueGraph);
+}
+
+double GuidelineStateContext::convertScreenPointToGraphCoordinate (const QPointF &posScreen) const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->convertScreenPointToGraphCoordinate (posScreen);
 }
 
 GuidelineAbstract *GuidelineStateContext::createGuideline (const QString &identifier,

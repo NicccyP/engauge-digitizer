@@ -28,7 +28,7 @@ public:
   /// consistent with the displayed Guidelines (which includes the just-moved Guideline)
   CmdAbstract *createAfterDrag (MainWindow &mainWindow,
                                 Document &document,
-                                const DocumentModelGuidelines &modelGuidelinesDisplay,
+                                double newValue,
                                 const DocumentModelGuidelines &modelGuidelinesDocument,
                                 const QString &identifier,
                                 bool draggedOffscreen);

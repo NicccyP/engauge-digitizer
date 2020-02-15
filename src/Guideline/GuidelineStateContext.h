@@ -101,7 +101,10 @@ public:
   ColorPalette color () const;
 
   /// Convert single graph coordinate into screen point pair
-  QPointF convertGraphCoordinateToScreenPoint (double valueGraph);
+  QPointF convertGraphCoordinateToScreenPoint (double valueGraph) const;
+
+  /// Convert screen point pair into single graph coordinate
+  double convertScreenPointToGraphCoordinate (const QPointF &posScreen) const;
 
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (const QString &identifier,

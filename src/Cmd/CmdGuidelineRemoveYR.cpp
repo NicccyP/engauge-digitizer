@@ -44,7 +44,7 @@ void CmdGuidelineRemoveYR::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveYR::cmdRedo";
 
-  mainWindow().guidelineRemoveYR (m_identifier);
+  mainWindow().guidelineRemove (m_identifier);
 }
 
 void CmdGuidelineRemoveYR::cmdUndo ()

@@ -163,27 +163,24 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
 
-  /// Add a X/T Guideline value
+  /// Add a X/T Guideline
   void guidelineAddXT (const QString &identifier,
                        double xT);
   
-  /// Add a Y/R Guideline value
+  /// Add a Y/R Guideline
   void guidelineAddYR (const QString &identifier,
                        double yR);
   
-  /// Move a X/T Guideline value
+  /// Move a X/T Guideline
   void guidelineMoveXT (const QString &identifier,
                         double xTAfter);
   
-  /// Move a Y/R Guideline value
+  /// Move a Y/R Guideline
   void guidelineMoveYR (const QString &identifier,
                         double yRAfter);
   
-  /// Remove a X/T Guideline value
-  void guidelineRemoveXT (const QString &identifier);
-
-  /// Remove a Y/R Guideline value
-  void guidelineRemoveYR (const QString &identifier);
+  /// Remove a X/T or Y/R Guideline
+  void guidelineRemove (const QString &identifier);
   
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
@@ -352,7 +349,7 @@ private slots:
   void slotFittingWindowClosed();
   void slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool);
   void slotGeometryWindowClosed();
-  void slotGuidelineDragged(QString, bool);
+  void slotGuidelineDragged(QString, double, bool);
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);

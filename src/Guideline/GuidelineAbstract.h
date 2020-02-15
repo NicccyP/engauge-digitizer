@@ -32,15 +32,14 @@ class QWidget;
 ///  4) The new deployed Guideline is continually resized to just fit the scene, and in the
 ///     case of polar coordinates resized to go between origin and scene edge (theta) or
 ///     curved elliptically (range)
-///  5) At the end of the drag, the Handle is no longer needed so it transitions to Discarded state
+///  5) At the end of the drag, the Handle transitions into the Deployed state and the
+///     the visible Guideline is destroyed
 /// State transitions are diagrammed in the GuidelineStateContext class
 ///
 /// This strategy works with the following constraints
 /// 1) Since it is not the dragged object that we modify in 3d above, we can resize and adjust
 ///    the curvature of the visible new deployed Guideline as necessary
-///
-/// A simple way to describe this approach: Clicking and dragging involves the clicked Guideline
-/// dying and a new Guideline being born in its place
+/// 2) When a Guideline is clicked on, that is the one that is active during the cursor drag
 ///
 /// State names are defined as:
 /// # horizontal = Follows constant-y isocontour
@@ -68,17 +67,11 @@ public:
   GuidelineAbstract(QGraphicsScene &scene);
   ~GuidelineAbstract();
 
-  /// Bind the other Guideline to this newly-created Guideline
-  void bindGuidelineInvisibleToVisible (const QString &identifierInvisible);
-
   /// Bind a newly-created visible Guideline to this Guideline, and make this one invisible
   void bindGuidelineVisibleToInvisible (GuidelineAbstract *guidelineVisible);
   
   /// Detach visible Guideline after click and drag
   void detachVisibleGuideline (const QPointF &posScene);
-
-  /// Guideline has been dragged off screen so remove it
-  void draggedOffScreen ();
 
   /// Return true if accepting hover events
   virtual bool getGraphicsItemAcceptHover () const = 0;
@@ -168,6 +161,7 @@ signals:
 
   /// Signal indicating end of Guideline drag
   void signalGuidelineDragged (QString,
+                               double,
                                bool);
 
   /// Signal for cloned deployed Guideline from handle Guideline
@@ -196,9 +190,6 @@ private:
   // Context is allocated as a final step in the constructor, at which point
   // this class has registered with the QGraphicsScene
   GuidelineStateContext *m_context;
-
-  // After binding to invisible Guideline
-  QString m_identifierInvisible;
 
   // After binding to visible Guideline
   GuidelineAbstract *m_guidelineVisible;

@@ -52,7 +52,7 @@ void CmdGuidelineAddXT::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineAddXT::cmdUndo";
 
-  mainWindow().guidelineRemoveXT (m_identifier);
+  mainWindow().guidelineRemove (m_identifier);
 }
 
 void CmdGuidelineAddXT::saveXml (QXmlStreamWriter & /* writer */) const

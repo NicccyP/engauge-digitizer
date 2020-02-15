@@ -36,7 +36,7 @@ void GuidelineStateDiscarded::begin ()
                                             guidelineFormat.lineWidthNonHover ());
 }
 
-QPointF GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint (double /* valueGraph */)
+QPointF GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint (double /* valueGraph */) const
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint "
                                << "should not be called";
@@ -44,6 +44,15 @@ QPointF GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint (double /* 
   ENGAUGE_ASSERT (false);
 
   return QPointF (0, 0); // No-harm value
+}
+
+double GuidelineStateDiscarded::convertScreenPointToGraphCoordinate (const QPointF & /* posScreen */) const
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDiscarded::convertScreenPointToGraphCoordinate";
+
+  ENGAUGE_ASSERT (false);
+
+  return 0.1; // No-harm value even if using log scale
 }
 
 bool GuidelineStateDiscarded::doPaint () const

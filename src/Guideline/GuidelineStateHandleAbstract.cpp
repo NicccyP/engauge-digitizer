@@ -40,16 +40,6 @@ void GuidelineStateHandleAbstract::beginCommon ()
                                             guidelineFormat.lineWidthNonHover ());
 }
 
-QPointF GuidelineStateHandleAbstract::convertGraphCoordinateToScreenPoint (double /* valueGraph */)
-{
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateHandleAbstract::convertGraphCoordinateToScreenPoint "
-                               << "should not be called";
-
-  ENGAUGE_ASSERT (false);
-
-  return QPointF (0, 0); // No-harm value
-}
-
 bool GuidelineStateHandleAbstract::doPaint () const
 {
   return false;

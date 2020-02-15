@@ -23,7 +23,7 @@ GuidelineStateDeployedConstantRAbstract::~GuidelineStateDeployedConstantRAbstrac
 {
 }
 
-QPointF GuidelineStateDeployedConstantRAbstract::convertGraphCoordinateToScreenPoint (double valueGraph)
+QPointF GuidelineStateDeployedConstantRAbstract::convertGraphCoordinateToScreenPoint (double valueGraph) const
 {
   const double ARBITRARY_THETA = 0; // Value that is legal in all cases
   QPointF posScreen;
@@ -31,6 +31,14 @@ QPointF GuidelineStateDeployedConstantRAbstract::convertGraphCoordinateToScreenP
                                                                  valueGraph),
                                                         posScreen);
   return posScreen;
+}
+
+double GuidelineStateDeployedConstantRAbstract::convertScreenPointToGraphCoordinate (const QPointF &posScreen) const
+{
+  QPointF posGraph;
+  context().transformation().transformScreenToRawGraph (posScreen,
+                                                        posGraph);
+  return posGraph.y();
 }
 
 EllipseParameters GuidelineStateDeployedConstantRAbstract::pointToEllipse (const QPointF &posScreen) const

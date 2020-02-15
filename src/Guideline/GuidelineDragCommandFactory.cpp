@@ -21,27 +21,22 @@ GuidelineDragCommandFactory::GuidelineDragCommandFactory ()
 
 CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindow,
                                                            Document &document,
-                                                           const DocumentModelGuidelines &modelGuidelinesDisplay,
+                                                           double valueAfter,
                                                            const DocumentModelGuidelines &modelGuidelinesDocument,
                                                            const QString &identifier,
                                                            bool draggedOffscreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineDragCommandFactory::GuidelineDragCommandFactory";
 
-  GuidelineValues valuesXDisplay = modelGuidelinesDisplay.valuesX ();
   GuidelineValues valuesXDocument = modelGuidelinesDocument.valuesX ();
-
-  GuidelineValues valuesYDisplay = modelGuidelinesDisplay.valuesY ();
   GuidelineValues valuesYDocument = modelGuidelinesDocument.valuesY ();
 
   // So which Guideline moved?
   double valueBefore = valueForIdentifier (modelGuidelinesDocument,
                                            identifier);
-  double valueAfter = valueForIdentifier (modelGuidelinesDisplay,
-                                          identifier);
 
   // What type was the Guideline?
-  bool isXT = isXTForIdentifier (modelGuidelinesDisplay,
+  bool isXT = isXTForIdentifier (modelGuidelinesDocument,
                                  identifier);
   
   CmdAbstract *cmd = nullptr;

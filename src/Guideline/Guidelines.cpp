@@ -197,7 +197,7 @@ GuidelineContainerPrivate::iterator Guidelines::findIdentifierXT (const QString 
     }
   }
 
-  LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::findIdentifierXT could not find " << identifier.toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guidelines::findIdentifierXT could not find " << identifier.toLatin1().data();
 
   return m_guidelineContainerXT.end();
 }
@@ -214,7 +214,7 @@ GuidelineContainerPrivate::iterator Guidelines::findIdentifierYR (const QString 
     }
   }
 
-  LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::findIdentifierYR could not find " << identifier.toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guidelines::findIdentifierYR could not find " << identifier.toLatin1().data();
 
   return m_guidelineContainerYR.end(); // Return something
 }
@@ -328,25 +328,22 @@ void Guidelines::registerGuidelineYR (GuidelineAbstract *guideline)
   m_guidelineContainerYR.push_back (guideline);
 }
 
-void Guidelines::removeGuidelineXT (const QString &identifier)
+void Guidelines::removeGuideline (const QString &identifier)
 {
-  GuidelineContainerPrivate::iterator itr = findIdentifierXT (identifier);
-
-  // Remove it
-  if (itr != m_guidelineContainerXT.end ()) {
-    m_guidelineContainerXT.erase (itr);
-    delete *itr;
+  // Try to remove XT entry
+  GuidelineContainerPrivate::iterator itrXT = findIdentifierXT (identifier);
+  if (itrXT != m_guidelineContainerXT.end ()) {
+    m_guidelineContainerXT.erase (itrXT);
+    delete *itrXT;
+    return;
   }
-}
 
-void Guidelines::removeGuidelineYR (const QString &identifier)
-{
-  GuidelineContainerPrivate::iterator itr = findIdentifierYR (identifier);
-
-  // Remove it
-  if (itr != m_guidelineContainerYR.end ()) {
-    m_guidelineContainerYR.erase (itr);
-    delete *itr;
+  // Try to remove YR entry
+  GuidelineContainerPrivate::iterator itrYR = findIdentifierYR (identifier);
+  if (itrYR != m_guidelineContainerYR.end ()) {
+    m_guidelineContainerYR.erase (itrYR);
+    delete *itrYR;
+    return;
   }
 }
 

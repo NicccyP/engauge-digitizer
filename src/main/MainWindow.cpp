@@ -900,19 +900,11 @@ void MainWindow::guidelineMoveYR (const QString &identifier,
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
-void MainWindow::guidelineRemoveXT (const QString &identifier)
+void MainWindow::guidelineRemove (const QString &identifier)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveXT";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemove";
 
-  m_guidelines.removeGuidelineXT (identifier);
-  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
-}
-
-void MainWindow::guidelineRemoveYR (const QString &identifier)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemoveYR";
-
-  m_guidelines.removeGuidelineYR (identifier);
+  m_guidelines.removeGuideline (identifier);
   m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
 }
 
@@ -2746,18 +2738,19 @@ void MainWindow::slotGeometryWindowClosed()
   m_actionViewGeometryWindow->setChecked (false);
 }
 
-void MainWindow::slotGuidelineDragged(QString identifier,
+void MainWindow::slotGuidelineDragged(QString identifierHandlePermanent,
+                                      double newValue,
                                       bool draggedOffscreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
 
   GuidelineDragCommandFactory cmdFactory;
-
+  
   CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,
                                                  m_cmdMediator->document(),
-                                                 m_guidelines.modelGuidelines (),
+                                                 newValue,
                                                  m_cmdMediator->document().modelGuidelines (),
-                                                 identifier,
+                                                 identifierHandlePermanent,
                                                  draggedOffscreen);
 
   m_cmdMediator->push (cmd);
