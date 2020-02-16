@@ -29,7 +29,8 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
                                                       MainWindow &mainWindow,
                                                       const QString &identifier)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineFactory::createGuideline";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineFactory::createGuideline identifer="
+                               << identifier.toLatin1().data();
 
   // Main scene or one of the guideline scenes?
   QGraphicsScene *scene = m_sceneMain;

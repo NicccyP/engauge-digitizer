@@ -60,13 +60,21 @@ const GuidelineStateContext *GuidelineAbstract::context () const
 
 void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline identifier="
+                               << identifier().toLatin1().data();
+
   if (m_guidelineVisible != nullptr) {
 
     // If scene position is off-screen then user is removing the visible Guideline
     bool offscreen = !m_scene.sceneRect().contains (posScene);
 
     // Remove transient Guideline, which was never registered with Guidelines
+    LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline identifierDeleting="
+                                 << m_guidelineVisible->identifier().toLatin1().data();
+    disconnect (this, SIGNAL (signalHandleMoved (QPointF)),
+                m_guidelineVisible, SLOT (slotHandleMoved (QPointF)));
     m_guidelineVisible->removeFromScene (&m_scene);
+    delete m_guidelineVisible;
     m_guidelineVisible = nullptr;
 
     // Update Guideline value from cursor position

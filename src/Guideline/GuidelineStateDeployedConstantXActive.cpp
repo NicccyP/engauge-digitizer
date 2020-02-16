@@ -27,8 +27,6 @@ void GuidelineStateDeployedConstantXActive::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXActive::begin";
 
-  context().guideline().setGraphicsItemVisible (true); // Undo setVisible from GuidelineStateDeployedConstantXHide
-
   beginCommon (GuidelineFormat::HOVER_OFF);
 }
 

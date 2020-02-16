@@ -120,6 +120,9 @@ void GuidelineLine::paint(QPainter *painter,
 
 void GuidelineLine::removeFromScene (QGraphicsScene *scene)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::removeFromScene identifier="
+                               << identifier().toLatin1().data();
+
   scene->removeItem (this);
 }
 

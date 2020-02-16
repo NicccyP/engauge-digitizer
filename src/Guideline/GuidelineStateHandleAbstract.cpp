@@ -26,8 +26,6 @@ GuidelineStateHandleAbstract::~GuidelineStateHandleAbstract ()
 
 void GuidelineStateHandleAbstract::beginCommon ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandleAbstract::beginCommon";
-
   GuidelineFormat guidelineFormat (context().color());
   
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_HANDLE);

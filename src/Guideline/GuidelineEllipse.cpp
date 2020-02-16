@@ -177,6 +177,9 @@ void GuidelineEllipse::paint(QPainter *painter,
 
 void GuidelineEllipse::removeFromScene (QGraphicsScene *scene)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::removeFromScene identifier="
+                               << identifier().toLatin1().data();
+
   scene->removeItem (this);
 }
 
