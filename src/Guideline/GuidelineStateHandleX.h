@@ -21,6 +21,8 @@ public:
   virtual double convertScreenPointToGraphCoordinate (const QPointF &posScreen) const;
   virtual void end ();
   virtual void handleMouseRelease (const QPointF &posScene);
+  virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
+  virtual QLineF pointToLine (const QPointF &posScreen) const;
   virtual QString stateName () const;
 
 };

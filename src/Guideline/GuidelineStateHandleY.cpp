@@ -8,6 +8,7 @@
 #include "GraphicsScene.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
+#include "GuidelineProjectorConstantY.h"
 #include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandleY.h"
@@ -34,7 +35,7 @@ QPointF GuidelineStateHandleY::convertGraphCoordinateToScreenPoint (double value
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleY::convertGraphCoordinateToScreenPoint";
 
-  const double ARBITRARY_X = 0; // Value that is legal in all cases
+  const double ARBITRARY_X = 1; // Value that is legal in all cases including log
   QPointF posScreen;
   context().transformation().transformRawGraphToScreen (QPointF (ARBITRARY_X,
                                                                  valueGraph),
@@ -61,8 +62,23 @@ void GuidelineStateHandleY::handleMouseRelease (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleY::handleMouseRelease";
 
-  context().guideline().detachVisibleGuideline (posScene);
+  context().guideline().detachVisibleGuideline(posScene);
   context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+}
+
+EllipseParameters GuidelineStateHandleY::pointToEllipse (const QPointF & /* posScreen */) const
+{
+  // pointToLine applies in this state
+  return EllipseParameters();
+}
+
+QLineF GuidelineStateHandleY::pointToLine (const QPointF &posScreen) const
+{
+  GuidelineProjectorConstantY projector;
+
+  return projector.fromPosScreen (context().transformation(),
+                                  sceneRect (),
+                                  posScreen);
 }
 
 QString GuidelineStateHandleY::stateName () const

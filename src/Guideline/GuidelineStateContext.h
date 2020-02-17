@@ -143,7 +143,7 @@ public:
   EllipseParameters pointToEllipse (const QPointF &posScreen) const;
 
   /// Return line parallel to an axis line, that passes through the specified point
-  QLineF pointToLine (const QPointF &poscreen) const;
+  QLineF pointToLine (const QPointF &posScreen) const;
 
   /// Get method for current cursor coordinate when object was last created/dragged
   QPointF posCursorGraph () const;

@@ -18,7 +18,6 @@ const bool IS_NOT_X_THETA = false;
 
 FormatCoordsUnits::FormatCoordsUnits()
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnits::FormatCoordsUnits";
 }
 
 void FormatCoordsUnits::formattedToUnformatted (const QString &xThetaFormatted,

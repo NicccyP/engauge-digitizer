@@ -43,6 +43,7 @@ double GuidelineStateDeployedConstantTAbstract::convertScreenPointToGraphCoordin
 
 EllipseParameters GuidelineStateDeployedConstantTAbstract::pointToEllipse (const QPointF & /* posScreen */) const
 {
+  // pointToLine applies in this state
   return EllipseParameters();
 }
 

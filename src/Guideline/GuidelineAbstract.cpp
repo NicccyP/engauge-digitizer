@@ -60,8 +60,12 @@ const GuidelineStateContext *GuidelineAbstract::context () const
 
 void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline identifier="
-                               << identifier().toLatin1().data();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline"
+                               << " keeping identifier=" << identifier().toLatin1().data()
+                               << " in " << stateName ().toLatin1().data()
+                               << " and removing identifer="
+                               << m_guidelineVisible->identifier().toLatin1().data()
+                               << " in " << m_guidelineVisible->stateName().toLatin1().data();
 
   if (m_guidelineVisible != nullptr) {
 

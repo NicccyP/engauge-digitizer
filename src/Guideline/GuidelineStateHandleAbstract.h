@@ -29,8 +29,6 @@ public:
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
-  virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
-  virtual QLineF pointToLine (const QPointF &poscreen) const;
   virtual void updateWithLatestTransformation ();
 
 protected:

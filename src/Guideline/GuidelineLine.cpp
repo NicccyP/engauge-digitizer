@@ -93,8 +93,6 @@ void GuidelineLine::mousePressEvent(QGraphicsSceneMouseEvent *event)
   handleMousePressEvent (event->scenePos ());
   
   QGraphicsLineItem::mousePressEvent (event);
-
-  context()->handleMousePress(event->scenePos());
 }
 
 void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)

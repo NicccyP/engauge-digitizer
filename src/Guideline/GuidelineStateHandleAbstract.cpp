@@ -26,8 +26,9 @@ GuidelineStateHandleAbstract::~GuidelineStateHandleAbstract ()
 
 void GuidelineStateHandleAbstract::beginCommon ()
 {
+  // The pen color is irrelevant since doPaint=false below prevents pen/brush drawing
   GuidelineFormat guidelineFormat (context().color());
-  
+
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_HANDLE);
   context().guideline().setGraphicsItemVisible (true);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
@@ -40,7 +41,7 @@ void GuidelineStateHandleAbstract::beginCommon ()
 
 bool GuidelineStateHandleAbstract::doPaint () const
 {
-  return false;
+  return true;
 }
 
 void GuidelineStateHandleAbstract::handleActiveChange (bool /* active */)
@@ -72,16 +73,6 @@ void GuidelineStateHandleAbstract::handleMousePress (const QPointF & /* posScene
 void GuidelineStateHandleAbstract::handleVisibleChange (bool /* visible */)
 {
   // Noop
-}
-
-EllipseParameters GuidelineStateHandleAbstract::pointToEllipse (const QPointF & /* poscreen */) const
-{
-  return EllipseParameters();
-}
-
-QLineF GuidelineStateHandleAbstract::pointToLine (const QPointF & /* posGraph */) const
-{
-  return QLineF (0, 0, 0, 0);
 }
 
 void GuidelineStateHandleAbstract::updateWithLatestTransformation ()

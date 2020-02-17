@@ -52,6 +52,7 @@ EllipseParameters GuidelineStateDeployedConstantRAbstract::pointToEllipse (const
 
 QLineF GuidelineStateDeployedConstantRAbstract::pointToLine (const QPointF & /* posScreen */) const
 {
+  // pointToEllipse applies in this state
   return QLineF (0, 0, 0, 0);
 }
 

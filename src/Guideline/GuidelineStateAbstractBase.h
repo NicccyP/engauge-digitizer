@@ -64,7 +64,7 @@ public:
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const = 0;
 
   /// Return line parallel to an axis line, that passes through the specified point
-  virtual QLineF pointToLine (const QPointF &poscreen) const = 0;
+  virtual QLineF pointToLine (const QPointF &posScreen) const = 0;
 
   /// Name of state as a string for debugging only
   virtual QString stateName () const = 0;
