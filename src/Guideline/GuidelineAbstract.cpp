@@ -107,7 +107,8 @@ void GuidelineAbstract::handleHoverLeaveEvent()
 
 void GuidelineAbstract::handleMouseMoveEvent (const QPointF &posScene)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::handleMouseMoveEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineAbstract::handleMouseMoveEvent ("
+                              << posScene.x() << ", " << posScene.y() << ")";
 
   // Skip if there is no bound visible Guideline
   if (m_guidelineVisible != nullptr) {

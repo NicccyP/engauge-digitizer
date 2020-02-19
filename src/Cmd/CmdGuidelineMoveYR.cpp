@@ -44,7 +44,9 @@ CmdGuidelineMoveYR::~CmdGuidelineMoveYR ()
 
 void CmdGuidelineMoveYR::cmdRedo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveYR::cmdRedo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveYR::cmdRedo"
+                              << " identifier=" << m_identifier.toLatin1().data()
+                              << " value=" << m_valueAfter;
 
   mainWindow().guidelineMoveYR (m_identifier,
                                 m_valueAfter);
@@ -52,7 +54,9 @@ void CmdGuidelineMoveYR::cmdRedo ()
 
 void CmdGuidelineMoveYR::cmdUndo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveYR::cmdUndo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveYR::cmdUndo"
+                              << " identifier=" << m_identifier.toLatin1().data()
+                              << " value=" << m_valueBefore;
 
   mainWindow().guidelineMoveYR (m_identifier,
                                 m_valueBefore);

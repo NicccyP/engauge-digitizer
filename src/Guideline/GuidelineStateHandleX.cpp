@@ -33,23 +33,27 @@ void GuidelineStateHandleX::begin ()
 
 QPointF GuidelineStateHandleX::convertGraphCoordinateToScreenPoint (double valueGraph) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleX::convertGraphCoordinateToScreenPoint";
-
   const double ARBITRARY_Y = 1; // Value that is legal in all cases including log
   QPointF posScreen;
   context().transformation().transformRawGraphToScreen (QPointF (valueGraph,
                                                                  ARBITRARY_Y),
                                                         posScreen);
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleX::convertGraphCoordinateToScreenPoint"
+                               << " pos=(" << posScreen.x() << ", " << posScreen.y() << ")";
+
   return posScreen;
 }
 
 double GuidelineStateHandleX::convertScreenPointToGraphCoordinate(const QPointF &posScreen) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleX::convertScreenPointToGraphCoordinate";
-
   QPointF posGraph;
   context().transformation().transformScreenToRawGraph (posScreen,
                                                         posGraph);
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleX::convertScreenPointToGraphCoordinate"
+                               << " pos=(" << posGraph.x() << ", " << posGraph.y() << ")";
+
   return posGraph.x();
 }
 

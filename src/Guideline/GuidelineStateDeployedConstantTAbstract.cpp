@@ -11,7 +11,6 @@
 #include "GuidelineStateDeployedConstantTAbstract.h"
 #include "Logger.h"
 #include <QGraphicsScene>
-#include <qmath.h>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantTAbstract::GuidelineStateDeployedConstantTAbstract (GuidelineStateContext &context) :
@@ -30,6 +29,10 @@ QPointF GuidelineStateDeployedConstantTAbstract::convertGraphCoordinateToScreenP
   context().transformation().transformRawGraphToScreen (QPointF (valueGraph,
                                                                  ARBITRARY_RANGE),
                                                         posScreen);
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::convertGraphCoordinateToScreenPoint"
+                               << " pos=(" << posScreen.x() << ", " << posScreen.y() << ")";
+
   return posScreen;
 }
 
@@ -38,6 +41,10 @@ double GuidelineStateDeployedConstantTAbstract::convertScreenPointToGraphCoordin
   QPointF posGraph;
   context().transformation().transformScreenToRawGraph (posScreen,
                                                         posGraph);
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::convertScreenPointToGraphCoordinate"
+                               << " pos=(" << posGraph.x() << ", " << posGraph.y() << ")";
+
   return posGraph.x();
 }
 

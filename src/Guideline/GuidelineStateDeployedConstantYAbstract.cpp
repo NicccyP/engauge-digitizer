@@ -29,6 +29,10 @@ QPointF GuidelineStateDeployedConstantYAbstract::convertGraphCoordinateToScreenP
   context().transformation().transformRawGraphToScreen (QPointF (ARBITRARY_X,
                                                                  valueGraph),
                                                         posScreen);
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedConstantYAbstract::convertGraphCoordinateToScreenPoint"
+                               << " pos=(" << posScreen.x() << ", " << posScreen.y() << ")";
+
   return posScreen;
 }
 
@@ -37,6 +41,10 @@ double GuidelineStateDeployedConstantYAbstract::convertScreenPointToGraphCoordin
   QPointF posGraph;
   context().transformation().transformScreenToRawGraph (posScreen,
                                                         posGraph);
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedConstantYAbstract::convertScreenPointToGraphCoordinate"
+                               << " pos=(" << posGraph.x() << ", " << posGraph.y() << ")";
+
   return posGraph.y();
 }
 

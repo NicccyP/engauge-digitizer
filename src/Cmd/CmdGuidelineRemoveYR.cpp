@@ -42,14 +42,17 @@ CmdGuidelineRemoveYR::~CmdGuidelineRemoveYR ()
 
 void CmdGuidelineRemoveYR::cmdRedo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveYR::cmdRedo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveYR::cmdRedo"
+                              << " identifier=" << m_identifier.toLatin1().data();
 
   mainWindow().guidelineRemove (m_identifier);
 }
 
 void CmdGuidelineRemoveYR::cmdUndo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveYR::cmdUndo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineRemoveYR::cmdUndo"
+                              << " identifier=" << m_identifier.toLatin1().data()
+                              << " value=" << m_valueBefore;
 
   mainWindow().guidelineAddYR (m_identifier,
                                m_valueBefore);

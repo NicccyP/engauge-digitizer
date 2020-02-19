@@ -81,6 +81,10 @@ CoordsType Guidelines::coordsType () const
 GuidelineAbstract *Guidelines::createGuideline (const QString &identifier,
                                                 GuidelineState stateInitial)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guidelines::createGuideline"
+                               << " identifier=" << identifier.toLatin1().data()
+                               << " state=" << guidelineStateAsString (stateInitial).toLatin1().data();
+
   GuidelineAbstract *guideline = m_guidelineFactory->createGuideline (*this,
                                                                       stateInitial,
                                                                       m_mainWindow,
@@ -297,6 +301,10 @@ DocumentModelGuidelines Guidelines::modelGuidelines () const
 void Guidelines::moveGuidelineXT (const QString &identifier,
                                   double valueAfter)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guidelines::moveGuidelineXT"
+                               << " identifier=" << identifier.toLatin1().data()
+                               << " value=" << valueAfter;
+
   GuidelineContainerPrivate::iterator itr = findIdentifierXT (identifier);
 
    if (itr== m_guidelineContainerXT.end ()) {
@@ -311,6 +319,10 @@ void Guidelines::moveGuidelineXT (const QString &identifier,
 void Guidelines::moveGuidelineYR (const QString &identifier,
                                   double valueAfter)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guidelines::moveGuidelineYR"
+                               << " identifier=" << identifier.toLatin1().data()
+                               << " value=" << valueAfter;
+
   GuidelineContainerPrivate::iterator itr = findIdentifierYR (identifier);
 
   if (itr == m_guidelineContainerYR.end ()) {
@@ -334,6 +346,9 @@ void Guidelines::registerGuidelineYR (GuidelineAbstract *guideline)
 
 void Guidelines::removeGuideline (const QString &identifier)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guidelines::removeGuideline"
+                               << " identifier=" << identifier.toLatin1().data();
+
   // Try to remove XT entry
   GuidelineContainerPrivate::iterator itrXT = findIdentifierXT (identifier);
   if (itrXT != m_guidelineContainerXT.end ()) {

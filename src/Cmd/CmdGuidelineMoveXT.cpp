@@ -44,7 +44,9 @@ CmdGuidelineMoveXT::~CmdGuidelineMoveXT ()
 
 void CmdGuidelineMoveXT::cmdRedo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveXT::cmdRedo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveXT::cmdRedo"
+                              << " identifier=" << m_identifier.toLatin1().data()
+                              << " value=" << m_valueAfter;
 
   mainWindow().guidelineMoveXT (m_identifier,
                                 m_valueAfter);
@@ -52,7 +54,9 @@ void CmdGuidelineMoveXT::cmdRedo ()
 
 void CmdGuidelineMoveXT::cmdUndo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveXT::cmdUndo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveXT::cmdUndo"
+                              << " identifier=" << m_identifier.toLatin1().data()
+                              << " value=" << m_valueBefore;
 
   mainWindow().guidelineMoveXT (m_identifier,
                                 m_valueBefore);
