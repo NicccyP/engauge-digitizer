@@ -24,7 +24,8 @@ GuidelineStateDeployedConstantXLocked::~GuidelineStateDeployedConstantXLocked ()
 
 void GuidelineStateDeployedConstantXLocked::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXLocked::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXLocked::begin"
+                              << " identifier=" << context().guideline().identifier().toLatin1().data();
 
   beginCommon (GuidelineFormat::HOVER_ON);
 }

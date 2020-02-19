@@ -24,7 +24,8 @@ GuidelineStateDeployedConstantYHover::~GuidelineStateDeployedConstantYHover ()
 
 void GuidelineStateDeployedConstantYHover::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYHover::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYHover::begin"
+                              << " identifier=" << context().guideline().identifier().toLatin1().data();
 
   beginCommon (GuidelineFormat::HOVER_ON);
 }

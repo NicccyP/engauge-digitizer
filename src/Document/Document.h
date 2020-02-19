@@ -86,7 +86,7 @@ public:
                                              QString &generatedIentifier,
                                              double ordinal);
 
-  /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Document.
+  /// Add a single graph point with the specified point identifier. Note that PointStyle is not applied to the point within the Document.
   void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                              const QPointF &posScreen,
                                              const QString &identifier,

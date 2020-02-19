@@ -25,7 +25,8 @@ GuidelineStateDiscarded::~GuidelineStateDiscarded ()
 
 void GuidelineStateDiscarded::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::begin"
+                              << " identifier=" << context().guideline().identifier().toLatin1().data();
 
   GuidelineFormat guidelineFormat (context().color());
   

@@ -29,7 +29,7 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
                                                       MainWindow &mainWindow,
                                                       const QString &identifier)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineFactory::createGuideline identifer="
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineFactory::createGuideline identifier="
                                << identifier.toLatin1().data();
 
   // Main scene or one of the guideline scenes?

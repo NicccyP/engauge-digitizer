@@ -26,7 +26,8 @@ GuidelineStateHandleY::~GuidelineStateHandleY ()
 
 void GuidelineStateHandleY::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandleY::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandleY::begin"
+                              << " identifier=" << context().guideline().identifier().toLatin1().data();
 
   beginCommon ();
 }

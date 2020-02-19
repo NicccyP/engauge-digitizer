@@ -25,7 +25,8 @@ GuidelineStateDeployedConstantRHide::~GuidelineStateDeployedConstantRHide ()
 
 void GuidelineStateDeployedConstantRHide::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRHide::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRHide::begin"
+                              << " identifier=" << context().guideline().identifier().toLatin1().data();
 
   beginCommon (GuidelineFormat::HOVER_OFF);
 

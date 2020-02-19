@@ -63,7 +63,7 @@ void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline"
                                << " keeping identifier=" << identifier().toLatin1().data()
                                << " in " << stateName ().toLatin1().data()
-                               << " and removing identifer="
+                               << " and removing identifier="
                                << m_guidelineVisible->identifier().toLatin1().data()
                                << " in " << m_guidelineVisible->stateName().toLatin1().data();
 
