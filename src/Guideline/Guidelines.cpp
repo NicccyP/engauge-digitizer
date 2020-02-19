@@ -299,8 +299,10 @@ void Guidelines::moveGuidelineXT (const QString &identifier,
 {
   GuidelineContainerPrivate::iterator itr = findIdentifierXT (identifier);
 
-  // Move it
-  if (itr != m_guidelineContainerXT.end ()) {
+   if (itr== m_guidelineContainerXT.end ()) {
+     LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::moveGuidelineXT";
+   } else {
+     // Move it
     GuidelineAbstract *guideline = *itr;
     guideline->updateGeometry (valueAfter);
   }
@@ -311,8 +313,10 @@ void Guidelines::moveGuidelineYR (const QString &identifier,
 {
   GuidelineContainerPrivate::iterator itr = findIdentifierYR (identifier);
 
-  // Move it
-  if (itr != m_guidelineContainerYR.end ()) {
+  if (itr == m_guidelineContainerYR.end ()) {
+    LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::moveGuidelineYR";
+  } else {
+    // Move it
     GuidelineAbstract *guideline = *itr;
     guideline->updateGeometry (valueAfter);
   }
@@ -345,6 +349,9 @@ void Guidelines::removeGuideline (const QString &identifier)
     delete *itrYR;
     return;
   }
+
+  LOG4CPP_ERROR_S ((*mainCat)) << "Guidelines::removeGuideline cannot find "
+                               << identifier.toLatin1().data();
 }
 
 QString Guidelines::stateDump () const

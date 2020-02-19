@@ -2741,7 +2741,7 @@ void MainWindow::slotGuidelineDragged(QString identifierHandlePermanent,
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
 
   GuidelineDragCommandFactory cmdFactory;
-  
+
   CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,
                                                  m_cmdMediator->document(),
                                                  newValue,

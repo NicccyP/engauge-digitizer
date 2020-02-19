@@ -87,7 +87,6 @@ void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
     emit signalGuidelineDragged(identifier (),
                                 value,
                                 offscreen);
-
   }
 }
 
