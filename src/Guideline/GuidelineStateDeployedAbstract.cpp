@@ -30,29 +30,32 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
 
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DEPLOYED);
   context().guideline().setGraphicsItemVisible (true);
-  context().guideline().setGraphicsItemPen (hoverOption == GuidelineFormat::HOVER_ON ?
-                                            guidelineFormat.colorDeployedHover () :
-                                            guidelineFormat.colorDeployedNonHover (),
-                                            hoverOption == GuidelineFormat::HOVER_ON ?
-                                            guidelineFormat.lineWidthHover () :
-                                            guidelineFormat.lineWidthNonHover ());
 
   if (locked) {
 
-    // Give feedback when user hovers
+    // Prevent interaction. ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
     QGraphicsItem::GraphicsItemFlags flags = context().guideline ().graphicsItemFlags();
     flags &= ~QGraphicsItem::ItemIsFocusable;
     flags &= ~QGraphicsItem::ItemIsMovable;
     context().guideline().setGraphicsItemFlags (flags);
-    context().guideline().setGraphicsItemAcceptHoverEvents (true);
+    context().guideline().setGraphicsItemAcceptHoverEvents (false);
+
+    context().guideline().setGraphicsItemPen (guidelineFormat.colorDeployedNonHover (),
+                                              guidelineFormat.lineWidthNonHover ());
 
   } else {
 
-    // Prevent interaction. ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
+    // Give feedback when user hovers    
     context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
                                                 QGraphicsItem::ItemIsMovable);
-    context().guideline().setGraphicsItemAcceptHoverEvents (false);
+    context().guideline().setGraphicsItemAcceptHoverEvents (true);
 
+    context().guideline().setGraphicsItemPen (hoverOption == GuidelineFormat::HOVER_ON ?
+                                              guidelineFormat.colorDeployedHover () :
+                                              guidelineFormat.colorDeployedNonHover (),
+                                              hoverOption == GuidelineFormat::HOVER_ON ?
+                                              guidelineFormat.lineWidthHover () :
+                                              guidelineFormat.lineWidthNonHover ());
   }
 }
 
