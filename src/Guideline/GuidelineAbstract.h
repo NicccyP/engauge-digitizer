@@ -69,9 +69,6 @@ public:
 
   /// Bind a newly-created visible Guideline to this Guideline, and make this one invisible
   void bindGuidelineVisibleToInvisible (GuidelineAbstract *guidelineVisible);
-  
-  /// Detach visible Guideline after click and drag
-  void detachVisibleGuideline (const QPointF &posScene);
 
   /// Return true if accepting hover events
   virtual bool getGraphicsItemAcceptHover () const = 0;
@@ -111,6 +108,10 @@ public:
 
   /// Make graphics item remove itself from the scene
   virtual void removeFromScene (QGraphicsScene *scene) = 0;
+  
+  /// Replace visible and handle Guidelines after click and drag
+  void sacrificeHandleAndVisibleGuidelines (const QPointF &posScene,
+                                            GuidelineState guidelineStateForReplacement);
   
   /// GraphicsScene that owns this class
   QGraphicsScene &scene ();
@@ -162,7 +163,8 @@ signals:
   /// Signal indicating end of Guideline drag
   void signalGuidelineDragged (QString,
                                double,
-                               bool);
+                               bool,
+                               GuidelineState);
 
   /// Signal for cloned deployed Guideline from handle Guideline
   void signalHandleMoved (QPointF);

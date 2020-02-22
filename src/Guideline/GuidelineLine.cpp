@@ -99,9 +99,9 @@ void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mouseReleaseEvent";
 
-  handleMouseReleaseEvent (event->scenePos ());
-
   QGraphicsLineItem::mouseReleaseEvent (event);
+
+  handleMouseReleaseEvent (event->scenePos ());
 }
 
 void GuidelineLine::paint(QPainter *painter,

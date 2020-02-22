@@ -79,6 +79,12 @@ public:
   void createGuidelineY (const QString &identifier,
                          const QPointF &posScreen);
 
+  /// Factory method for creating a new replacement Guideline, which replaces one
+  /// handle and one visible Guideline after a drag
+  void createReplacementGuideline (const QString &identifierReplaced,
+                                   double newValue,
+                                   GuidelineState guidelineStateForReplacement);
+
   /// DigitizeState change so active status may (or may not) be toggled 
   void handleActiveChange (bool active);
   
@@ -128,6 +134,8 @@ private:
   /// Add a new Guideline to the global list maintained by this class
   void registerGuidelineXT (GuidelineAbstract *guideline);
   void registerGuidelineYR (GuidelineAbstract *guideline);
+
+  GuidelineAbstract *unregisterGuideline (const QString &identifier);
 
   // Save for easy removal later
   GuidelineContainerPrivate m_guidelineContainerXT;

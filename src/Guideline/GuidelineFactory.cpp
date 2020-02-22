@@ -53,8 +53,8 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
                                    identifier);
   }
 
-  QObject::connect (guideline, SIGNAL (signalGuidelineDragged (QString, double, bool)),
-                    &mainWindow, SLOT (slotGuidelineDragged (QString, double, bool)));
+  QObject::connect (guideline, SIGNAL (signalGuidelineDragged (QString, double, bool, GuidelineState)),
+                    &mainWindow, SLOT (slotGuidelineDragged (QString, double, bool, GuidelineState)));
 
   return guideline;
 }

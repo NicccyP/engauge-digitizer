@@ -67,8 +67,9 @@ void GuidelineStateHandleX::handleMouseRelease (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleX::handleMouseRelease";
 
-  context().guideline().detachVisibleGuideline(posScene);
-  context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+  context().guideline().sacrificeHandleAndVisibleGuidelines(posScene,
+                                                            GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+  context().requestStateTransition (GUIDELINE_STATE_DISCARDED);
 }
 
 EllipseParameters GuidelineStateHandleX::pointToEllipse (const QPointF & /* posScreen */) const

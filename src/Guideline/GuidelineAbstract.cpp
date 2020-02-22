@@ -58,38 +58,6 @@ const GuidelineStateContext *GuidelineAbstract::context () const
   return m_context;
 }
 
-void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline"
-                               << " keeping identifier=" << identifier().toLatin1().data()
-                               << " in " << stateName ().toLatin1().data()
-                               << " and removing identifier="
-                               << m_guidelineVisible->identifier().toLatin1().data()
-                               << " in " << m_guidelineVisible->stateName().toLatin1().data();
-
-  if (m_guidelineVisible != nullptr) {
-
-    // If scene position is off-screen then user is removing the visible Guideline
-    bool offscreen = !m_scene.sceneRect().contains (posScene);
-
-    // Remove transient Guideline, which was never registered with Guidelines
-    LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::detachVisibleGuideline identifierDeleting="
-                                 << m_guidelineVisible->identifier().toLatin1().data();
-    disconnect (this, SIGNAL (signalHandleMoved (QPointF)),
-                m_guidelineVisible, SLOT (slotHandleMoved (QPointF)));
-    m_guidelineVisible->removeFromScene (&m_scene);
-    delete m_guidelineVisible;
-    m_guidelineVisible = nullptr;
-
-    // Update Guideline value from cursor position
-    double value = context()->convertScreenPointToGraphCoordinate (posScene);
-
-    emit signalGuidelineDragged(identifier (),
-                                value,
-                                offscreen);
-  }
-}
-
 void GuidelineAbstract::handleActiveChange (bool active)
 {
   m_context->handleActiveChange (active);
@@ -128,14 +96,43 @@ void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent";
 
-  // Current Guideline is the temporary visible Guideline and not the permanent Guideline (see detachVisibleGuideline)
-
   m_context->handleMouseRelease (posScene);
 }
 
 void GuidelineAbstract::handleVisibleChange (bool visible)
 {
   m_context->handleVisibleChange (visible);
+}
+
+void GuidelineAbstract::sacrificeHandleAndVisibleGuidelines (const QPointF &posScene,
+                                                             GuidelineState guidelineStateForReplacement)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::sacrificeHandleAndVisibleGuidelines"
+                               << " keeping identifier=" << identifier().toLatin1().data()
+                               << " in " << stateName ().toLatin1().data();
+
+  if (m_guidelineVisible != nullptr) {
+
+    // If scene position is off-screen then user is removing the visible Guideline
+    bool offscreen = !m_scene.sceneRect().contains (posScene);
+
+    // Remove transient Guideline, which was never registered with Guidelines
+    LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::sacrificeHandleAndVisibleGuidelines identifierDeleting="
+                                 << m_guidelineVisible->identifier().toLatin1().data();
+    disconnect (this, SIGNAL (signalHandleMoved (QPointF)),
+                m_guidelineVisible, SLOT (slotHandleMoved (QPointF)));
+    m_guidelineVisible->removeFromScene (&m_scene);
+    delete m_guidelineVisible;
+    m_guidelineVisible = nullptr;
+
+    // Update Guideline value from cursor position
+    double value = context()->convertScreenPointToGraphCoordinate (posScene);
+
+    emit signalGuidelineDragged(identifier (),
+                                value,
+                                offscreen,
+                                guidelineStateForReplacement);
+  }
 }
 
 QGraphicsScene &GuidelineAbstract::scene ()

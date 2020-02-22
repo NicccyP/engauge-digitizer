@@ -2734,19 +2734,26 @@ void MainWindow::slotGeometryWindowClosed()
   m_actionViewGeometryWindow->setChecked (false);
 }
 
-void MainWindow::slotGuidelineDragged(QString identifierHandlePermanent,
+void MainWindow::slotGuidelineDragged(QString identifierReplaced,
                                       double newValue,
-                                      bool draggedOffscreen)
+                                      bool draggedOffscreen,
+                                      GuidelineState guidelineStateForReplacement)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
 
+  // Create replacement Guideline and register it with Guidelines instead of the original
+  m_guidelines.createReplacementGuideline (identifierReplaced,
+                                           newValue,
+                                           guidelineStateForReplacement);
+
+  // Create Cmd that will move the new Guideline
   GuidelineDragCommandFactory cmdFactory;
 
   CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,
                                                  m_cmdMediator->document(),
                                                  newValue,
                                                  m_cmdMediator->document().modelGuidelines (),
-                                                 identifierHandlePermanent,
+                                                 identifierReplaced,
                                                  draggedOffscreen);
 
   m_cmdMediator->push (cmd);
