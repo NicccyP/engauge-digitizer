@@ -32,14 +32,22 @@ class QWidget;
 ///  4) The new deployed Guideline is continually resized to just fit the scene, and in the
 ///     case of polar coordinates resized to go between origin and scene edge (theta) or
 ///     curved elliptically (range)
-///  5) At the end of the drag, the Handle transitions into the Deployed state and the
-///     the visible Guideline is destroyed
+///  5) At the end of the drag, the Handle and Visible Guidelines are sacrificed (=discarded)
+///     and a new Deployed Guideline is created. Since the new Deployed Guideline is off the
+///     stack, the new CmdGuidelineMove can work on it safely
 /// State transitions are diagrammed in the GuidelineStateContext class
 ///
 /// This strategy works with the following constraints
 /// 1) Since it is not the dragged object that we modify in 3d above, we can resize and adjust
 ///    the curvature of the visible new deployed Guideline as necessary
-/// 2) When a Guideline is clicked on, that is the one that is active during the cursor drag
+/// 2) When a Guideline is clicked on, that is the one that is active during the cursor drag.
+///    It is not possible to move the focus to another QGraphicsItem
+/// 3) At the end of the drag, a new CmdGuidelineMove is created and its redo method is run
+///    before the Handle Guideline is off the stack. This would corrupt the movement if that
+///    CmdGuidelineMove tried to move the (on the stack) Handle, so we do not transition the
+///    Handle state back to the Deployed state. Instead, a third Guideline is created as the
+///    target of the new CmdGuidelineMove. The Handle and Visible Guidelines are sacrificed
+///    (=moved to Discard state or deleted).j
 ///
 /// State names are defined as:
 /// # horizontal = Follows constant-y isocontour
@@ -51,7 +59,6 @@ class QWidget;
 /// # discarded = A noop state. The Guideline is no longer useful and has been removed
 /// # handle = This Guideline is invisible, being dragged, and moving a bound deployed
 ///            Guideline along the same drag trajectory
-/// # lurking = Guideline state for when active but not seen, and waiting for hover
 ///
 /// There are two derived classes:
 /// # one for drawing lines (cartesian and polar angle) with QGraphicsLineItem

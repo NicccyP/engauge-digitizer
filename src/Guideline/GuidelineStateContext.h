@@ -43,7 +43,8 @@ class Transformation;
 ///
 ///   Start -> DeployedConstantRHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantRHover -> DeployedConstantRActive [label = HoverLeave];
-///   DeployedConstantRHover -> Handle [label = MouseClick];
+///   DeployedConstantRHover -> HandleR [label = MouseClick];
+///   DeployedConstantRActive -> Discarded [label = DragOffscreen];
 ///   DeployedConstantRActive -> Discarded [label = TransformLoss];
 ///   DeployedConstantRActive -> DeployedConstantRHide [label = TurnedOff];
 ///   DeployedConstantRHide -> DeployedConstantRActive [label = TurnedOn];
@@ -53,7 +54,8 @@ class Transformation;
 ///
 ///   Start -> DeployedConstantTHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantTHover -> DeployedConstantTActive [label = HoverLeave];
-///   DeployedConstantTHover -> Handle [label = MouseClick];
+///   DeployedConstantTHover -> HandleT [label = MouseClick];
+///   DeployedConstantTActive -> Discarded [label = DragOffscreen];
 ///   DeployedConstantTActive -> Discarded [label = TransformLoss];
 ///   DeployedConstantTActive -> DeployedConstantTHide [label = TurnedOff];
 ///   DeployedConstantTHide -> DeployedConstantTActive [label = TurnedOn];
@@ -63,7 +65,8 @@ class Transformation;
 ///
 ///   Start -> DeployedConstantXHover [label = HoverWithCartesianCoordinates];
 ///   DeployedConstantXHover -> DeployedConstantXActive [label = HoverLeave];
-///   DeployedConstantXHover -> Handle [label = MouseClick];
+///   DeployedConstantXHover -> HandleX [label = MouseClick];
+///   DeployedConstantXActive -> Discarded [label = DragOffscreen];
 ///   DeployedConstantXActive -> Discarded [label = TransformLoss];
 ///   DeployedConstantXActive -> DeployedConstantXHide [label = TurnedOff];
 ///   DeployedConstantXHide -> DeployedConstantXActive [label = TurnedOn];
@@ -73,7 +76,8 @@ class Transformation;
 ///
 ///   Start -> DeployedConstantYHover [label = HoverWithCartesianCoordinates];
 ///   DeployedConstantYHover -> DeployedConstantYActive [label = HoverLeave];
-///   DeployedConstantYHover -> Handle [label = MouseClick];
+///   DeployedConstantYHover -> HandleY [label = MouseClick];
+///   DeployedConstantYActive -> Discarded [label = DragOffscreen];
 ///   DeployedConstantYActive -> Discarded [label = TransformLoss];
 ///   DeployedConstantYActive -> DeployedConstantYHide [label = TurnedOff];
 ///   DeployedConstantYHide -> DeployedConstantYActive [label = TurnedOn];
@@ -81,7 +85,10 @@ class Transformation;
 ///   DeployedConstantYActive -> DeployedConstantYLocked [label = LeaveSelectMode];
 ///   DeployedConstantYLocked -> DeployedConstantYActive [label = EnterSelectMode];
 ///
-///   Handle -> Discarded [label = MouseRelease];
+///   HandleR -> Discarded [label = MouseRelease];
+///   HandleT -> Discarded [label = MouseRelease];
+///   HandleX -> Discarded [label = MouseRelease];
+///   HandleY -> Discarded [label = MouseRelease];
 ///
 /// }
 /// \enddot
