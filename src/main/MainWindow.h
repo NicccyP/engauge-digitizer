@@ -451,11 +451,13 @@ private:
   void guidelineRemoveYREnqueue (double value);    
   Guidelines &guidelines (); /// Return guidelines for unit testing
   bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
+  void handleGuidelineMode();
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
   void loadErrorReportFile(const QString &errorReportFile);
+  void loadGuidelinesFromCmdMediator();
   bool loadImage (const QString &fileName,
                   const QImage &image,
                   ImportType ImportType);

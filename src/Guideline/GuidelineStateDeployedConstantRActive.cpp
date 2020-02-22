@@ -28,7 +28,8 @@ void GuidelineStateDeployedConstantRActive::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRActive::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_OFF);
+  beginCommon (GuidelineFormat::HOVER_OFF,
+               false);
 }
 
 bool GuidelineStateDeployedConstantRActive::doPaint () const
@@ -43,6 +44,16 @@ void GuidelineStateDeployedConstantRActive::end ()
 
 void GuidelineStateDeployedConstantRActive::handleActiveChange (bool /* active */)
 {
+}
+
+void GuidelineStateDeployedConstantRActive::handleGuidelineMode (bool visible,
+                                                                 bool locked)
+{
+  if (!visible) {
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE);
+  } else if (locked) {
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED);
+  }
 }
 
 void GuidelineStateDeployedConstantRActive::handleHoverEnterEvent ()
@@ -60,13 +71,6 @@ void GuidelineStateDeployedConstantRActive::handleMousePress (const QPointF &pos
   handleMousePressCommon (posScene,
                           GUIDELINE_STATE_HANDLE_R,
                           GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
-}
-
-void GuidelineStateDeployedConstantRActive::handleVisibleChange (bool visible)
-{
-  if (!visible) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE);
-  }
 }
 
 QString GuidelineStateDeployedConstantRActive::stateName () const

@@ -289,26 +289,29 @@ void Guidelines::handleActiveChange (bool active)
   }
 }
 
-void Guidelines::handleVisibleChange (bool visible)
+void Guidelines::initialize (GraphicsScene &scene)
+{
+  m_guidelineFactory = new GuidelineFactory (&scene);
+}
+
+void Guidelines::handleGuidelineMode (bool visible,
+                                      bool isLocked)
 {
   GuidelineContainerPrivate::iterator itr;
 
   for (itr = m_guidelineContainerXT.begin(); itr != m_guidelineContainerXT.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
 
-    guideline->handleVisibleChange (visible);
+    guideline->handleGuidelineMode (visible,
+                                    isLocked);
   }
 
   for (itr = m_guidelineContainerYR.begin(); itr != m_guidelineContainerYR.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
 
-    guideline->handleVisibleChange (visible);
+    guideline->handleGuidelineMode (visible,
+                                    isLocked);
   }
-}
-
-void Guidelines::initialize (GraphicsScene &scene)
-{
-  m_guidelineFactory = new GuidelineFactory (&scene);
 }
 
 DocumentModelGuidelines Guidelines::modelGuidelines () const
@@ -392,6 +395,43 @@ void Guidelines::removeGuideline (const QString &identifier)
 
   if (guideline != nullptr) {
     delete guideline;
+  }
+}
+
+void Guidelines::setModelGuidelines (CoordsType coordsType,
+                                     const DocumentModelGuidelines &modelGuidelines)
+{
+  clear ();
+
+  GuidelineValues valuesXT = modelGuidelines.valuesX();
+  GuidelineValues valuesYR = modelGuidelines.valuesY();
+
+  GuidelineValues::const_iterator itr;
+
+  for (itr = valuesXT.begin(); itr != valuesXT.end(); itr++) {
+    QString identifier = itr.key();
+    double value = itr.value();
+
+    if (coordsType == COORDS_TYPE_CARTESIAN) {
+      createGuidelineX (identifier,
+                        value);
+    } else {
+      createGuidelineT (identifier,
+                        value);
+    }
+  }
+
+  for (itr = valuesYR.begin(); itr != valuesYR.end(); itr++) {
+    QString identifier = itr.key();
+    double value = itr.value();
+
+    if (coordsType == COORDS_TYPE_CARTESIAN) {
+      createGuidelineY (identifier,
+                        value);
+    } else {
+      createGuidelineR (identifier,
+                        value);
+    }
   }
 }
 

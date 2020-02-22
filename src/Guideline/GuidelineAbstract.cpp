@@ -63,6 +63,13 @@ void GuidelineAbstract::handleActiveChange (bool active)
   m_context->handleActiveChange (active);
 }
 
+void GuidelineAbstract::handleGuidelineMode (bool visible,
+                                             bool locked)
+{
+  m_context->handleGuidelineMode (visible,
+                                  locked);
+}
+
 void GuidelineAbstract::handleHoverEnterEvent()
 {
   m_context->handleHoverEnterEvent ();
@@ -97,11 +104,6 @@ void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent";
 
   m_context->handleMouseRelease (posScene);
-}
-
-void GuidelineAbstract::handleVisibleChange (bool visible)
-{
-  m_context->handleVisibleChange (visible);
 }
 
 void GuidelineAbstract::sacrificeHandleAndVisibleGuidelines (const QPointF &posScene,

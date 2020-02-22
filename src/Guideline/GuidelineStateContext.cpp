@@ -160,11 +160,13 @@ void GuidelineStateContext::handleMouseRelease (const QPointF &posScene)
   transitionIfRequested ();
 }
 
-void GuidelineStateContext::handleVisibleChange (bool visible)
+void GuidelineStateContext::handleGuidelineMode (bool visible,
+                                                 bool locked)
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  m_states[m_currentState]->handleVisibleChange (visible);
+  m_states[m_currentState]->handleGuidelineMode (visible,
+                                                 locked);
   transitionIfRequested ();
 }
 

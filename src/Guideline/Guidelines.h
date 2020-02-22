@@ -87,9 +87,10 @@ public:
 
   /// DigitizeState change so active status may (or may not) be toggled 
   void handleActiveChange (bool active);
-  
-  /// User toggled guideline visibility
-  void handleVisibleChange (bool visible);
+
+  /// User toggled guideline mode
+  void handleGuidelineMode (bool visible,
+                            bool locked);
 
   /// Initialize Guideline factory
   void initialize (GraphicsScene &scene);
@@ -108,6 +109,10 @@ public:
   /// Remove an X/T or Y/R guideline. Since Guideline identifiers are unique this
   /// method is not implemented with separate X/T and Y/R versions
   void removeGuideline (const QString &identifier);
+
+  /// Load Guidelines from Document
+  void setModelGuidelines (CoordsType coordsType,
+                           const DocumentModelGuidelines &modelGuidelines);
 
   /// States listed as a string for debugging only
   QString stateDump () const;

@@ -89,6 +89,10 @@ public:
   /// DigitizeState change so active status may (or may not) be toggled
   void handleActiveChange (bool active);
 
+  /// User toggled Guideline visibility and/or locked mode
+  void handleGuidelineMode (bool visible,
+                            bool locked);
+
   /// Highlight this Guideline upon hover enter
   void handleHoverEnterEvent();
 
@@ -103,9 +107,6 @@ public:
 
   /// Cleanup after being dragged
   void handleMouseReleaseEvent (const QPointF &posScene);
-
-  /// User toggled Guideline visibility
-  void handleVisibleChange (bool visible);
 
   /// Unique identifier from QGraphicsItem
   virtual QString identifier () const = 0;

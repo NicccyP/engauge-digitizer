@@ -28,7 +28,8 @@ void GuidelineStateDeployedConstantYActive::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYActive::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_OFF);
+  beginCommon (GuidelineFormat::HOVER_OFF,
+               false);
 }
 
 bool GuidelineStateDeployedConstantYActive::doPaint () const
@@ -39,6 +40,16 @@ bool GuidelineStateDeployedConstantYActive::doPaint () const
 void GuidelineStateDeployedConstantYActive::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYActive::end";
+}
+
+void GuidelineStateDeployedConstantYActive::handleGuidelineMode (bool visible,
+                                                                 bool locked)
+{
+  if (!visible) {
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE);
+  } else if (locked) {
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED);
+  }
 }
 
 void GuidelineStateDeployedConstantYActive::handleActiveChange (bool /* active */)
@@ -60,13 +71,6 @@ void GuidelineStateDeployedConstantYActive::handleMousePress (const QPointF &pos
   handleMousePressCommon (posScene,
                           GUIDELINE_STATE_HANDLE_Y,
                           GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
-}
-
-void GuidelineStateDeployedConstantYActive::handleVisibleChange (bool visible)
-{
-  if (!visible) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE);
-  }
 }
 
 QString GuidelineStateDeployedConstantYActive::stateName () const

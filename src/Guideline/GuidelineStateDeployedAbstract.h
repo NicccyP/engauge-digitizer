@@ -25,7 +25,8 @@ public:
 protected:
 
   /// Initialization common to all states
-  void beginCommon (GuidelineFormat::HoverOption hoverOption);
+  void beginCommon (GuidelineFormat::HoverOption hoverOption,
+                    bool locked);
 
 };
 

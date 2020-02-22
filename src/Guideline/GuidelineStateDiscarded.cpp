@@ -70,6 +70,11 @@ void GuidelineStateDiscarded::handleActiveChange (bool /* active */)
 {
 }
 
+void GuidelineStateDiscarded::handleGuidelineMode (bool /* visible */,
+                                                   bool /* locked */)
+{
+}
+
 void GuidelineStateDiscarded::handleHoverEnterEvent ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
@@ -92,10 +97,6 @@ void GuidelineStateDiscarded::handleMousePress (const QPointF & /* posScene */)
 void GuidelineStateDiscarded::handleMouseRelease (const QPointF & /* posScene */)
 {
   // Noop
-}
-
-void GuidelineStateDiscarded::handleVisibleChange (bool /* visible */)
-{
 }
 
 EllipseParameters GuidelineStateDiscarded::pointToEllipse (const QPointF & /* poscreen */) const

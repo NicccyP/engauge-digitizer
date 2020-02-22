@@ -912,7 +912,7 @@ Guidelines &MainWindow::guidelines()
 bool MainWindow::guidelinesAreVisible () const
 {
   return (guidelinesVisibilityCanBeEnabled () &&
-          m_actionViewGuidelinesEdit->isChecked());
+          (m_actionViewGuidelinesEdit->isChecked() || m_actionViewGuidelinesLock->isChecked()));
 }
 
 bool MainWindow::guidelinesVisibilityCanBeEnabled () const
@@ -947,6 +947,12 @@ void MainWindow::handlerFileExtractImage ()
     directoryPersist.setDirectoryExportSaveFromFilename(fileName);
     fileExtractImage(fileName);
   }
+}
+
+void MainWindow::handleGuidelineMode ()
+{
+  m_guidelines.handleGuidelineMode(guidelinesAreVisible (),
+                                   m_actionViewGuidelinesLock->isChecked());
 }
 
 QImage MainWindow::imageFiltered () const
@@ -1088,6 +1094,14 @@ void MainWindow::loadErrorReportFile(const QString &errorReportFile)
   slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
   updateAfterCommand ();
+}
+
+void MainWindow::loadGuidelinesFromCmdMediator ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadGuidelinesFromCmdMediator";
+
+  m_guidelines.setModelGuidelines (m_cmdMediator->document().modelCoords().coordsType(),
+                                   m_cmdMediator->document().modelGuidelines());
 }
 
 bool MainWindow::loadImage (const QString &fileName,
@@ -1953,6 +1967,9 @@ bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
   saveStartingDocumentSnapshot();
 
   updateAfterCommand(); // Replace stale points by points in new Document
+
+  loadGuidelinesFromCmdMediator (); // After Transformation has been defined by updateAfterCommand so Guidelines can be drawn
+  handleGuidelineMode ();
 
   return true;
 }
@@ -3150,7 +3167,7 @@ void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
 
-  m_guidelines.handleVisibleChange (guidelinesAreVisible ());
+  handleGuidelineMode ();
   updateControls();
 }
 

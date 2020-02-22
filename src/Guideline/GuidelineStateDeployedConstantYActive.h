@@ -21,10 +21,11 @@ public:
   virtual bool doPaint () const;
   virtual void end ();  
   virtual void handleActiveChange (bool active);
+  virtual void handleGuidelineMode (bool visible,
+                                    bool locked);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleVisibleChange (bool visible);
   virtual QString stateName () const;
 
 private:

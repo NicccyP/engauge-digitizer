@@ -23,22 +23,37 @@ GuidelineStateDeployedAbstract::~GuidelineStateDeployedAbstract ()
 {
 }
 
-void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption hoverOption)
+void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption hoverOption,
+                                                  bool locked)
 {
   GuidelineFormat guidelineFormat (context().color());
 
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DEPLOYED);
   context().guideline().setGraphicsItemVisible (true);
-  // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
-  context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
-                                              QGraphicsItem::ItemIsMovable);
-  context().guideline().setGraphicsItemAcceptHoverEvents (true); // Give feedback when user hovers
   context().guideline().setGraphicsItemPen (hoverOption == GuidelineFormat::HOVER_ON ?
                                             guidelineFormat.colorDeployedHover () :
                                             guidelineFormat.colorDeployedNonHover (),
                                             hoverOption == GuidelineFormat::HOVER_ON ?
                                             guidelineFormat.lineWidthHover () :
                                             guidelineFormat.lineWidthNonHover ());
+
+  if (locked) {
+
+    // Give feedback when user hovers
+    QGraphicsItem::GraphicsItemFlags flags = context().guideline ().graphicsItemFlags();
+    flags &= ~QGraphicsItem::ItemIsFocusable;
+    flags &= ~QGraphicsItem::ItemIsMovable;
+    context().guideline().setGraphicsItemFlags (flags);
+    context().guideline().setGraphicsItemAcceptHoverEvents (true);
+
+  } else {
+
+    // Prevent interaction. ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
+    context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
+                                                QGraphicsItem::ItemIsMovable);
+    context().guideline().setGraphicsItemAcceptHoverEvents (false);
+
+  }
 }
 
 void GuidelineStateDeployedAbstract::end ()

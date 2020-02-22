@@ -119,6 +119,7 @@ Document::Document (const QString &fileName) :
             break;
 
           default:
+            LOG4CPP_ERROR_S ((*mainCat)) << "Document::Document invalid version " << version;
             m_successfulRead = false;
             m_reasonForUnsuccessfulRead = QString ("Engauge %1 %2 %3 %4 Engauge")
                                           .arg (VERSION_NUMBER)
@@ -585,7 +586,7 @@ void Document::loadVersion6 (QFile *file)
       // Iterate to next StartElement
       if (tokenType == QXmlStreamReader::StartElement) {
 
-        // This is a StartElement, so process it
+        // This is a StartElement, so process it up to the corresonding EndElement
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file

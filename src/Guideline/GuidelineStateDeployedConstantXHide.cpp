@@ -28,7 +28,8 @@ void GuidelineStateDeployedConstantXHide::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXHide::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_OFF);
+  beginCommon (GuidelineFormat::HOVER_OFF,
+               false);
 
   context().guideline().setGraphicsItemVisible (false); // Stop hover and painting (doPoint only stops painting)
 }
@@ -47,6 +48,18 @@ void GuidelineStateDeployedConstantXHide::handleActiveChange (bool /* active */)
 {
 }
 
+void GuidelineStateDeployedConstantXHide::handleGuidelineMode (bool visible,
+                                                               bool locked)
+{
+  if (visible) {
+    if (locked) {
+      context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED);
+    } else {
+      context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+    }
+  }
+}
+
 void GuidelineStateDeployedConstantXHide::handleHoverEnterEvent ()
 {
   // Noop
@@ -59,13 +72,6 @@ void GuidelineStateDeployedConstantXHide::handleHoverLeaveEvent ()
 
 void GuidelineStateDeployedConstantXHide::handleMousePress (const QPointF & /* posScene */)
 {
-}
-
-void GuidelineStateDeployedConstantXHide::handleVisibleChange (bool visible)
-{
-  if (visible) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
-  }
 }
 
 QString GuidelineStateDeployedConstantXHide::stateName () const

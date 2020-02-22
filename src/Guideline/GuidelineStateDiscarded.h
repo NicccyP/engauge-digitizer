@@ -23,11 +23,12 @@ public:
   virtual bool doPaint () const;
   virtual void end ();
   virtual void handleActiveChange (bool active);
+  virtual void handleGuidelineMode (bool visible,
+                                    bool locked);
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleMouseRelease (const QPointF &posScene);
-  virtual void handleVisibleChange (bool visible);
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &posScreen) const;
   virtual QString stateName () const;
