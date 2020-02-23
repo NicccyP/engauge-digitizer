@@ -9,6 +9,7 @@
 #include "DocumentSerialize.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("GuidelineMoveYR");
 
@@ -30,12 +31,31 @@ CmdGuidelineMoveYR::CmdGuidelineMoveYR(MainWindow &mainWindow,
 CmdGuidelineMoveYR::CmdGuidelineMoveYR (MainWindow &mainWindow,
                                         Document &document,
                                         const QString &cmdDescription,
-                                        QXmlStreamReader & /* reader */) :
+                                        QXmlStreamReader &reader) :
   CmdAbstract (mainWindow,
                document,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineMoveYR::CmdGuidelineMoveYR";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_BEFORE) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_AFTER)) {
+    xmlExitWithError (reader,
+                      QString ("%1 %2 %3 %4 %5 %6")
+                      .arg (QObject::tr ("Missing attribute(s)"))
+                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
+                      .arg (QObject::tr (","))
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_BEFORE)
+                      .arg (QObject::tr ("and/or"))
+                      .arg (DOCUMENT_SERIALIZE_GRAPH_AFTER));
+  }
+
+  m_identifier = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
+  m_valueBefore = attributes.value(DOCUMENT_SERIALIZE_GRAPH_BEFORE).toDouble();
+  m_valueAfter = attributes.value(DOCUMENT_SERIALIZE_GRAPH_AFTER).toDouble();
 }
 
 CmdGuidelineMoveYR::~CmdGuidelineMoveYR ()
@@ -62,7 +82,13 @@ void CmdGuidelineMoveYR::cmdUndo ()
                                 m_valueBefore);
 }
 
-void CmdGuidelineMoveYR::saveXml (QXmlStreamWriter & /* writer */) const
+void CmdGuidelineMoveYR::saveXml (QXmlStreamWriter &writer) const
 {
-  // Noop. This command is only for unit testing, and is completely independent of the Document that is being saved
+  writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_GUIDELINE_MOVE_Y_R);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifier);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_BEFORE, QString::number (m_valueBefore));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_AFTER, QString::number (m_valueAfter));
+  writer.writeEndElement();
 }
