@@ -24,7 +24,24 @@ class Transformation;
 /// class owns an instance of this class. The base class for all guideline states is
 /// GuidelineStateAbstractBase.
 ///
-/// The state machine graph:
+/// While dragging, the Guideline appears to follow a constant-coordinate isocontour during the dragging. The
+/// isocontour is along X or Y for cartesian coordinates, or T or R for polar coordinates.
+/// This effect is achieved using three GuidelineAbstract instances:
+/// - The <b>dragged Guideline</b> that is initially visible and clicked on by the user. It immediately becomes
+///   invisible since it cannot be redrawn while being dragged (a constraint of the Qt framework). The
+///   state of this Guideline is Handle.
+/// - The <b>visible Guideline</b> that is created as soon as the dragged Guideline is made invisible. The
+///   visible Guideline is moved along with the cursor during the dragging. It starts out looking just
+///   like the dragged Guideline, but changes to follow the relevant isocontours during the dragging.
+///   The user will think he/she is dragging the visible Guideline directly, but this is an illusion.
+///   The state of this Guideline is Deployed.
+/// - The <b>replacement Guideline</b> that replaces both the dragged and visible Guideline instances when the 
+///   mouse is released. This Guideline is off the stack when the mouse is released and therefore can be the
+///   target of a new CmdGuidelineMoveXT or CmdGuidelineMoveYR which wants to move something as soons as its
+///   redo method is called. The state of this Guideline is Deployed.
+///
+/// The state machine graph for dragging a Guideline is below:
+/// 
 /// \dot
 /// digraph guidelines {
 ///   rankdir = LR;
@@ -33,7 +50,7 @@ class Transformation;
 ///   DeployedConstantRAppearing -> DeployedConstantRActive [label = Timeout];
 ///
 ///   Start -> DeployedConstantTAppearing [label = BtnGuidelineT];
-///   DeployedConstantRAppearing -> DeployedConstantTActive [label = Timeout];
+///   DeployedConstantTAppearing -> DeployedConstantTActive [label = Timeout];
 ///
 ///   Start -> DeployedConstantXAppearing [label = BtnGuidelineX];
 ///   DeployedConstantXAppearing -> DeployedConstantXActive [label = Timeout];
