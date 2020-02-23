@@ -5,7 +5,9 @@
  ******************************************************************************************************/
 
 #include "GuidelineOffset.h"
+#include "Logger.h"
 #include <QGraphicsView>
+#include "QtToString.h"
 #include "Transformation.h"
 
 const bool ADD_TO_EDGE = true;
@@ -32,13 +34,22 @@ QPointF GuidelineOffset::bottomTop (const QGraphicsView &view,
   QRect viewportRect = view.viewport()->rect();
   QRect scrolledRect = view.viewportTransform ().inverted ().mapRect (viewportRect);
 
+  QRectF sceneRect = view.scene()->sceneRect();
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineOffset::bottomTop"
+                               << " viewportRect=" << QRectFToString (viewportRect).toLatin1().data()
+                               << " scrolledRect=" << QRectFToString (scrolledRect).toLatin1().data()
+                               << " sceneRect=" << QRectFToString (sceneRect).toLatin1().data();
+
   double offset = scrolledRect.height () * GUIDELINE_OFFSET_PORTION_OF_SCREEN_WIDTH;
   
-  // Halfway across and a little above-bottom/below-top if offsetVertical is negative/positive
+  // Halfway across and a little above-bottom/below-top if offsetVertical is negative/positive. If viewport
+  // bigger than the scene (=there is an empty margin) then scrolledRect offsets are negative, and we use
+  // sceneRect, otherwise we use scrolledRect
   double x = scrolledRect.center().x();
   double y = (add ?
-              scrolledRect.y () + offset :
-              scrolledRect.y () + scrolledRect.height () - offset);
+              qMax (scrolledRect.y () + offset, offset) :
+              qMin (scrolledRect.y () + scrolledRect.height () - offset, sceneRect.height () - offset));
 
   QPointF posScene (x, y), posGraph;
 
@@ -64,12 +75,21 @@ QPointF GuidelineOffset::leftRight(const QGraphicsView &view,
   QRect viewportRect = view.viewport()->rect();
   QRect scrolledRect = view.viewportTransform ().inverted ().mapRect (viewportRect);
 
+  QRectF sceneRect = view.scene()->sceneRect();
+
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineOffset::leftRight"
+                               << " viewportRect=" << QRectFToString (viewportRect).toLatin1().data()
+                               << " scrolledRect=" << QRectFToString (scrolledRect).toLatin1().data()
+                               << " sceneRect=" << QRectFToString (sceneRect).toLatin1().data();
+
   double offset = scrolledRect.width () * GUIDELINE_OFFSET_PORTION_OF_SCREEN_WIDTH;
   
-  // Halfway down and a little left-of-right/right-of-left if offsetHorizontal is negative/positive
+  // Halfway down and a little left-of-right/right-of-left if offsetHorizontal is negative/positive. If viewport
+  // bigger than the scene (=there is an empty margin) then scrolledRect offsets are negative, and we use
+  // sceneRect, otherwise we use scrolledRect
   double x = (add ?
-              scrolledRect.x () + offset :
-              scrolledRect.x () + scrolledRect.width () - offset);
+              qMax (scrolledRect.x () + offset, offset) :
+              qMin (scrolledRect.x () + scrolledRect.width () - offset, sceneRect.width () - offset));
   double y =  scrolledRect.center().y();
 
   QPointF posScene (x, y), posGraph;
