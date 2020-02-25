@@ -10,7 +10,6 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantYLocked.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantYLocked::GuidelineStateDeployedConstantYLocked (GuidelineStateContext &context) :

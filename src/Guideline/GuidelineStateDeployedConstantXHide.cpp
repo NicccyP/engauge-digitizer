@@ -11,7 +11,6 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantXHide.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantXHide::GuidelineStateDeployedConstantXHide (GuidelineStateContext &context) :

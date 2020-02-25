@@ -10,7 +10,6 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantXHover.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantXHover::GuidelineStateDeployedConstantXHover (GuidelineStateContext &context) :

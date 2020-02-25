@@ -10,7 +10,6 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantYAbstract.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantYAbstract::GuidelineStateDeployedConstantYAbstract (GuidelineStateContext &context) :

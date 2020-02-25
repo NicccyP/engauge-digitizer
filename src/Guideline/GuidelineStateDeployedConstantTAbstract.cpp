@@ -24,10 +24,32 @@ GuidelineStateDeployedConstantTAbstract::~GuidelineStateDeployedConstantTAbstrac
 
 QPointF GuidelineStateDeployedConstantTAbstract::convertGraphCoordinateToScreenPoint (double valueGraph) const
 {
-  const double ARBITRARY_RANGE = 1.0; // Value that is legal in all cases, including log scaling
+  // Selecting an arbitrary range value is tricky for the constant T case when log scaling is in effect, since
+  // we cannot pick:
+  // - the origin radius since we are creating a second point which will be later combined with the origin
+  //   to fully define the Guideline line
+  // - any negative number (log only accepts positive values)
+  // - any value between 0 (exclusive) and the origin radius (exclusive) since there is no corresponding point
+  //   in the graph when the log scale is increasing while moving away from the origin
+  // - any value between the origin radius (exclusive) and infinity since there is no corresponding point
+  //   in the graph when the log scale is decreasing while moving away from the origin
+  // The strategy is to pick the four corners of the screen and use one of their coordinates
+  const QGraphicsScene &scene = context().guideline().scene();
+  QRectF sceneRect = scene.sceneRect();
+  QPointF posGraphTL, posGraphTR, posGraphBL, posGraphBR;
+  context().transformation().transformScreenToRawGraph(sceneRect.topLeft(),
+                                                       posGraphTL);
+  context().transformation().transformScreenToRawGraph(sceneRect.topRight(),
+                                                       posGraphTR);
+  context().transformation().transformScreenToRawGraph(sceneRect.bottomLeft(),
+                                                       posGraphBL);
+  context().transformation().transformScreenToRawGraph(sceneRect.bottomRight(),
+                                                       posGraphBR);
+  double arbitraryRange = qMax (posGraphTL.y(), qMax (posGraphTR.y(), qMax (posGraphBL.y(), posGraphBR.y())));
+
   QPointF posScreen;
   context().transformation().transformRawGraphToScreen (QPointF (valueGraph,
-                                                                 ARBITRARY_RANGE),
+                                                                 arbitraryRange),
                                                         posScreen);
 
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::convertGraphCoordinateToScreenPoint"

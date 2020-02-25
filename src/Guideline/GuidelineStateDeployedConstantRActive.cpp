@@ -11,7 +11,6 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantRActive.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantRActive::GuidelineStateDeployedConstantRActive (GuidelineStateContext &context) :
