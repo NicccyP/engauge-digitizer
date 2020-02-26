@@ -14,7 +14,7 @@
 #include <QString>
 #include "Transformation.h"
 
-class DocumentModelCoords;
+class DocumentModelGuidelines;
 class GraphicsScene;
 class GuidelineAbstract;
 class GuidelineFactory;

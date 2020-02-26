@@ -61,7 +61,23 @@ EllipseParameters GuidelineProjectorConstantR::fromPosScreen (const Transformati
   QPointF posGraph;
   transformation.transformScreenToRawGraph (posScreen,  posGraph);
 
+  double rGraph = posGraph.y();
+
+  if (transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
+    if (rGraph <= 0) {
+
+      // Range enforcement on the range values with log scale should have prevented this branch
+      LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineProjectorConstantR::fromPosScreen out of bounds range " << rGraph;
+
+    } else {
+
+      // Adjust radius from log to linear so, after conversion to cartesian, we have linear x and y
+      rGraph = qLn (rGraph);
+
+    }
+  }
+
   return fromCoordinateR (transformation,
                           sceneRect,
-                          posGraph.y());
+                          rGraph);
 }

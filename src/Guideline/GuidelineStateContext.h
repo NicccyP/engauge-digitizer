@@ -58,7 +58,6 @@ class Transformation;
 ///   Start -> DeployedConstantYAppearing [label = BtnGuidelineY];
 ///   DeployedConstantYAppearing -> DeployedConstantYActive [label = Timeout];
 ///
-///   Start -> DeployedConstantRHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantRHover -> DeployedConstantRActive [label = HoverLeave];
 ///   DeployedConstantRHover -> HandleR [label = MouseClick];
 ///   DeployedConstantRActive -> Discarded [label = DragOffscreen];
@@ -69,7 +68,6 @@ class Transformation;
 ///   DeployedConstantRActive -> DeployedConstantRLocked [label = LeaveSelectMode];
 ///   DeployedConstantRLocked -> DeployedConstantRActive [label = EnterSelectMode];
 ///
-///   Start -> DeployedConstantTHover [label = HoverWithPolarCoordinates];
 ///   DeployedConstantTHover -> DeployedConstantTActive [label = HoverLeave];
 ///   DeployedConstantTHover -> HandleT [label = MouseClick];
 ///   DeployedConstantTActive -> Discarded [label = DragOffscreen];
@@ -80,7 +78,6 @@ class Transformation;
 ///   DeployedConstantTActive -> DeployedConstantTLocked [label = LeaveSelectMode];
 ///   DeployedConstantTLocked -> DeployedConstantTActive [label = EnterSelectMode];
 ///
-///   Start -> DeployedConstantXHover [label = HoverWithCartesianCoordinates];
 ///   DeployedConstantXHover -> DeployedConstantXActive [label = HoverLeave];
 ///   DeployedConstantXHover -> HandleX [label = MouseClick];
 ///   DeployedConstantXActive -> Discarded [label = DragOffscreen];
@@ -91,7 +88,6 @@ class Transformation;
 ///   DeployedConstantXActive -> DeployedConstantXLocked [label = LeaveSelectMode];
 ///   DeployedConstantXLocked -> DeployedConstantXActive [label = EnterSelectMode];
 ///
-///   Start -> DeployedConstantYHover [label = HoverWithCartesianCoordinates];
 ///   DeployedConstantYHover -> DeployedConstantYActive [label = HoverLeave];
 ///   DeployedConstantYHover -> HandleY [label = MouseClick];
 ///   DeployedConstantYActive -> Discarded [label = DragOffscreen];
