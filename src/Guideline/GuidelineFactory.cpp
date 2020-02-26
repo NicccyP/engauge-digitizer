@@ -63,6 +63,7 @@ void GuidelineFactory::createEllipseMap ()
 {
   // All other states get a line instead of an ellipse
   m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING] = true;
   m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE] = true;
   m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER] = true;
 }

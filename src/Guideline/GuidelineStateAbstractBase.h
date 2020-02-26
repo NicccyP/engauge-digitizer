@@ -17,6 +17,9 @@
 
 class GuidelineStateContext;
 
+/// Milliseconds before transition from Appearing state to Active state
+const int APPEARING_TIMEOUT = 3000;
+
 /// This class maintains deployed horizontal/vertical state behaviors for the Guideline class
 class GuidelineStateAbstractBase
 {
@@ -61,6 +64,9 @@ public:
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   virtual void handleMouseRelease (const QPointF &posScene) = 0;
 
+  /// Handle timeout from Appearing state
+  virtual void handleTimeout () = 0;
+  
   /// Return ellipse representing constant range, that passes through the specified point
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const = 0;
 

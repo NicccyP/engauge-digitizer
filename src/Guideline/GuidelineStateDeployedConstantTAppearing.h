@@ -4,22 +4,24 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DISCARDED_H
-#define GUIDELINE_STATE_DISCARDED_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING_H
 
-#include "GuidelineStateAbstractBase.h"
+#include "GuidelineStateDeployedConstantTAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DISCARDED
-class GuidelineStateDiscarded : public GuidelineStateAbstractBase
+class QTimer;
+
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING. This acts
+/// just like GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE but is drawn much bigger, then transitions
+/// to the other state after a timeout
+class GuidelineStateDeployedConstantTAppearing : public GuidelineStateDeployedConstantTAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDiscarded(GuidelineStateContext &context);
-  virtual ~GuidelineStateDiscarded();
+  GuidelineStateDeployedConstantTAppearing(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantTAppearing();
 
   virtual void begin ();
-  virtual QPointF convertGraphCoordinateToScreenPoint (double valueGraph) const;
-  virtual double convertScreenPointToGraphCoordinate (const QPointF &posScreen) const;
   virtual bool doPaint () const;
   virtual void end ();
   virtual void handleActiveChange (bool active);
@@ -28,17 +30,13 @@ public:
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease (const QPointF &posScene);
-  virtual void handleState ();
   virtual void handleTimeout ();
-  virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
-  virtual QLineF pointToLine (const QPointF &posScreen) const;
   virtual QString stateName () const;
-  virtual void updateWithLatestTransformation ();
-
+  
 private:
-  GuidelineStateDiscarded();
+  GuidelineStateDeployedConstantTAppearing();
 
+  QTimer *m_timer;
 };
 
-#endif // GUIDELINE_STATE_DISCARDED_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING_H

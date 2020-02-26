@@ -10,18 +10,22 @@
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantRActive.h"
+#include "GuidelineStateDeployedConstantRAppearing.h"
 #include "GuidelineStateDeployedConstantRHide.h"
 #include "GuidelineStateDeployedConstantRHover.h"
 #include "GuidelineStateDeployedConstantRLocked.h"
 #include "GuidelineStateDeployedConstantTActive.h"
+#include "GuidelineStateDeployedConstantTAppearing.h"
 #include "GuidelineStateDeployedConstantTHide.h"
 #include "GuidelineStateDeployedConstantTHover.h"
 #include "GuidelineStateDeployedConstantTLocked.h"
 #include "GuidelineStateDeployedConstantXActive.h"
+#include "GuidelineStateDeployedConstantXAppearing.h"
 #include "GuidelineStateDeployedConstantXHide.h"
 #include "GuidelineStateDeployedConstantXHover.h"
 #include "GuidelineStateDeployedConstantXLocked.h"
 #include "GuidelineStateDeployedConstantYActive.h"
+#include "GuidelineStateDeployedConstantYAppearing.h"
 #include "GuidelineStateDeployedConstantYHide.h"
 #include "GuidelineStateDeployedConstantYHover.h"
 #include "GuidelineStateDeployedConstantYLocked.h"
@@ -40,18 +44,22 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
   m_guidelines (guidelines)
 {
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE        , new GuidelineStateDeployedConstantRActive        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING     , new GuidelineStateDeployedConstantRAppearing     (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE          , new GuidelineStateDeployedConstantRHide          (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER         , new GuidelineStateDeployedConstantRHover         (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED        , new GuidelineStateDeployedConstantRLocked        (*this));  
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE        , new GuidelineStateDeployedConstantTActive        (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING     , new GuidelineStateDeployedConstantTAppearing     (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE          , new GuidelineStateDeployedConstantTHide          (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER         , new GuidelineStateDeployedConstantTHover         (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED        , new GuidelineStateDeployedConstantTLocked        (*this));  
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE        , new GuidelineStateDeployedConstantXActive        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING     , new GuidelineStateDeployedConstantXAppearing     (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE          , new GuidelineStateDeployedConstantXHide          (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER         , new GuidelineStateDeployedConstantXHover         (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED        , new GuidelineStateDeployedConstantXLocked        (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE        , new GuidelineStateDeployedConstantYActive        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING     , new GuidelineStateDeployedConstantYAppearing     (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE          , new GuidelineStateDeployedConstantYHide          (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER         , new GuidelineStateDeployedConstantYHover         (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED        , new GuidelineStateDeployedConstantYLocked        (*this));   
@@ -201,6 +209,14 @@ void GuidelineStateContext::setPosCursorGraph (const QPointF &posGraph)
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
   m_posCursorGraph = posGraph;
+}
+
+void GuidelineStateContext::slotTimeout ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->handleTimeout ();
+  transitionIfRequested ();
 }
 
 QString GuidelineStateContext::stateDump () const

@@ -30,6 +30,7 @@ public:
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
+  virtual void handleTimeout ();
   virtual void updateWithLatestTransformation ();
 
 protected:

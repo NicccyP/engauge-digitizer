@@ -69,3 +69,8 @@ void GuidelineStateDeployedAbstract::handleMouseRelease (const QPointF & /* posS
   // Noop
 }
 
+void GuidelineStateDeployedAbstract::handleTimeout ()
+{
+  // Noop
+}
+

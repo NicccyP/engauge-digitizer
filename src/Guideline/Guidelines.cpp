@@ -98,7 +98,7 @@ void Guidelines::createGuidelineR (const QString &identifier,
                                    double r)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING);
   if (guideline) {
     guideline->updateGeometry (r);
   }
@@ -110,7 +110,7 @@ void Guidelines::createGuidelineR (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -122,7 +122,7 @@ void Guidelines::createGuidelineT (const QString &identifier,
                                    double t)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING);
   if (guideline) {
     guideline->updateGeometry (t);
   }
@@ -134,7 +134,7 @@ void Guidelines::createGuidelineT (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -146,7 +146,7 @@ void Guidelines::createGuidelineX (const QString &identifier,
                                    double x)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING);
   if (guideline) {
     guideline->updateGeometry (x);
   }
@@ -158,7 +158,7 @@ void Guidelines::createGuidelineX (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -170,7 +170,7 @@ void Guidelines::createGuidelineY (const QString &identifier,
                                    double y)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING);
   if (guideline) {
     guideline->updateGeometry (y);
   }
@@ -182,7 +182,7 @@ void Guidelines::createGuidelineY (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }

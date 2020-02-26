@@ -76,6 +76,13 @@ void GuidelineStateHandleAbstract::handleMousePress (const QPointF & /* posScene
   // Noop
 }
 
+void GuidelineStateHandleAbstract::handleTimeout ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleAbstract::handleTimeout";
+
+  // Noop
+}
+
 void GuidelineStateHandleAbstract::updateWithLatestTransformation ()
 {
   // Noop

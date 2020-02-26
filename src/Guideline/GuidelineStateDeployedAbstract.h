@@ -21,7 +21,8 @@ public:
 
   virtual void end ();
   virtual void handleMouseRelease (const QPointF &posScene);
-
+  virtual void handleTimeout ();
+  
 protected:
 
   /// Initialization common to all states

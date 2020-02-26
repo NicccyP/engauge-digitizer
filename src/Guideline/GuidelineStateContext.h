@@ -12,6 +12,7 @@
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QLineF>
+#include <QObject>
 #include <QPointF>
 #include <QString>
 #include <QVector>
@@ -105,8 +106,14 @@ class Transformation;
 ///
 /// }
 /// \enddot
-class GuidelineStateContext
+///
+/// This class derives from QObject so it can receive timeouts from the Appearing state,
+/// and then perform a state transition after each timeout. If the states received those
+/// timeouts then they would not be able to (singlehandedly) take themselves off the stack
+class GuidelineStateContext : public QObject
 {
+  Q_OBJECT;
+
 public:
   /// Single constructor.
   GuidelineStateContext (GuidelineAbstract &guideline,
@@ -187,6 +194,9 @@ public:
 
   /// Update given Transformation in GuidelineStateContext
   void updateWithLatestTransformation ();
+
+public slots:
+  void slotTimeout ();
 
 private:
   GuidelineStateContext();

@@ -373,21 +373,25 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantRAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantRActive.h \
+    src/Guideline/GuidelineStateDeployedConstantRAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantRHide.h \
     src/Guideline/GuidelineStateDeployedConstantRHover.h \
     src/Guideline/GuidelineStateDeployedConstantRLocked.h \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantTActive.h \
+    src/Guideline/GuidelineStateDeployedConstantTAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantTHide.h \
     src/Guideline/GuidelineStateDeployedConstantTHover.h \
     src/Guideline/GuidelineStateDeployedConstantTLocked.h \
     src/Guideline/GuidelineStateDeployedConstantXAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantXActive.h \
+    src/Guideline/GuidelineStateDeployedConstantXAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantXHide.h \
     src/Guideline/GuidelineStateDeployedConstantXHover.h \
     src/Guideline/GuidelineStateDeployedConstantXLocked.h \
     src/Guideline/GuidelineStateDeployedConstantYAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantYActive.h \
+    src/Guideline/GuidelineStateDeployedConstantYAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantYHide.h \
     src/Guideline/GuidelineStateDeployedConstantYHover.h \
     src/Guideline/GuidelineStateDeployedConstantYLocked.h \
@@ -773,21 +777,25 @@ SOURCES += \
     src/Guideline/GuidelineStateDeployedAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantRActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
     src/Guideline/GuidelineStateDeployedConstantRLocked.cpp \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantTActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantTHover.cpp \
     src/Guideline/GuidelineStateDeployedConstantTLocked.cpp \
     src/Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantXActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantXHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantXHover.cpp \
     src/Guideline/GuidelineStateDeployedConstantXLocked.cpp \
     src/Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantYActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantYHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
     src/Guideline/GuidelineStateDeployedConstantYLocked.cpp \

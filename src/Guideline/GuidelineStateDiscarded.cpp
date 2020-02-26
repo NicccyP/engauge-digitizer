@@ -99,6 +99,16 @@ void GuidelineStateDiscarded::handleMouseRelease (const QPointF & /* posScene */
   // Noop
 }
 
+void GuidelineStateDiscarded::handleState ()
+{
+  // Noop
+}
+
+void GuidelineStateDiscarded::handleTimeout ()
+{
+  // Noop
+}
+
 EllipseParameters GuidelineStateDiscarded::pointToEllipse (const QPointF & /* poscreen */) const
 {
   return EllipseParameters();
